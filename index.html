@@ -1,1 +1,91 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GBELS Razidero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <b>🏫 GBELS Razidero</b>
+  <div>
+    <a href="index.html">Dashboard</a>
+    <a href="results.html">Results</a>
+    <a href="attendance.html">Attendance</a>
+    <a href="login.html">Login</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="card hero">
+    <h1>GBELS Razidero</h1>
+    <p>"Pioneering Digital Education in Sindh"</p>
+    <p>📍 Town Agra, Khairpur Mirs</p>
+    <p>SEMIS: 415020308</p>
+  </div>
+
+  <div class="card">
+    <div class="big" id="time">--:--</div>
+    <p id="date"></p>
+    <hr>
+    <b>🎉 Next Holiday</b>
+    <p>Independence Day - 14 August</p>
+  </div>
+
+  <div class="card weather">
+    <h2>🌤 Razidero, Sindh</h2>
+    <div class="big">32°</div>
+    <p>Clear Sky</p>
+    <p>Entry: 08:00 AM | Off: 01:30 PM</p>
+  </div>
+
+  <div class="card">
+    <h3>Total Students</h3>
+    <div class="stats">
+      <div>
+        <h1>558</h1>
+        <p>Boys</p>
+      </div>
+      <div>
+        <h1>194</h1>
+        <p>Girls</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card green">
+    <h2>📢 WhatsApp Channel</h2>
+    <p>Get Results & School Updates</p>
+    <a class="btn" href="#">Join Now</a>
+  </div>
+
+  <div class="card">
+    <h3>Quick Menu</h3>
+    <div class="menu">
+      <a href="login.html">📊 Login</a>
+      <a href="results.html">🏆 Results</a>
+      <a href="#">📚 Books</a>
+      <a href="#">👥 Faculty</a>
+      <a href="#">📝 Apply Leave</a>
+      <a href="attendance.html">🏫 Attendance</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function updateTime() {
+  let now = new Date();
+  document.getElementById("time").innerHTML =
+    now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  document.getElementById("date").innerHTML = now.toDateString();
+}
+updateTime();
+setInterval(updateTime, 1000);
+</script>
+
+</body>
+</html>
