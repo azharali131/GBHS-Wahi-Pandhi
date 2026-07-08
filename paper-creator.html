@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Creator · GBHS Wahi Pandhi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0b1a26;
+      font-family: 'Inter', sans-serif;
+      color: #e8f0f8;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .top-header .title { color: #88b0c8; font-size: 0.85rem; }
+    .top-header .title strong { color: #00e6d0; }
+    .home-btn {
+      background: rgba(0, 230, 210, 0.12);
+      border: 1px solid rgba(0, 230, 210, 0.2);
+      padding: 8px 20px;
+      border-radius: 40px;
+      color: #00e6d0;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.25s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+    .home-btn:hover { background: #00e6d0; color: #0b1a26; transform: scale(0.96); }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .page-title h1 { font-size: 2rem; font-weight: 900; color: #00e6d0; }
+    .page-title p { color: #88b0c8; font-size: 0.95rem; }
+
+    .two-columns {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .form-column { flex: 1; min-width: 300px; }
+    .preview-column { flex: 1; min-width: 350px; background: #f0f0f0; border-radius: 20px; padding: 18px; }
+
+    .card {
+      background: rgba(14, 34, 50, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid rgba(0,230,210,0.06);
+      margin-bottom: 16px;
+    }
+    .card h3 { color: #00e6d0; font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; border-left: 3px solid #00e6d0; padding-left: 10px; }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .field {
+      flex: 1;
+      min-width: 120px;
+    }
+    .field label {
+      font-size: 0.6rem;
+      display: block;
+      margin-bottom: 3px;
+      color: #88b0c8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      background: #eef7fc;
+      font-size: 0.8rem;
+      color: #0b1a26;
+      outline: 2px solid transparent;
+      transition: 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid #00e6d0; }
+    .field textarea { border-radius: 12px; resize: vertical; }
+
+    .tools-bar {
+      display: flex;
+      gap: 8px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+    .tool-btn {
+      background: #00796b;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 14px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .tool-btn:hover { background: #009688; transform: scale(0.96); }
+
+    .questions-container {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .question-item {
+      background: rgba(0,0,0,0.15);
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .question-text { font-size: 0.75rem; color: #e8f0f8; }
+    .question-marks { font-size: 0.65rem; color: #00e6d0; font-weight: 600; }
+    .remove-q {
+      background: #f44336;
+      border: none;
+      border-radius: 20px;
+      padding: 2px 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.6rem;
+      font-weight: 600;
+    }
+    .remove-q:hover { background: #d32f2f; }
+
+    .preview-label {
+      font-size: 11px; color: #666; margin-bottom: 8px; display: block; font-weight: bold;
+    }
+
+    .a4-preview {
+      background: white;
+      color: black;
+      padding: 16px;
+      border-radius: 12px;
+      font-family: 'Times New Roman', Times, serif;
+      max-width: 100%;
+      font-size: 12px;
+    }
+    .a4-header { text-align: center; border-bottom: 2px solid black; padding-bottom: 8px; margin-bottom: 10px; }
+    .a4-school { font-weight: bold; font-size: 14px; text-transform: uppercase; }
+    .a4-address { font-size: 7px; color: #555; }
+    .a4-exam-title { text-align: center; font-weight: bold; font-size: 11px; margin: 8px 0; text-transform: uppercase; }
+    .a4-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      font-size: 10px;
+      border: 1px solid #ccc;
+      padding: 4px;
+      margin: 6px 0;
+    }
+    .a4-quote { background: #f5f5f5; padding: 6px; text-align: center; margin: 8px 0; border-radius: 6px; }
+    .a4-sindhi { font-family: 'Noto Naskh Arabic', serif; font-size: 10px; }
+    .a4-english { font-size: 8px; color: #555; }
+    .a4-section { font-weight: bold; margin: 12px 0 8px 0; font-size: 10px; }
+    .a4-question { margin: 8px 0; padding-bottom: 6px; border-bottom: 1px dotted #ccc; }
+    .a4-q-num { font-weight: bold; display: inline-block; width: 24px; }
+    .a4-q-marks { float: right; font-size: 8px; }
+    .a4-footer { text-align: center; margin-top: 16px; padding-top: 6px; border-top: 1px solid #ccc; font-size: 8px; }
+
+    .modal-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .btn-cancel {
+      background: #3a5a6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-cancel:hover { background: #4a6a7e; }
+    .btn-save {
+      background: linear-gradient(135deg, #00e6d0, #00b8a8);
+      color: #02212e;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-save:hover { transform: scale(0.96); }
+
+    .question-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a2a3a;
+      padding: 24px;
+      border-radius: 20px;
+      z-index: 20000;
+      width: 380px;
+      border: 1px solid #00e6d0;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .question-popup h3 { color: #00e6d0; margin-bottom: 12px; font-weight: 700; }
+    .question-popup textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      background: #eef7fc;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      resize: vertical;
+    }
+    .popup-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 12px;
+    }
+    .popup-buttons button {
+      padding: 6px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .popup-buttons button:hover { transform: scale(0.96); }
+
+    .print-btn {
+      background: #4caf50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 12px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+    .print-btn:hover { transform: scale(0.98); }
+
+    @media (max-width: 768px) {
+      .two-columns { flex-direction: column; }
+      .preview-column { min-width: unset; }
+      .question-popup { width: 95%; }
+      .top-header { flex-direction: column; align-items: stretch; text-align: center; }
+      .home-btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="top-header">
+    <span class="title"><strong>GBHS Wahi Pandhi</strong> · Paper Creator</span>
+    <a href="teacher-portal.html" class="home-btn"><i class="fas fa-arrow-left"></i> Back to Portal</a>
+  </div>
+
+  <div class="page-title">
+    <h1>📄 Question Paper Creator</h1>
+    <p>Create professional exam papers with school logo, subject, and custom questions.</p>
+  </div>
+
+  <div class="two-columns">
+    <div class="form-column">
+      <div class="card">
+        <h3>Exam Details</h3>
+        <div class="form-row">
+          <div class="field"><label>Exam Name</label><input type="text" id="pExamName" value="MIDTERM EXAMINATION" oninput="updatePreview()"></div>
+          <div class="field"><label>Year</label><input type="text" id="pYear" value="2025-26" oninput="updatePreview()"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Paper Info</h3>
+        <div class="form-row">
+          <div class="field"><label>Subject</label><input type="text" id="pSubject" placeholder="e.g., Sindhi" oninput="updatePreview()"></div>
+          <div class="field"><label>Class</label><select id="pClass" onchange="updatePreview()"><option>Six</option><option>Seven</option><option>Eight</option><option>Nine</option><option>Ten</option></select></div>
+          <div class="field"><label>Date</label><input type="date" id="pDate" oninput="updatePreview()"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Time</label><input type="text" id="pTime" value="3 Hours" oninput="updatePreview()"></div>
+          <div class="field"><label>Total Marks</label><input type="number" id="pTotalMarks" value="100" oninput="updatePreview()"></div>
+          <div class="field"><label>Pass Marks</label><input type="number" id="pPassMarks" value="33" oninput="updatePreview()"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Quote</h3>
+        <div class="form-row">
+          <div class="field"><label>Sindhi</label><textarea id="pQuoteSindhi" rows="2" placeholder="سنڌي عبارت" oninput="updatePreview()"></textarea></div>
+          <div class="field"><label>English</label><textarea id="pQuoteEnglish" rows="1" placeholder="English translation" oninput="updatePreview()"></textarea></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Questions</h3>
+        <div class="tools-bar">
+          <button class="tool-btn" onclick="openQuestionPopup()"><i class="fas fa-plus"></i> Add Question</button>
+        </div>
+        <div id="questionsList" class="questions-container"><p style="color:#6a8aa8; text-align:center; padding:10px; font-size:0.8rem;">No questions added</p></div>
+      </div>
+    </div>
+    <div class="preview-column">
+      <span class="preview-label">📄 Live Preview</span>
+      <div id="livePreview" class="a4-preview"></div>
+      <button class="print-btn" onclick="printPaper()"><i class="fas fa-print"></i> Print Paper</button>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:16px; color:#5a7a8a; font-size:0.8rem;">
+    <a href="teacher-portal.html" style="color:#00e6d0; text-decoration:none;">← Back to Teachers Portal</a>
+  </div>
+</div>
+
+<!-- Question Popup -->
+<div id="questionPopup" class="question-popup">
+  <h3><i class="fas fa-question-circle"></i> Add Question</h3>
+  <textarea id="newQText" rows="3" placeholder="Enter your question here..."></textarea>
+  <div class="field" style="margin-top:10px;"><label>Marks</label><input type="number" id="newQMarks" value="10"></div>
+  <div class="popup-buttons">
+    <button onclick="closeQuestionPopup()" style="background:#3a5a6e; color:white;">Cancel</button>
+    <button onclick="saveQuestion()" style="background:#00e6d0; font-weight:700; color:#02212e;">Add Question</button>
+  </div>
+</div>
+
+<script>
+  let paperQuestions = [];
+
+  // ===== QUESTION HANDLING =====
+  function openQuestionPopup() {
+    document.getElementById('questionPopup').style.display = 'block';
+  }
+  function closeQuestionPopup() {
+    document.getElementById('questionPopup').style.display = 'none';
+  }
+  function saveQuestion() {
+    const txt = document.getElementById('newQText').value.trim();
+    if(txt) {
+      paperQuestions.push({text: txt, marks: parseInt(document.getElementById('newQMarks').value) || 10});
+      updateQuestionsDisplay();
+      updatePreview();
+      closeQuestionPopup();
+      document.getElementById('newQText').value = '';
+    }
+  }
+  function removeQuestion(i) {
+    paperQuestions.splice(i, 1);
+    updateQuestionsDisplay();
+    updatePreview();
+  }
+  function updateQuestionsDisplay() {
+    const cont = document.getElementById('questionsList');
+    if(paperQuestions.length === 0) {
+      cont.innerHTML = '<p style="color:#6a8aa8; text-align:center; padding:10px; font-size:0.8rem;">No questions added</p>';
+      return;
+    }
+    let h = '';
+    for(let i = 0; i < paperQuestions.length; i++) {
+      h += `<div class="question-item">
+        <div>
+          <div class="question-text">Q${i+1}. ${paperQuestions[i].text}</div>
+          <div class="question-marks">Marks: ${paperQuestions[i].marks}</div>
+        </div>
+        <button class="remove-q" onclick="removeQuestion(${i})">Remove</button>
+      </div>`;
+    }
+    cont.innerHTML = h;
+  }
+
+  // ===== PREVIEW =====
+  function updatePreview() {
+    const sub = document.getElementById('pSubject').value || '[Subject]';
+    const cls = document.getElementById('pClass').value || '[Class]';
+    const date = document.getElementById('pDate').value || '[Date]';
+    const time = document.getElementById('pTime').value || '3 Hours';
+    const total = document.getElementById('pTotalMarks').value || '100';
+    const pass = document.getElementById('pPassMarks').value || '33';
+    const exam = document.getElementById('pExamName').value || 'MIDTERM';
+    const year = document.getElementById('pYear').value || '2025';
+    const qSindhi = document.getElementById('pQuoteSindhi').value || '';
+    const qEng = document.getElementById('pQuoteEnglish').value || '';
+
+    let html = `
+      <div class="a4-header">
+        <div style="font-size:12px; font-weight:bold;">GOVERNMENT BOYS HIGH SCHOOL WAHI PANDHI</div>
+        <div style="font-size:7px; color:#555;">Tehsil Johi, District Dadu, Sindh</div>
+      </div>
+      <div class="a4-exam-title">${exam.toUpperCase()} ${year}</div>
+      <div class="a4-details">
+        <div><strong>Subject:</strong> ${sub}</div>
+        <div><strong>Class:</strong> ${cls}</div>
+        <div><strong>Date:</strong> ${date}</div>
+        <div><strong>Time:</strong> ${time}</div>
+        <div><strong>Total:</strong> ${total}</div>
+        <div><strong>Pass:</strong> ${pass}</div>
+      </div>
+    `;
+
+    if(qSindhi || qEng) {
+      html += `<div class="a4-quote">${qSindhi ? `<div class="a4-sindhi">"${qSindhi}"</div>` : ''}${qEng ? `<div class="a4-english">"${qEng}"</div>` : ''}</div>`;
+    }
+
+    html += `<div class="a4-section">SECTION - A</div>`;
+    for(let i = 0; i < paperQuestions.length; i++) {
+      html += `<div class="a4-question">
+        <div><span class="a4-q-num">${i+1}.</span> ${paperQuestions[i].text}<span class="a4-q-marks">(${paperQuestions[i].marks} marks)</span></div>
+        <div style="margin-top:20px;"></div>
+      </div>`;
+    }
+    if(!paperQuestions.length) {
+      html += `<p style="color:#999; text-align:center; padding:10px 0; font-size:10px;">Add questions above</p>`;
+    }
+    html += `<div class="a4-footer"><hr><p>**** Best of Luck ****</p></div>`;
+
+    document.getElementById('livePreview').innerHTML = html;
+  }
+
+  // ===== PRINT =====
+  function printPaper() {
+    const previewHTML = document.getElementById('livePreview').innerHTML;
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html><head><title>Question Paper</title>
+      <style>
+        body { margin:0; padding:30px; background:white; font-family:'Times New Roman',Times,serif; }
+        .a4-header { text-align:center; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:12px; }
+        .a4-school { font-weight:bold; font-size:16px; text-transform:uppercase; }
+        .a4-address { font-size:9px; color:#555; }
+        .a4-exam-title { text-align:center; font-weight:bold; font-size:13px; margin:10px 0; text-transform:uppercase; }
+        .a4-details { display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px; font-size:12px; border:1px solid #000; padding:6px; margin:8px 0; }
+        .a4-quote { background:#f5f5f5; padding:8px; text-align:center; margin:10px 0; border-radius:6px; }
+        .a4-sindhi { font-family:'Noto Naskh Arabic',serif; font-size:12px; }
+        .a4-english { font-size:10px; color:#555; }
+        .a4-section { font-weight:bold; margin:15px 0 10px 0; font-size:12px; }
+        .a4-question { margin:12px 0; padding-bottom:8px; border-bottom:1px dotted #000; }
+        .a4-q-num { font-weight:bold; display:inline-block; width:30px; }
+        .a4-q-marks { float:right; font-size:10px; }
+        .a4-footer { text-align:center; margin-top:20px; padding-top:8px; border-top:1px solid #000; font-size:10px; }
+        .print-footer { text-align:center; margin-top:25px; padding-top:10px; border-top:1px solid #000; font-size:9px; }
+        .page-number { text-align:center; font-size:9px; margin-top:15px; }
+      </style>
+      </head><body>
+      <div style="max-width:800px; margin:0 auto;">${previewHTML}</div>
+      <div class="print-footer">Created with GBHS Wahi Pandhi Paper Creator</div>
+      <div class="page-number">Page 1/1</div>
+      </body></html>
+    `);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+  }
+
+  // ===== INIT =====
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set default date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('pDate').value = today;
+    updatePreview();
+  });
+</script>
+</body>
+</html>
