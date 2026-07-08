@@ -16,11 +16,12 @@
       min-height: 100vh;
       padding: 20px;
     }
-    .container { max-width: 1100px; margin: 0 auto; }
+    .container { max-width: 800px; margin: 0 auto; }
     
+    /* Top Header */
     .top-header {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       margin-bottom: 16px;
       gap: 12px;
@@ -30,13 +31,12 @@
       color: #88b0c8;
       font-size: 0.85rem;
       font-weight: 500;
-      margin-right: auto;
     }
     .top-header .portal-title strong { color: #00e6d0; font-weight: 700; }
     .home-btn {
       background: rgba(0, 230, 210, 0.12);
       border: 1px solid rgba(0, 230, 210, 0.2);
-      padding: 10px 24px;
+      padding: 8px 20px;
       border-radius: 40px;
       color: #00e6d0;
       cursor: pointer;
@@ -45,9 +45,8 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      backdrop-filter: blur(4px);
+      gap: 8px;
+      font-size: 0.85rem;
     }
     .home-btn:hover {
       background: #00e6d0;
@@ -56,40 +55,40 @@
       box-shadow: 0 4px 20px rgba(0, 230, 210, 0.25);
     }
 
+    /* Login Box */
     .login-box {
-      max-width: 450px;
+      max-width: 420px;
       margin: 40px auto;
       background: rgba(14, 34, 50, 0.92);
       backdrop-filter: blur(12px);
-      border-radius: 48px;
-      padding: 44px 36px;
+      border-radius: 40px;
+      padding: 36px 28px;
       text-align: center;
       border: 1px solid rgba(0, 230, 210, 0.3);
       box-shadow: 0 30px 50px rgba(0,0,0,0.5);
-      transition: 0.3s;
     }
     .login-box .login-icon {
-      width: 72px;
-      height: 72px;
+      width: 64px;
+      height: 64px;
       background: linear-gradient(135deg, #00e6d0, #00b8a8);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px;
-      font-size: 2rem;
+      margin: 0 auto 12px;
+      font-size: 1.8rem;
       color: #02212e;
       box-shadow: 0 8px 28px rgba(0,230,210,0.25);
     }
-    .login-box h2 { color: #00e6d0; font-weight: 700; font-size: 1.8rem; margin-bottom: 4px; }
-    .login-box .sub { color: #88b0c8; font-size: 0.85rem; margin-bottom: 24px; }
+    .login-box h2 { color: #00e6d0; font-weight: 700; font-size: 1.6rem; }
+    .login-box .sub { color: #88b0c8; font-size: 0.8rem; margin-bottom: 20px; }
     .login-box input {
       width: 100%;
-      padding: 14px 20px;
-      margin: 10px 0;
-      border-radius: 60px;
+      padding: 12px 18px;
+      margin: 8px 0;
+      border-radius: 50px;
       border: none;
-      font-size: 1rem;
+      font-size: 0.95rem;
       background: #eef7fc;
       color: #0b1a26;
       font-weight: 500;
@@ -99,27 +98,23 @@
     .login-box input:focus { outline: 2px solid #00e6d0; }
     .login-btn {
       width: 100%;
-      padding: 15px;
+      padding: 13px;
       background: linear-gradient(135deg, #00e6d0, #00b8a8);
       border: none;
-      border-radius: 60px;
+      border-radius: 50px;
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: 0.25s;
       color: #02212e;
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+      margin-top: 10px;
       box-shadow: 0 6px 24px rgba(0,230,210,0.2);
     }
     .login-btn:hover { transform: scale(0.98); box-shadow: 0 10px 32px rgba(0,230,210,0.35); }
     .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .login-btn .spinner {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border: 3px solid rgba(255,255,255,0.25);
       border-top: 3px solid #02212e;
       border-radius: 50%;
@@ -127,26 +122,27 @@
       display: inline-block;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
-    .error-msg { color: #ff7a7a; margin-top: 12px; display: none; font-size: 0.85rem; }
-    .login-box .demo-info {
-      font-size: 12px;
+    .error-msg { color: #ff7a7a; margin-top: 10px; display: none; font-size: 0.85rem; }
+    .demo-info {
+      font-size: 11px;
       color: #5a7a8a;
-      margin-top: 18px;
+      margin-top: 14px;
       background: rgba(0,0,0,0.2);
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 40px;
       display: inline-block;
     }
-    .login-box .demo-info strong { color: #00e6d0; }
+    .demo-info strong { color: #00e6d0; }
 
+    /* Dashboard */
     .dashboard { display: none; }
     
     .header {
       background: linear-gradient(135deg, rgba(2, 18, 32, 0.94), rgba(10, 30, 50, 0.94));
       backdrop-filter: blur(14px);
-      border-radius: 32px;
-      padding: 20px 32px;
-      margin-bottom: 28px;
+      border-radius: 28px;
+      padding: 16px 24px;
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -154,126 +150,177 @@
       border: 1px solid rgba(0,230,210,0.12);
       box-shadow: 0 8px 30px rgba(0,0,0,0.3);
     }
-    .header-left { display: flex; align-items: center; gap: 16px; }
+    .header-left { display: flex; align-items: center; gap: 14px; }
     .header-left .avatar-icon {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       background: linear-gradient(135deg, #00e6d0, #00b8a8);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: #02212e;
-      box-shadow: 0 4px 16px rgba(0,230,210,0.2);
     }
-    .header-left h2 { font-size: 1.3rem; font-weight: 700; color: #e8f0f8; }
+    .header-left h2 { font-size: 1.1rem; font-weight: 700; color: #e8f0f8; }
     .header-left h2 span { color: #00e6d0; }
-    .header-left .sub-text { font-size: 0.75rem; color: #88b0c8; margin-top: 2px; }
-    .header-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .header-left .sub-text { font-size: 0.7rem; color: #88b0c8; }
     .logout-btn {
       background: rgba(244, 67, 54, 0.12);
       border: 1px solid rgba(244,67,54,0.2);
-      padding: 10px 28px;
+      padding: 8px 20px;
       border-radius: 40px;
       color: #ff7a7a;
       cursor: pointer;
       font-weight: 600;
       transition: 0.25s;
-      backdrop-filter: blur(4px);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
-    .logout-btn:hover { background: #f44336; color: white; border-color: #f44336; transform: scale(0.96); box-shadow: 0 4px 20px rgba(244,67,54,0.3); }
+    .logout-btn:hover { background: #f44336; color: white; border-color: #f44336; transform: scale(0.96); }
 
     .notice-board {
       background: linear-gradient(135deg, #f9a825, #f57f17);
-      border-radius: 24px;
-      padding: 20px 28px;
-      margin-bottom: 28px;
-      border-left: 8px solid #ffea00;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-    .notice-board h4 { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; color: #1a1a2e; font-weight: 700; }
-    .notice-board p { color: #1a1a2e; font-weight: 500; line-height: 1.6; margin-top: 6px; font-size: 0.9rem; }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      border-radius: 20px;
+      padding: 16px 24px;
       margin-bottom: 20px;
+      border-left: 6px solid #ffea00;
     }
-    .full-width { grid-column: 1 / -1; }
+    .notice-board h4 { display: flex; align-items: center; gap: 10px; font-size: 1rem; color: #1a1a2e; font-weight: 700; }
+    .notice-board p { color: #1a1a2e; font-weight: 500; line-height: 1.5; margin-top: 4px; font-size: 0.85rem; }
 
     .card {
       background: rgba(14, 34, 50, 0.7);
       backdrop-filter: blur(8px);
-      border-radius: 28px;
-      padding: 28px 30px;
+      border-radius: 24px;
+      padding: 24px;
       border: 1px solid rgba(0,230,210,0.06);
-      transition: 0.3s;
+      margin-bottom: 20px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
-    .card:hover { border-color: rgba(0,230,210,0.2); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
-    .card h3 { color: #00e6d0; font-weight: 600; font-size: 1.2rem; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
-    .card p { color: #b0ccdd; line-height: 1.5; font-size: 0.92rem; }
+    .card h3 { color: #00e6d0; font-weight: 600; font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .card p { color: #b0ccdd; line-height: 1.5; font-size: 0.9rem; }
 
-    .feature-btn {
+    .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .field {
+      flex: 1;
+      min-width: 140px;
+    }
+    .field label {
+      font-size: 0.65rem;
+      display: block;
+      margin-bottom: 4px;
+      color: #88b0c8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .field select, .field input {
+      width: 100%;
+      padding: 8px 14px;
+      border-radius: 30px;
+      border: none;
+      background: #eef7fc;
+      font-size: 0.85rem;
+      color: #0b1a26;
+      outline: 2px solid transparent;
+      transition: 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .field select:focus, .field input:focus { outline: 2px solid #00e6d0; }
+
+    .upload-area {
+      border: 2px dashed rgba(0,230,210,0.2);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      margin: 12px 0;
+      transition: 0.3s;
+      background: rgba(0,230,210,0.02);
+    }
+    .upload-area:hover { background: rgba(0,230,210,0.06); border-color: #00e6d0; }
+    .upload-area i { font-size: 2rem; color: #00e6d0; opacity: 0.5; }
+    .upload-area p { color: #b0ccdd; font-size: 0.85rem; }
+    .upload-area .small { font-size: 11px; color: #5a7a8a; }
+
+    .preview-img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 12px;
+      display: none;
+      max-height: 200px;
+      object-fit: contain;
+    }
+
+    .upload-btn {
       background: linear-gradient(135deg, #00e6d0, #00b8a8);
       color: #02212e;
-      width: 100%;
-      padding: 14px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 60px;
+      border-radius: 50px;
       font-weight: 700;
       cursor: pointer;
-      margin-top: 16px;
-      font-size: 1rem;
       transition: 0.25s;
-      box-shadow: 0 4px 16px rgba(0,230,210,0.12);
+      font-size: 0.95rem;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
     }
-    .feature-btn:hover { transform: scale(0.97); box-shadow: 0 8px 28px rgba(0,230,210,0.25); }
+    .upload-btn:hover { transform: scale(0.97); box-shadow: 0 8px 28px rgba(0,230,210,0.25); }
 
-    .upload-area {
-      border: 2px dashed rgba(0,230,210,0.2);
-      border-radius: 20px;
-      padding: 28px;
+    .message {
+      padding: 10px;
+      border-radius: 50px;
+      margin-top: 12px;
       text-align: center;
-      cursor: pointer;
-      margin: 14px 0;
-      transition: 0.3s;
-      background: rgba(0,230,210,0.02);
-    }
-    .upload-area:hover { background: rgba(0,230,210,0.06); border-color: #00e6d0; }
-    .upload-area i { font-size: 2.8rem; color: #00e6d0; opacity: 0.5; }
-    .upload-area p { color: #b0ccdd; margin-top: 6px; }
-    .upload-area .small { font-size: 12px; color: #5a7a8a; }
-
-    .preview-img {
-      max-width: 100%;
-      margin-top: 15px;
-      border-radius: 16px;
       display: none;
-      max-height: 300px;
-      object-fit: contain;
+      font-weight: 600;
+      font-size: 0.9rem;
     }
+    .success { background: #2e7d32; color: white; }
+    .error { background: #c62828; color: white; }
+    .warning { background: #f57c00; color: #1a1a2e; }
 
-    .security-note {
-      background: rgba(0,0,0,0.3);
-      border-radius: 20px;
-      padding: 16px 24px;
+    /* Quick Links */
+    .quick-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .quick-link {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,230,210,0.1);
+      border-radius: 16px;
+      padding: 14px;
       text-align: center;
-      border: 1px solid rgba(255,170,68,0.15);
+      text-decoration: none;
+      color: #e8f0f8;
+      transition: 0.3s;
       font-size: 0.85rem;
-      backdrop-filter: blur(4px);
-      grid-column: 1 / -1;
+      font-weight: 500;
     }
-    .security-note i { color: #ffaa44; margin-right: 10px; }
-    .security-note strong { color: #ffaa44; }
+    .quick-link:hover { border-color: #00e6d0; transform: translateY(-2px); background: rgba(0,230,210,0.05); }
+    .quick-link i { font-size: 1.5rem; color: #00e6d0; display: block; margin-bottom: 6px; }
 
+    .footer-text {
+      text-align: center;
+      color: #5a7a8a;
+      font-size: 0.75rem;
+      padding: 16px 0 8px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 20px;
+    }
+    .footer-text strong { color: #00e6d0; }
+
+    /* My Uploads Modal */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -288,214 +335,101 @@
     }
     .modal-container {
       background: #0d2432;
-      border-radius: 32px;
+      border-radius: 28px;
       width: 95%;
       max-width: 700px;
-      max-height: 90vh;
+      max-height: 85vh;
       overflow-y: auto;
-      padding: 28px;
+      padding: 24px;
       border: 1px solid rgba(0,230,210,0.12);
       box-shadow: 0 30px 60px rgba(0,0,0,0.5);
     }
-    .modal-container::-webkit-scrollbar { width: 6px; }
-    .modal-container::-webkit-scrollbar-track { background: #0a1a2a; border-radius: 10px; }
-    .modal-container::-webkit-scrollbar-thumb { background: #00e6d0; border-radius: 10px; }
-
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
       border-bottom: 1px solid rgba(0,230,210,0.08);
     }
-    .modal-header h2 { color: #00e6d0; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 12px; }
-    .close-modal { font-size: 32px; cursor: pointer; transition: 0.2s; color: #88b0c8; line-height: 1; }
+    .modal-header h2 { color: #00e6d0; font-size: 1.3rem; font-weight: 700; }
+    .close-modal { font-size: 28px; cursor: pointer; transition: 0.2s; color: #88b0c8; line-height: 1; }
     .close-modal:hover { color: #00e6d0; transform: rotate(90deg); }
 
-    .form-section {
-      background: rgba(255,255,255,0.03);
-      border-radius: 20px;
-      padding: 18px 20px;
-      margin-bottom: 20px;
-    }
-    .section-title {
-      color: #00e6d0;
-      font-weight: 600;
-      margin-bottom: 15px;
-      border-left: 4px solid #00e6d0;
-      padding-left: 12px;
-      font-size: 0.95rem;
-    }
-    .form-row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .field {
-      flex: 1;
-      min-width: 140px;
-      margin-bottom: 12px;
-    }
-    .field label {
-      font-size: 0.7rem;
-      display: block;
-      margin-bottom: 5px;
-      color: #88b0c8;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-    }
-    .field input, .field select {
-      width: 100%;
-      padding: 10px 16px;
-      border-radius: 30px;
-      border: none;
-      background: #eef7fc;
-      font-size: 0.85rem;
-      color: #0b1a26;
-      outline: 2px solid transparent;
-      transition: 0.2s;
-      font-family: 'Inter', sans-serif;
-    }
-    .field input:focus, .field select:focus { outline: 2px solid #00e6d0; }
-
-    .upload-result-btn {
-      background: linear-gradient(135deg, #00e6d0, #00b8a8);
-      color: #02212e;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 60px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.25s;
-      font-size: 1rem;
-      width: 100%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .upload-result-btn:hover { transform: scale(0.97); box-shadow: 0 8px 28px rgba(0,230,210,0.25); }
-
-    .message {
-      padding: 12px;
-      border-radius: 60px;
-      margin-top: 15px;
-      text-align: center;
-      display: none;
-      font-weight: 600;
-    }
-    .success { background: #2e7d32; color: white; }
-    .error { background: #c62828; color: white; }
-    .warning { background: #f57c00; color: #1a1a2e; }
-
-    .modal-buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: flex-end;
-      margin-top: 20px;
-      padding-top: 15px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .btn-cancel {
-      background: #3a5a6e;
-      color: white;
-      padding: 10px 28px;
-      border-radius: 40px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .btn-cancel:hover { background: #4a6a7e; }
-    .btn-save {
-      background: linear-gradient(135deg, #00e6d0, #00b8a8);
-      color: #02212e;
-      padding: 10px 28px;
-      border-radius: 40px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .btn-save:hover { transform: scale(0.96); box-shadow: 0 4px 20px rgba(0,230,210,0.2); }
-
-    /* View Uploaded Results */
-    .uploaded-results-grid {
+    .upload-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 12px;
+      gap: 12px;
     }
-    .uploaded-item {
+    .upload-item {
       background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 14px;
-      border: 1px solid rgba(0,230,210,0.1);
-      transition: 0.3s;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid rgba(0,230,210,0.08);
       cursor: pointer;
+      transition: 0.3s;
     }
-    .uploaded-item:hover { border-color: #00e6d0; transform: translateY(-2px); }
-    .uploaded-item .thumb {
+    .upload-item:hover { border-color: #00e6d0; transform: translateY(-2px); }
+    .upload-item .thumb {
       width: 100%;
-      height: 100px;
+      height: 80px;
       background: #1a2a3a;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #00e6d0;
       overflow: hidden;
     }
-    .uploaded-item .thumb img {
+    .upload-item .thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .uploaded-item .info {
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: #88b0c8;
-    }
-    .uploaded-item .info strong { color: #e8f0f8; }
+    .upload-item .info { margin-top: 6px; font-size: 0.7rem; color: #88b0c8; }
+    .upload-item .info strong { color: #e8f0f8; }
 
-    /* Responsive */
-    @media (max-width: 860px) {
-      .dashboard-grid { grid-template-columns: 1fr; }
-      .header { flex-direction: column; align-items: stretch; gap: 16px; padding: 20px; }
-      .header-left { flex-wrap: wrap; }
-      .header-actions { flex-wrap: wrap; }
-      .login-box { margin: 40px auto; padding: 32px 24px; }
-      .uploaded-results-grid { grid-template-columns: 1fr; }
-      .top-header { flex-direction: column; align-items: stretch; }
-      .top-header .portal-title { margin-right: 0; text-align: center; margin-bottom: 6px; }
-      .home-btn { justify-content: center; }
+    .delete-btn {
+      background: #c62828;
+      color: white;
+      padding: 6px 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: 0.2s;
+      margin-top: 4px;
     }
-    @media (max-width: 480px) {
-      .header-left h2 { font-size: 1.1rem; }
-      .card { padding: 20px 16px; }
-      .modal-container { padding: 16px; }
-      .login-box { padding: 24px 16px; }
-      .login-box h2 { font-size: 1.4rem; }
+    .delete-btn:hover { background: #b71c1c; transform: scale(0.95); }
+
+    @media (max-width: 600px) {
+      .quick-links { grid-template-columns: 1fr; }
+      .upload-grid { grid-template-columns: 1fr; }
+      .header { flex-direction: column; align-items: stretch; gap: 12px; }
+      .login-box { padding: 24px 16px; margin: 20px auto; }
+      .top-header { flex-direction: column; align-items: stretch; text-align: center; }
+      .home-btn { justify-content: center; }
+      .form-row { flex-direction: column; }
+      .field { min-width: unset; }
     }
   </style>
 </head>
 <body>
 <div class="container">
+  <!-- Top Header -->
   <div class="top-header">
     <span class="portal-title"><strong>GBHS Wahi Pandhi</strong> · Teachers Portal</span>
     <a href="index.html" class="home-btn"><i class="fas fa-home"></i> Home</a>
   </div>
 
-  <!-- LOGIN -->
+  <!-- Login -->
   <div id="loginSection" class="login-box">
     <div class="login-icon"><i class="fas fa-chalkboard-user"></i></div>
     <h2>Teachers Portal</h2>
     <p class="sub">Staff Access · GBHS Wahi Pandhi</p>
-    <input type="text" id="teacherId" placeholder="Teacher ID (T001, T002)">
+    <input type="text" id="teacherId" placeholder="Teacher ID">
     <input type="password" id="password" placeholder="Password">
     <button class="login-btn" id="loginBtn" onclick="login()">
       <span>Login</span>
@@ -505,7 +439,7 @@
     <div class="demo-info">Demo: <strong>T001</strong> / maths123 &nbsp;|&nbsp; <strong>T002</strong> / science123</div>
   </div>
 
-  <!-- DASHBOARD -->
+  <!-- Dashboard -->
   <div id="dashboard" class="dashboard">
     <div class="header">
       <div class="header-left">
@@ -515,108 +449,111 @@
           <div class="sub-text"><i class="far fa-clock"></i> <span id="headerTime"></span></div>
         </div>
       </div>
-      <div class="header-actions">
-        <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-      </div>
+      <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
 
+    <!-- Notice -->
     <div class="notice-board">
-      <h4><i class="fas fa-bullhorn"></i> 📢 Notice from Management</h4>
+      <h4><i class="fas fa-bullhorn"></i> 📢 Upload Results</h4>
       <p>• Upload result images (JPG, PNG, PDF) for any class and subject.<br>
-      • Results will be automatically available for students to view.<br>
-      • Select date or use current date for the result.<br>
+      • Results will be available for students to view immediately.<br>
       • Students can view results by selecting class and subject.</p>
     </div>
 
-    <div class="dashboard-grid">
-      <!-- Upload Result -->
-      <div class="card full-width">
-        <h3><i class="fas fa-upload"></i> Upload Result Image</h3>
-        <p style="margin-bottom: 12px;">Upload result image (PDF, JPG, PNG). Students will see it by selecting class and subject.</p>
-        
-        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-          <div class="field" style="flex:1; min-width:150px;">
-            <label>Select Class</label>
-            <select id="resultClass">
-              <option value="">Select Class</option>
-              <option value="6th">6th</option>
-              <option value="7th">7th</option>
-              <option value="8th">8th</option>
-              <option value="9th">9th</option>
-              <option value="10th">10th</option>
-            </select>
-          </div>
-          <div class="field" style="flex:1; min-width:150px;">
-            <label>Select Subject</label>
-            <select id="resultSubject">
-              <option value="">Select Subject</option>
-              <option value="Urdu">Urdu</option>
-              <option value="Math">Math</option>
-              <option value="Science">Science</option>
-              <option value="English">English</option>
-              <option value="Sindhi">Sindhi</option>
-              <option value="Physics">Physics</option>
-              <option value="Chemistry">Chemistry</option>
-              <option value="Biology">Biology</option>
-              <option value="Computer">Computer</option>
-              <option value="Islamiat">Islamiat</option>
-            </select>
-          </div>
-          <div class="field" style="flex:1; min-width:150px;">
-            <label>Exam Type</label>
-            <select id="examType">
-              <option value="Midterm">Midterm</option>
-              <option value="Final">Final</option>
-              <option value="Test">Test</option>
-              <option value="Annual">Annual</option>
-            </select>
-          </div>
-          <div class="field" style="flex:1; min-width:150px;">
-            <label>Result Date</label>
-            <input type="date" id="resultDate">
-          </div>
+    <!-- Upload Card -->
+    <div class="card">
+      <h3><i class="fas fa-upload"></i> Upload Result Image</h3>
+      
+      <div class="form-row">
+        <div class="field">
+          <label>Class</label>
+          <select id="resultClass">
+            <option value="">Select</option>
+            <option value="6th">6th</option>
+            <option value="7th">7th</option>
+            <option value="8th">8th</option>
+            <option value="9th">9th</option>
+            <option value="10th">10th</option>
+          </select>
         </div>
-
-        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-          <i class="fas fa-cloud-upload-alt"></i>
-          <p>Click to select result image (PDF, JPG, PNG)</p>
-          <p class="small">Supported: PDF, JPG, JPEG, PNG</p>
+        <div class="field">
+          <label>Subject</label>
+          <select id="resultSubject">
+            <option value="">Select</option>
+            <option value="Urdu">Urdu</option>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+            <option value="Sindhi">Sindhi</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Computer">Computer</option>
+            <option value="Islamiat">Islamiat</option>
+          </select>
         </div>
-        <input type="file" id="fileInput" style="display:none" accept=".pdf,.jpg,.jpeg,.png">
-        <div id="previewContainer"></div>
-
-        <button class="upload-result-btn" onclick="uploadResult()">
-          <i class="fas fa-cloud-upload-alt"></i> Publish Result
-        </button>
-        <div id="uploadMsg" class="message"></div>
+      </div>
+      
+      <div class="form-row">
+        <div class="field">
+          <label>Exam Type</label>
+          <select id="examType">
+            <option value="Midterm">Midterm</option>
+            <option value="Final">Final</option>
+            <option value="Test">Test</option>
+            <option value="Annual">Annual</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Result Date</label>
+          <input type="date" id="resultDate">
+        </div>
       </div>
 
-      <!-- View Uploaded -->
-      <div class="card">
-        <h3><i class="fas fa-list"></i> My Uploaded Results</h3>
-        <p>View all results you have uploaded.</p>
-        <button class="feature-btn" onclick="viewMyUploads()"><i class="fas fa-eye"></i> View My Uploads</button>
+      <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Click to select result image</p>
+        <p class="small">Supported: JPG, PNG, PDF</p>
       </div>
+      <input type="file" id="fileInput" style="display:none" accept=".pdf,.jpg,.jpeg,.png">
+      <div id="previewContainer"></div>
 
-      <!-- Attendance -->
-      <div class="card">
-        <h3><i class="fas fa-calendar-check"></i> Class Attendance</h3>
-        <p>Mark & view daily attendance.</p>
-        <button class="feature-btn" onclick="alert('Attendance feature coming soon!')"><i class="fas fa-fingerprint"></i> Mark Attendance</button>
+      <button class="upload-btn" onclick="uploadResult()">
+        <i class="fas fa-cloud-upload-alt"></i> Publish Result
+      </button>
+      <div id="uploadMsg" class="message"></div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="card">
+      <h3><i class="fas fa-link"></i> Quick Links</h3>
+      <div class="quick-links">
+        <a href="my-uploads.html" class="quick-link">
+          <i class="fas fa-list"></i> My Uploads
+        </a>
+        <a href="paper-creator.html" class="quick-link">
+          <i class="fas fa-file-alt"></i> Paper Creator
+        </a>
+        <a href="students-results.html" class="quick-link">
+          <i class="fas fa-graduation-cap"></i> Student Results
+        </a>
+        <a href="index.html" class="quick-link">
+          <i class="fas fa-home"></i> Homepage
+        </a>
       </div>
     </div>
 
-    <div class="security-note">
-      <i class="fas fa-shield-alt"></i> <strong>Security:</strong> Never share credentials. Report suspicious activity immediately.
+    <div class="footer-text">
+      &copy; 2026 GBHS Wahi Pandhi. Designed by <strong>Sadam Rustamani</strong>
     </div>
   </div>
 </div>
 
-<!-- VIEW UPLOADS MODAL -->
+<!-- View Uploads Modal -->
 <div id="viewModal" class="modal-overlay">
-  <div class="modal-container" style="max-width:900px;">
+  <div class="modal-container">
     <div class="modal-header">
-      <h2><i class="fas fa-list"></i> My Uploaded Results</h2>
+      <h2><i class="fas fa-list"></i> My Uploads</h2>
       <span class="close-modal" onclick="closeViewModal()">&times;</span>
     </div>
     <div id="viewContent"></div>
@@ -635,28 +572,37 @@
     const loginBtn = document.getElementById('loginBtn');
     const originalContent = loginBtn.innerHTML;
     
+    if(!id || !pwd) {
+      showError('Please enter ID and password');
+      return;
+    }
+    
     loginBtn.innerHTML = '<div class="spinner"></div> Logging in...';
     loginBtn.disabled = true;
     
     setTimeout(() => {
       if((id === "T001" && pwd === "maths123") || (id === "T002" && pwd === "science123")) {
-        currentTeacher = { id, name: id === "T001" ? "Mr. Ahmed (Mathematics)" : "Mrs. Fatima (Science)" };
+        currentTeacher = { id, name: id === "T001" ? "Mr. Ahmed" : "Mrs. Fatima" };
         sessionStorage.setItem('teacher', JSON.stringify(currentTeacher));
         document.getElementById('loginSection').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
         document.getElementById('teacherName').innerText = currentTeacher.name;
-        // Set default date to today
+        
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('resultDate').value = today;
       } else {
         loginBtn.innerHTML = originalContent;
         loginBtn.disabled = false;
-        let err = document.getElementById('loginError');
-        err.innerText = "Invalid credentials! Use T001/maths123 or T002/science123";
-        err.style.display = 'block';
-        setTimeout(() => err.style.display = 'none', 3000);
+        showError('Invalid credentials! Use T001/maths123');
       }
-    }, 1200);
+    }, 800);
+  }
+
+  function showError(msg) {
+    const err = document.getElementById('loginError');
+    err.innerText = msg;
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 3000);
   }
 
   function logout() {
@@ -682,19 +628,12 @@
       const container = document.getElementById('previewContainer');
       
       if(file.type.startsWith('image/')) {
-        container.innerHTML = `<img src="${ev.target.result}" class="preview-img" style="display:block; max-height:200px;">`;
+        container.innerHTML = `<img src="${ev.target.result}" class="preview-img" style="display:block;">`;
       } else if(file.type === 'application/pdf') {
         container.innerHTML = `
-          <div style="background:#1a2a3a; border-radius:16px; padding:20px; text-align:center; margin-top:10px;">
-            <i class="fas fa-file-pdf" style="font-size:3rem; color:#ff4444;"></i>
-            <p style="color:#88b0c8; margin-top:6px;">${file.name}</p>
-          </div>
-        `;
-      } else {
-        container.innerHTML = `
-          <div style="background:#1a2a3a; border-radius:16px; padding:20px; text-align:center; margin-top:10px;">
-            <i class="fas fa-file" style="font-size:3rem; color:#00e6d0;"></i>
-            <p style="color:#88b0c8; margin-top:6px;">${file.name}</p>
+          <div style="background:#1a2a3a; border-radius:12px; padding:16px; text-align:center; margin-top:8px;">
+            <i class="fas fa-file-pdf" style="font-size:2rem; color:#ff4444;"></i>
+            <p style="color:#88b0c8; font-size:0.8rem; margin-top:4px;">${file.name}</p>
           </div>
         `;
       }
@@ -719,10 +658,8 @@
       return;
     }
     
-    // Get existing results
     let allResults = JSON.parse(localStorage.getItem('result_images') || '[]');
     
-    // Create result object
     const result = {
       id: Date.now(),
       class: className,
@@ -741,9 +678,8 @@
     allResults.push(result);
     localStorage.setItem('result_images', JSON.stringify(allResults));
     
-    showMsg('uploadMsg', `✅ Result for ${className} - ${subject} (${examType}) published successfully!`, 'success');
+    showMsg('uploadMsg', `✅ Result for ${className} - ${subject} published!`, 'success');
     
-    // Clear form
     setTimeout(() => {
       document.getElementById('resultClass').value = '';
       document.getElementById('resultSubject').value = '';
@@ -762,23 +698,24 @@
     
     if(myResults.length === 0) {
       document.getElementById('viewContent').innerHTML = `
-        <div style="text-align:center; padding:40px; color:#88b0c8;">
-          <i class="fas fa-folder-open" style="font-size:3rem; color:#3a5a6e; margin-bottom:12px;"></i>
+        <div style="text-align:center; padding:30px; color:#88b0c8;">
+          <i class="fas fa-folder-open" style="font-size:2.5rem; color:#3a5a6e; margin-bottom:10px;"></i>
           <p>You haven't uploaded any results yet.</p>
         </div>
       `;
     } else {
-      let html = `<div class="uploaded-results-grid">`;
+      let html = `<div class="upload-grid">`;
       for(let result of myResults.sort((a,b) => b.timestamp - a.timestamp)) {
         const isImage = result.fileType && result.fileType.startsWith('image/');
         html += `
-          <div class="uploaded-item" onclick="viewResultDetail(${result.id})">
+          <div class="upload-item">
             <div class="thumb">
               ${isImage ? `<img src="${result.fileData}" alt="Result">` : `<i class="fas fa-file-pdf"></i>`}
             </div>
             <div class="info">
               <strong>${result.class} - ${result.subject}</strong><br>
               ${result.examType} · ${result.date}
+              <button class="delete-btn" onclick="deleteResult(${result.id})">Delete</button>
             </div>
           </div>
         `;
@@ -790,52 +727,25 @@
     document.getElementById('viewModal').style.display = 'flex';
   }
 
-  function viewResultDetail(id) {
-    const allResults = JSON.parse(localStorage.getItem('result_images') || '[]');
-    const result = allResults.find(r => r.id === id);
-    if(!result) return;
-    
-    const isImage = result.fileType && result.fileType.startsWith('image/');
-    const content = `
-      <div style="text-align:center;">
-        <div style="margin-bottom:12px;">
-          <h3 style="color:#00e6d0;">${result.class} - ${result.subject}</h3>
-          <p style="color:#88b0c8;">${result.examType} · ${result.date}</p>
-          <p style="color:#6a8aa8; font-size:0.8rem;">Uploaded by: ${result.teacherName}</p>
-        </div>
-        <div style="background:#0a1a2a; border-radius:16px; padding:16px; max-height:70vh; overflow-y:auto;">
-          ${isImage ? `<img src="${result.fileData}" style="max-width:100%; border-radius:8px;">` : 
-            `<iframe src="${result.fileData}" style="width:100%; height:500px; border:none; border-radius:8px;"></iframe>`}
-        </div>
-        <button onclick="deleteResult(${result.id})" style="margin-top:16px; background:#c62828; color:white; padding:10px 28px; border:none; border-radius:40px; cursor:pointer; font-weight:600; transition:0.2s;" onmouseover="this.style.transform='scale(0.96)'" onmouseout="this.style.transform='scale(1)'">
-          <i class="fas fa-trash"></i> Delete Result
-        </button>
-        <button onclick="closeViewModal()" style="margin-top:16px; margin-left:10px; background:#3a5a6e; color:white; padding:10px 28px; border:none; border-radius:40px; cursor:pointer; font-weight:600; transition:0.2s;" onmouseover="this.style.transform='scale(0.96)'" onmouseout="this.style.transform='scale(1)'">
-          Close
-        </button>
-      </div>
-    `;
-    document.getElementById('viewContent').innerHTML = content;
-  }
-
   function deleteResult(id) {
-    if(!confirm('Are you sure you want to delete this result?')) return;
-    
+    if(!confirm('Delete this result?')) return;
     let allResults = JSON.parse(localStorage.getItem('result_images') || '[]');
     allResults = allResults.filter(r => r.id !== id);
     localStorage.setItem('result_images', JSON.stringify(allResults));
-    
-    viewMyUploads(); // Refresh
-    showMsg('uploadMsg', '✅ Result deleted successfully', 'success');
+    viewMyUploads();
   }
 
   function closeViewModal() {
     document.getElementById('viewModal').style.display = 'none';
   }
 
+  document.getElementById('viewModal').addEventListener('click', function(e) {
+    if (e.target === this) closeViewModal();
+  });
+
   // ===== HELPERS =====
   function showMsg(id, txt, type) { 
-    let d = document.getElementById(id); 
+    const d = document.getElementById(id); 
     if(d) { 
       d.innerText = txt; 
       d.className = 'message ' + type; 
@@ -861,11 +771,6 @@
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('resultDate').value = today;
     }
-  });
-
-  // Close modal on background click
-  document.getElementById('viewModal').addEventListener('click', function(e) {
-    if (e.target === this) closeViewModal();
   });
 </script>
 </body>
