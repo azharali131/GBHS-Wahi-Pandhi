@@ -50,4 +50,215 @@
 
     /* Notice List */
     .notice-list { display: flex; flex-direction: column; gap: 16px; }
-    .notice-item
+    .notice-item { background: white; border-radius: 16px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #eef4f8; transition: 0.3s; }
+    .notice-item:hover { border-color: #00d4c0; transform: translateX(4px); }
+    .notice-item .notice-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #00d4c0, #00a898); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: white; flex-shrink: 0; }
+    .notice-item .notice-icon.orange { background: linear-gradient(135deg, #ff8a5c, #ff6b4a); }
+    .notice-item .notice-icon.purple { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+    .notice-item .notice-icon.gold { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .notice-item .notice-content { flex: 1; }
+    .notice-item .notice-content h3 { font-size: 1rem; font-weight: 700; color: #0a1628; margin-bottom: 4px; }
+    .notice-item .notice-content p { color: #5a7a92; font-size: 0.9rem; line-height: 1.6; }
+    .notice-item .notice-content .notice-meta { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+    .notice-item .notice-content .notice-meta span { font-size: 0.7rem; color: #6a8aa8; display: flex; align-items: center; gap: 4px; }
+    .notice-item .notice-content .notice-meta span i { color: #00d4c0; }
+
+    /* Quote */
+    .quote-card { background: linear-gradient(135deg, #0a1628, #1a3a5a); color: white; border: none; padding: 30px; border-radius: 20px; text-align: center; margin-top: 30px; }
+    .quote-card h3 { color: #ffcd6b; font-size: 1.2rem; margin: 10px 0; }
+    .quote-card p { color: #aac8e8; }
+    .btn-primary { background: white; color: #0a1628; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 4px 20px rgba(255,255,255,0.2); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,255,255,0.3); }
+
+    /* Footer */
+    .footer { background: #0a1628; color: #8aa8c8; padding: 30px 20px 16px; margin-top: 30px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .footer h4 { color: white; font-size: 0.95rem; margin-bottom: 12px; }
+    .footer a { color: #8aa8c8; text-decoration: none; display: block; margin-bottom: 6px; font-size: 0.8rem; transition: 0.3s; }
+    .footer a:hover { color: #00d4c0; padding-left: 4px; }
+    .footer .bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 24px; text-align: center; font-size: 0.75rem; }
+    .footer .bottom strong { color: #00d4c0; }
+
+    /* Responsive */
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; width: 100%; padding: 12px 0; gap: 6px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { width: 100%; text-align: center; padding: 8px; font-size: 0.8rem; }
+      .hero h1 { font-size: 2rem; }
+      .top-bar { padding: 6px 12px; justify-content: center; }
+      .top-bar .contact-info { gap: 10px; font-size: 0.65rem; justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+      .section-title h2 { font-size: 1.5rem; }
+      .notice-item { flex-direction: column; align-items: flex-start; padding: 16px; }
+      .notice-item .notice-icon { width: 40px; height: 40px; font-size: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.6rem; }
+      .logo-area .school-name { font-size: 0.9rem; }
+      .logo-area img { width: 38px; height: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="contact-info">
+    <span><i class="fas fa-phone"></i> +92-123-4567890</span>
+    <span><i class="fas fa-envelope"></i> info@gbhswp.edu.pk</span>
+    <span><i class="fas fa-map-marker-alt"></i> Wahi Pandhi, Johi, Dadu</span>
+  </div>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo-area">
+    <img src="https://i.ibb.co/qXLQR7Y/Whats-App-Image-2026-05-05-at-12-23-47-AM.jpg" alt="School Logo" />
+    <div class="school-name">GBHS Wahi Pandhi <small>Tehsil Johi · District Dadu · Sindh</small></div>
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="staff.html">Staff</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="notices.html" class="active">Notices</a>
+    <a href="teacher-portal.html" class="btn-admission"><i class="fas fa-user-tie"></i> Teachers Portal</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-bullhorn"></i> School Notices</div>
+    <h1>Latest <span>Announcements</span></h1>
+    <p>Stay updated with the latest notices, circulars, and announcements from GBHS Wahi Pandhi. Important information for students, parents, and teachers.</p>
+  </div>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="section-title">
+    <h2>School <span>Notices</span></h2>
+    <p>All important notices and announcements are published here. Check regularly for updates.</p>
+  </div>
+
+  <div class="notice-list">
+    <!-- Notice 1 -->
+    <div class="notice-item">
+      <div class="notice-icon"><i class="fas fa-calendar-check"></i></div>
+      <div class="notice-content">
+        <h3>📅 Mid-Term Examinations Schedule</h3>
+        <p>Mid-term examinations for all classes will commence from <strong>May 20, 2026</strong> to <strong>May 28, 2026</strong>. Detailed schedule has been shared with class teachers.</p>
+        <div class="notice-meta">
+          <span><i class="fas fa-calendar-day"></i> May 20-28, 2026</span>
+          <span><i class="fas fa-user"></i> All Students</span>
+          <span><i class="fas fa-clock"></i> 8:00 AM - 2:00 PM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notice 2 -->
+    <div class="notice-item">
+      <div class="notice-icon orange"><i class="fas fa-trophy"></i></div>
+      <div class="notice-content">
+        <h3>🏆 Annual Sports Gala 2026</h3>
+        <p>Annual Sports Gala will be held on <strong>June 15, 2026</strong>. All students are encouraged to participate in various sports events. Registration forms are available at the office.</p>
+        <div class="notice-meta">
+          <span><i class="fas fa-calendar-day"></i> June 15, 2026</span>
+          <span><i class="fas fa-user"></i> All Students</span>
+          <span><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notice 3 -->
+    <div class="notice-item">
+      <div class="notice-icon purple"><i class="fas fa-user-graduate"></i></div>
+      <div class="notice-content">
+        <h3>🎓 Parent-Teacher Meeting</h3>
+        <p>Parent-Teacher Meeting (PTM) is scheduled for <strong>May 25, 2026</strong> at 9:00 AM. Parents are requested to attend and discuss their child's academic progress.</p>
+        <div class="notice-meta">
+          <span><i class="fas fa-calendar-day"></i> May 25, 2026</span>
+          <span><i class="fas fa-user"></i> Parents & Teachers</span>
+          <span><i class="fas fa-clock"></i> 9:00 AM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notice 4 -->
+    <div class="notice-item">
+      <div class="notice-icon gold"><i class="fas fa-hand-holding-heart"></i></div>
+      <div class="notice-content">
+        <h3>📚 Free Textbook Distribution</h3>
+        <p>Free textbooks for the academic session 2026-27 will be distributed to all students starting <strong>June 5, 2026</strong>. Students must collect their books from the school library.</p>
+        <div class="notice-meta">
+          <span><i class="fas fa-calendar-day"></i> June 5, 2026</span>
+          <span><i class="fas fa-user"></i> All Students</span>
+          <span><i class="fas fa-clock"></i> 8:00 AM - 2:00 PM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notice 5 -->
+    <div class="notice-item">
+      <div class="notice-icon"><i class="fas fa-sun"></i></div>
+      <div class="notice-content">
+        <h3>☀️ Summer Vacation Announcement</h3>
+        <p>Summer vacation will start from <strong>June 1, 2026</strong> and will continue until <strong>July 31, 2026</strong>. School will reopen on <strong>August 1, 2026</strong>.</p>
+        <div class="notice-meta">
+          <span><i class="fas fa-calendar-day"></i> June 1 - July 31, 2026</span>
+          <span><i class="fas fa-user"></i> All Students</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notice 6 -->
+    <div class="notice-item">
+      <div class="notice-icon orange"><i class="fas fa-book-open"></i></div>
+      <div class="notice-content">
+        <h3>📖 Admissions Open 2026-27</h3>
+        <p>Admissions are now open for the academic session 2026-27 for classes 6th to 10th. Visit the school office to collect admission forms. Last date: May 15, 2026.</p>
+        <div class="notice-meta">
+          <span><i class="fas fa-calendar-day"></i> Until May 15, 2026</span>
+          <span><i class="fas fa-user"></i> New Students</span>
+          <span><i class="fas fa-clock"></i> 8:00 AM - 2:00 PM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-card">
+    <i class="fas fa-quote-left" style="color: #00d4c0; font-size: 2rem; opacity: 0.5;"></i>
+    <h3>"Knowledge is power. Information is liberating. Education is the premise of progress, in every society, in every family."</h3>
+    <p>— Kofi Annan</p>
+    <div style="margin-top: 16px;">
+      <a href="index.html" class="btn-primary"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div><h4>GBHS Wahi Pandhi</h4><p style="font-size: 0.8rem; line-height: 1.6;">Tehsil Johi, District Dadu, Sindh<br />Established 1985</p></div>
+    <div><h4>Quick Links</h4><a href="admissions.html">Admissions</a><a href="staff.html">Staff</a><a href="notices.html">Notices</a></div>
+    <div><h4>Contact</h4><a href="#"><i class="fas fa-phone"></i> +92-123-4567890</a><a href="#"><i class="fas fa-envelope"></i> info@gbhswp.edu.pk</a></div>
+  </div>
+  <div class="bottom">&copy; 2026 GBHS Wahi Pandhi. All rights reserved. <strong>|</strong> Designed by <strong style="color:#00d4c0;">Sadam Rustamani</strong></div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+  document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); }); });
+</script>
+</body>
+</html>
