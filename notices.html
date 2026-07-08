@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
+  <title>Notices · GBHS Wahi Pandhi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a2a3a; min-height: 100vh; }
+
+    /* Top Bar */
+    .top-bar { background: #0a1628; padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; border-bottom: 2px solid #00d4c0; }
+    .top-bar .contact-info { display: flex; gap: 16px; color: #8aa8c8; font-size: 0.7rem; flex-wrap: wrap; }
+    .top-bar .contact-info i { color: #00d4c0; margin-right: 4px; }
+    .top-bar .social-icons { display: flex; gap: 10px; }
+    .top-bar .social-icons a { color: #8aa8c8; transition: 0.3s; font-size: 0.85rem; }
+    .top-bar .social-icons a:hover { color: #00d4c0; transform: translateY(-2px); }
+
+    /* Header */
+    .header { background: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 20px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-area img { width: 48px; height: 48px; border-radius: 50%; border: 3px solid #00d4c0; object-fit: cover; }
+    .logo-area .school-name { font-size: 1.1rem; font-weight: 800; color: #0a1628; line-height: 1.2; }
+    .logo-area .school-name small { display: block; font-size: 0.55rem; font-weight: 400; color: #6a8aa8; letter-spacing: 0.3px; }
+    .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: #0a1628; cursor: pointer; padding: 4px 8px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .nav-links a { padding: 6px 14px; border-radius: 30px; text-decoration: none; color: #1a3a5a; font-weight: 600; font-size: 0.75rem; transition: 0.3s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { background: #00d4c0; color: white; box-shadow: 0 4px 16px rgba(0,212,192,0.3); }
+    .nav-links .btn-admission { background: #ff6b4a; color: white; padding: 6px 18px; border-radius: 30px; font-weight: 700; }
+    .nav-links .btn-admission:hover { background: #e85530; transform: scale(0.96); }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #0a1628 0%, #1a3a5a 100%); padding: 60px 20px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,192,0.08) 0%, transparent 70%); border-radius: 50%; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+    .hero-badge { display: inline-block; background: rgba(0,212,192,0.15); color: #00d4c0; padding: 8px 24px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(0,212,192,0.2); }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; color: white; line-height: 1.2; }
+    .hero h1 span { color: #00d4c0; }
+    .hero p { color: #aac8e8; font-size: 1.05rem; line-height: 1.8; max-width: 600px; margin: 16px auto 0; }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 30px 16px; }
+    .section-title { text-align: center; margin-bottom: 30px; }
+    .section-title h2 { font-size: 2rem; font-weight: 800; color: #0a1628; }
+    .section-title h2 span { color: #00b8a8; }
+    .section-title p { color: #6a8aa8; max-width: 600px; margin: 6px auto 0; font-size: 0.95rem; }
+
+    /* Notice List */
+    .notice-list { display: flex; flex-direction: column; gap: 16px; }
+    .notice-item
