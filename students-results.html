@@ -47,7 +47,7 @@
       background: white;
       border-radius: 24px;
       padding: 32px;
-      max-width: 600px;
+      max-width: 550px;
       margin: 0 auto 30px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       border: 1px solid #eef4f8;
@@ -99,7 +99,7 @@
 
     .result-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 20px;
     }
     .result-card {
@@ -186,6 +186,9 @@
     .footer .bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 24px; text-align: center; font-size: 0.75rem; }
     .footer .bottom strong { color: #00d4c0; }
 
+    @media (max-width: 1024px) {
+      .result-grid { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
       .nav-links { display: none; flex-direction: column; width: 100%; padding: 12px 0; gap: 6px; }
@@ -195,7 +198,7 @@
       .hero h1 { font-size: 2rem; }
       .hero { padding: 40px 16px; }
       .result-check-box { padding: 20px; }
-      .result-grid { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr 1fr; }
       .top-bar { padding: 6px 12px; justify-content: center; }
       .top-bar .contact-info { gap: 10px; font-size: 0.65rem; justify-content: center; }
       .footer-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -204,6 +207,7 @@
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.6rem; }
+      .result-grid { grid-template-columns: 1fr; }
       .logo-area .school-name { font-size: 0.9rem; }
       .logo-area img { width: 38px; height: 38px; }
       .detail-content .detail-body iframe { height: 300px; }
@@ -248,7 +252,7 @@
   <div class="hero-content">
     <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Check Your Results</div>
     <h1>Student <span>Results</span></h1>
-    <p>Select your class and subject to view your exam results. Results are uploaded by teachers as images.</p>
+    <p>Select your class and subject to view all uploaded exam results. No roll number or name required.</p>
   </div>
 </section>
 
@@ -257,13 +261,13 @@
   
   <div class="section-title">
     <h2>View <span>Your Results</span></h2>
-    <p>Select your class and subject to see all available results.</p>
+    <p>Select your class and subject to see all available results uploaded by teachers.</p>
   </div>
 
-  <!-- Result Check Form -->
+  <!-- Result Check Form - Only Class and Subject -->
   <div class="result-check-box">
     <h3><i class="fas fa-search" style="color: #00d4c0;"></i> Find Your Results</h3>
-    <p class="sub">Select class and subject to view all uploaded results.</p>
+    <p class="sub">Select class and subject to view all uploaded results. No roll number needed!</p>
     
     <div class="form-group">
       <label><i class="fas fa-users"></i> Select Class</label>
@@ -361,7 +365,7 @@
     });
   });
 
-  // ===== CHECK RESULTS =====
+  // ===== CHECK RESULTS - Only Class and Subject =====
   function checkResults() {
     const className = document.getElementById('studentClass').value;
     const subject = document.getElementById('studentSubject').value;
@@ -418,7 +422,7 @@
       `;
     }
     html += `</div>`;
-    html += `<div style="margin-top: 16px; font-size: 0.8rem; color: #6a8aa8; text-align: center;">Results uploaded by teachers. Click on any card to view full result.</div>`;
+    html += `<div style="margin-top: 16px; font-size: 0.8rem; color: #6a8aa8; text-align: center;">Click on any result card to view full image.</div>`;
     
     document.getElementById('resultContent').innerHTML = html;
   }
@@ -502,7 +506,7 @@
   });
   
   console.log('🎓 GBHS Wahi Pandhi - Student Results');
-  console.log('📊 Results are stored in localStorage');
+  console.log('📊 Students can view results by selecting Class & Subject only');
 </script>
 </body>
 </html>
