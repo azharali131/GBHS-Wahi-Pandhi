@@ -437,8 +437,8 @@
   let selectedFile = null;
   let selectedFileData = null;
 
-  // ===== LOGIN =====
-  function login() {
+  // ===== REAL LOGIN - CHECKS GOOGLE SHEET =====
+  async function login() {
     const id = document.getElementById('teacherId').value.trim();
     const pwd = document.getElementById('password').value.trim();
     const loginBtn = document.getElementById('loginBtn');
@@ -452,21 +452,25 @@
     loginBtn.innerHTML = '<div class="spinner"></div> Verifying...';
     loginBtn.disabled = true;
     
-    // Demo login - works with teachers in Google Sheet
-    setTimeout(() => {
-      if((id === "T001" && pwd === "maths123") || 
-         (id === "T002" && pwd === "science123") || 
-         (id === "T003" && pwd === "urdu123")) {
-        
-        const names = {
-          'T001': 'Mr. Ahmed (Math)',
-          'T002': 'Mrs. Fatima (Science)',
-          'T003': 'Mr. Hassan (Urdu)'
-        };
-        
-        currentTeacher = { 
-          id: id, 
-          name: names[id] || 'Teacher',
+    try {
+      // Send login request to Google Apps Script
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          action: 'login',
+          teacherId: id,
+          password: pwd
+        }),
+        headers: {'Content-Type': 'application/json'}
+      });
+      
+      const data = await response.json();
+      
+      if(data.success && data.data && data.data.valid) {
+        // Login successful!
+        currentTeacher = {
+          id: id,
+          name: data.data.name || id,
           password: pwd
         };
         
@@ -478,18 +482,25 @@
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('resultDate').value = today;
       } else {
+        // Login failed
         loginBtn.innerHTML = originalContent;
         loginBtn.disabled = false;
-        showError('Invalid credentials! Contact admin.');
+        showError('Invalid credentials! Please check ID and password.');
       }
-    }, 800);
+    } catch(error) {
+      // Network error or Apps Script not responding
+      loginBtn.innerHTML = originalContent;
+      loginBtn.disabled = false;
+      showError('Connection error! Please check your internet and try again.');
+      console.error('Login error:', error);
+    }
   }
 
   function showError(msg) {
     const err = document.getElementById('loginError');
     err.innerText = msg;
     err.style.display = 'block';
-    setTimeout(() => err.style.display = 'none', 3000);
+    setTimeout(() => err.style.display = 'none', 4000);
   }
 
   function logout() {
@@ -556,6 +567,7 @@
     uploadBtn.disabled = true;
     
     const result = {
+      action: 'upload',
       class: className,
       subject: subject,
       examType: examType,
