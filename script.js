@@ -41,3 +41,19 @@ if (tickerWrap) {
 console.log('🏫 GBHS Wahi Pandhi Official Website');
 console.log('📚 Developed by Sadam Rustamani');
 console.log('💻 Built with ❤️ for the school community');
+
+
+// ===== Result storage =====
+{
+  id: 1234567890,
+  class: "6th",
+  subject: "Math",
+  examType: "Midterm",
+  date: "2026-05-15",
+  fileName: "result.jpg",
+  fileType: "image/jpeg",
+  fileData: "data:image/jpeg;base64,...",
+  teacherName: "Mr. Ahmed",
+  timestamp: 1234567890
+}
+
