@@ -18,7 +18,6 @@
     }
     .container { max-width: 800px; margin: 0 auto; }
     
-    /* Top Header */
     .top-header {
       display: flex;
       justify-content: space-between;
@@ -27,12 +26,8 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .top-header .portal-title {
-      color: #88b0c8;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-    .top-header .portal-title strong { color: #00e6d0; font-weight: 700; }
+    .top-header .portal-title { color: #88b0c8; font-size: 0.85rem; }
+    .top-header .portal-title strong { color: #00e6d0; }
     .home-btn {
       background: rgba(0, 230, 210, 0.12);
       border: 1px solid rgba(0, 230, 210, 0.2);
@@ -48,19 +43,12 @@
       gap: 8px;
       font-size: 0.85rem;
     }
-    .home-btn:hover {
-      background: #00e6d0;
-      color: #0b1a26;
-      transform: scale(0.96);
-      box-shadow: 0 4px 20px rgba(0, 230, 210, 0.25);
-    }
+    .home-btn:hover { background: #00e6d0; color: #0b1a26; transform: scale(0.96); }
 
-    /* Login Box */
     .login-box {
       max-width: 420px;
       margin: 40px auto;
       background: rgba(14, 34, 50, 0.92);
-      backdrop-filter: blur(12px);
       border-radius: 40px;
       padding: 36px 28px;
       text-align: center;
@@ -68,8 +56,7 @@
       box-shadow: 0 30px 50px rgba(0,0,0,0.5);
     }
     .login-box .login-icon {
-      width: 64px;
-      height: 64px;
+      width: 64px; height: 64px;
       background: linear-gradient(135deg, #00e6d0, #00b8a8);
       border-radius: 50%;
       display: flex;
@@ -110,11 +97,10 @@
       margin-top: 10px;
       box-shadow: 0 6px 24px rgba(0,230,210,0.2);
     }
-    .login-btn:hover { transform: scale(0.98); box-shadow: 0 10px 32px rgba(0,230,210,0.35); }
+    .login-btn:hover { transform: scale(0.98); }
     .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .login-btn .spinner {
-      width: 18px;
-      height: 18px;
+      width: 18px; height: 18px;
       border: 3px solid rgba(255,255,255,0.25);
       border-top: 3px solid #02212e;
       border-radius: 50%;
@@ -124,22 +110,16 @@
     @keyframes spin { 100% { transform: rotate(360deg); } }
     .error-msg { color: #ff7a7a; margin-top: 10px; display: none; font-size: 0.85rem; }
     .demo-info {
-      font-size: 11px;
-      color: #5a7a8a;
-      margin-top: 14px;
-      background: rgba(0,0,0,0.2);
-      padding: 6px 14px;
-      border-radius: 40px;
+      font-size: 11px; color: #5a7a8a; margin-top: 14px;
+      background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 40px;
       display: inline-block;
     }
     .demo-info strong { color: #00e6d0; }
 
-    /* Dashboard */
     .dashboard { display: none; }
     
     .header {
       background: linear-gradient(135deg, rgba(2, 18, 32, 0.94), rgba(10, 30, 50, 0.94));
-      backdrop-filter: blur(14px);
       border-radius: 28px;
       padding: 16px 24px;
       margin-bottom: 20px;
@@ -152,8 +132,7 @@
     }
     .header-left { display: flex; align-items: center; gap: 14px; }
     .header-left .avatar-icon {
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       background: linear-gradient(135deg, #00e6d0, #00b8a8);
       border-radius: 50%;
       display: flex;
@@ -176,7 +155,7 @@
       transition: 0.25s;
       font-size: 0.85rem;
     }
-    .logout-btn:hover { background: #f44336; color: white; border-color: #f44336; transform: scale(0.96); }
+    .logout-btn:hover { background: #f44336; color: white; }
 
     .notice-board {
       background: linear-gradient(135deg, #f9a825, #f57f17);
@@ -288,7 +267,6 @@
     .error { background: #c62828; color: white; }
     .warning { background: #f57c00; color: #1a1a2e; }
 
-    /* Quick Links */
     .quick-links {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -306,6 +284,7 @@
       transition: 0.3s;
       font-size: 0.85rem;
       font-weight: 500;
+      cursor: pointer;
     }
     .quick-link:hover { border-color: #00e6d0; transform: translateY(-2px); background: rgba(0,230,210,0.05); }
     .quick-link i { font-size: 1.5rem; color: #00e6d0; display: block; margin-bottom: 6px; }
@@ -320,7 +299,6 @@
     }
     .footer-text strong { color: #00e6d0; }
 
-    /* My Uploads Modal */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -389,15 +367,14 @@
     }
     .upload-item .info { margin-top: 6px; font-size: 0.7rem; color: #88b0c8; }
     .upload-item .info strong { color: #e8f0f8; }
-
     .delete-btn {
       background: #c62828;
       color: white;
-      padding: 6px 16px;
+      padding: 4px 14px;
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 600;
       transition: 0.2s;
       margin-top: 4px;
@@ -418,7 +395,6 @@
 </head>
 <body>
 <div class="container">
-  <!-- Top Header -->
   <div class="top-header">
     <span class="portal-title"><strong>GBHS Wahi Pandhi</strong> · Teachers Portal</span>
     <a href="index.html" class="home-btn"><i class="fas fa-home"></i> Home</a>
@@ -452,7 +428,6 @@
       <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
 
-    <!-- Notice -->
     <div class="notice-board">
       <h4><i class="fas fa-bullhorn"></i> 📢 Upload Results</h4>
       <p>• Upload result images (JPG, PNG, PDF) for any class and subject.<br>
@@ -528,13 +503,13 @@
     <div class="card">
       <h3><i class="fas fa-link"></i> Quick Links</h3>
       <div class="quick-links">
-        <a href="my-uploads.html" class="quick-link">
+        <a href="#" class="quick-link" onclick="viewMyUploads(); return false;">
           <i class="fas fa-list"></i> My Uploads
         </a>
-        <a href="paper-creator.html" class="quick-link">
+        <a href="paper-creator.html" target="_blank" class="quick-link">
           <i class="fas fa-file-alt"></i> Paper Creator
         </a>
-        <a href="students-results.html" class="quick-link">
+        <a href="students-results.html" target="_blank" class="quick-link">
           <i class="fas fa-graduation-cap"></i> Student Results
         </a>
         <a href="index.html" class="quick-link">
@@ -708,14 +683,14 @@
       for(let result of myResults.sort((a,b) => b.timestamp - a.timestamp)) {
         const isImage = result.fileType && result.fileType.startsWith('image/');
         html += `
-          <div class="upload-item">
+          <div class="upload-item" onclick="viewResultDetail(${result.id})">
             <div class="thumb">
               ${isImage ? `<img src="${result.fileData}" alt="Result">` : `<i class="fas fa-file-pdf"></i>`}
             </div>
             <div class="info">
               <strong>${result.class} - ${result.subject}</strong><br>
               ${result.examType} · ${result.date}
-              <button class="delete-btn" onclick="deleteResult(${result.id})">Delete</button>
+              <button class="delete-btn" onclick="event.stopPropagation(); deleteResult(${result.id})">Delete</button>
             </div>
           </div>
         `;
@@ -725,6 +700,29 @@
     }
     
     document.getElementById('viewModal').style.display = 'flex';
+  }
+
+  function viewResultDetail(id) {
+    const allResults = JSON.parse(localStorage.getItem('result_images') || '[]');
+    const result = allResults.find(r => r.id === id);
+    if(!result) return;
+    
+    const isImage = result.fileType && result.fileType.startsWith('image/');
+    const content = `
+      <div style="text-align:center;">
+        <h3 style="color:#00e6d0; margin-bottom:8px;">${result.class} - ${result.subject}</h3>
+        <p style="color:#88b0c8;">${result.examType} · ${result.date}</p>
+        <p style="color:#6a8aa8; font-size:0.8rem;">Uploaded by: ${result.teacherName}</p>
+        <div style="background:#0a1a2a; border-radius:12px; padding:16px; margin-top:12px; max-height:60vh; overflow-y:auto;">
+          ${isImage ? `<img src="${result.fileData}" style="max-width:100%; border-radius:8px;">` : 
+            `<iframe src="${result.fileData}" style="width:100%; height:400px; border:none; border-radius:8px;"></iframe>`}
+        </div>
+        <button onclick="closeViewModal()" style="margin-top:12px; background:#3a5a6e; color:white; padding:8px 24px; border:none; border-radius:40px; cursor:pointer; font-weight:600;">
+          Close
+        </button>
+      </div>
+    `;
+    document.getElementById('viewContent').innerHTML = content;
   }
 
   function deleteResult(id) {
