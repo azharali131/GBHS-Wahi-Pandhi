@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teachers Portal - GBHS Wahi Pandhi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== ALL EXISTING STYLES FROM YOUR CODE ===== */
+    /* I'm keeping your existing styles and adding new ones below */
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0b1a26;
+      font-family: 'Inter', sans-serif;
+      color: #e8f0f8;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    
+    /* ===== TOP HEADER WITH HOME BUTTON ===== */
+    .top-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .top-header .portal-title {
+      color: #88b0c8;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-right: auto;
+    }
+    .top-header .portal-title strong {
+      color: #00e6d0;
+      font-weight: 700;
+    }
+    .home-btn {
+      background: rgba(0, 230, 210, 0.12);
+      border: 1px solid rgba(0, 230, 210, 0.2);
+      padding: 10px 24px;
+      border-radius: 40px;
+      color: #00e6d0;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.25s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+    }
+    .home-btn:hover {
+      background: #00e6d0;
+      color: #0b1a26;
+      transform: scale(0.96);
+      box-shadow: 0 4px 20px rgba(0, 230, 210, 0.25);
+    }
+
+    /* ===== LOGIN BOX ===== */
+    .login-box {
+      max-width: 450px;
+      margin: 40px auto;
+      background: rgba(14, 34, 50, 0.92);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 44px 36px;
+      text-align: center;
+      border: 1px solid rgba(0, 230, 210, 0.3);
+      box-shadow: 0 30px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,230,210,0.06);
+      transition: 0.3s;
+    }
+    .login-box .login-icon {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #00e6d0, #00b8a8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 2rem;
+      color: #02212e;
+      box-shadow: 0 8px 28px rgba(0,230,210,0.25);
+    }
+    .login-box h2 {
+      color: #00e6d0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+    }
+    .login-box .sub {
+      color: #88b0c8;
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 14px 20px;
+      margin: 10px 0;
+      border-radius: 60px;
+      border: none;
+      font-size: 1rem;
+      background: #eef7fc;
+      color: #0b1a26;
+      font-weight: 500;
+      outline: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .login-box input:focus { outline: 2px solid #00e6d0; }
+    .login-box input::placeholder { color: #8aa8c8; }
+    
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #00e6d0, #00b8a8);
+      border: none;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: 0.25s;
+      color: #02212e;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 6px 24px rgba(0,230,210,0.2);
+    }
+    .login-btn:hover { transform: scale(0.98); box-shadow: 0 10px 32px rgba(0,230,210,0.35); }
+    .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .login-btn .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.25);
+      border-top: 3px solid #02212e;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    
+    .error-msg { color: #ff7a7a; margin-top: 12px; display: none; font-size: 0.85rem; }
+    .login-box .demo-info {
+      font-size: 12px;
+      color: #5a7a8a;
+      margin-top: 18px;
+      background: rgba(0,0,0,0.2);
+      padding: 8px 16px;
+      border-radius: 40px;
+      display: inline-block;
+    }
+    .login-box .demo-info strong { color: #00e6d0; }
+    
+    /* ===== DASHBOARD ===== */
+    .dashboard { display: none; }
+    
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, rgba(2, 18, 32, 0.94), rgba(10, 30, 50, 0.94));
+      backdrop-filter: blur(14px);
+      border-radius: 32px;
+      padding: 20px 32px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border: 1px solid rgba(0,230,210,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .header-left .avatar-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #00e6d0, #00b8a8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #02212e;
+      box-shadow: 0 4px 16px rgba(0,230,210,0.2);
+    }
+    .header-left h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #e8f0f8;
+    }
+    .header-left h2 span { color: #00e6d0; }
+    .header-left .sub-text {
+      font-size: 0.75rem;
+      color: #88b0c8;
+      margin-top: 2px;
+    }
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logout-btn {
+      background: rgba(244, 67, 54, 0.12);
+      border: 1px solid rgba(244,67,54,0.2);
+      padding: 10px 28px;
+      border-radius: 40px;
+      color: #ff7a7a;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.25s;
+      backdrop-filter: blur(4px);
+      font-size: 0.9rem;
+    }
+    .logout-btn:hover {
+      background: #f44336;
+      color: white;
+      border-color: #f44336;
+      transform: scale(0.96);
+      box-shadow: 0 4px 20px rgba(244,67,54,0.3);
+    }
+    
+    /* Notice Board */
+    .notice-board {
+      background: linear-gradient(135deg, #f9a825, #f57f17);
+      border-radius: 24px;
+      padding: 20px 28px;
+      margin-bottom: 28px;
+      border-left: 8px solid #ffea00;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .notice-board h4 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+      color: #1a1a2e;
+      font-weight: 700;
+    }
+    .notice-board p {
+      color: #1a1a2e;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
+    .notice-board p strong { color: #4a1a0a; }
+    
+    /* Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    .full-width { grid-column: 1 / -1; }
+    
+    /* Cards */
+    .card {
+      background: rgba(14, 34, 50, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 28px 30px;
+      border: 1px solid rgba(0,230,210,0.06);
+      transition: 0.3s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .card:hover {
+      border-color: rgba(0,230,210,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    }
+    .card h3 {
+      color: #00e6d0;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card p {
+      color: #b0ccdd;
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+    .card .text-muted { color: #6a8aa8; font-size: 0.85rem; }
+    
+    .feature-btn {
+      background: linear-gradient(135deg, #00e6d0, #00b8a8);
+      color: #02212e;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 60px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+      font-size: 1rem;
+      transition: 0.25s;
+      box-shadow: 0 4px 16px rgba(0,230,210,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .feature-btn:hover {
+      transform: scale(0.97);
+      box-shadow: 0 8px 28px rgba(0,230,210,0.25);
+    }
+    .feature-btn:disabled {
+      background: #3a5a6e;
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    /* Upload Area */
+    .upload-area {
+      border: 2px dashed rgba(0,230,210,0.2);
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      margin: 14px 0;
+      transition: 0.3s;
+      background: rgba(0,230,210,0.02);
+    }
+    .upload-area:hover {
+      background: rgba(0,230,210,0.06);
+      border-color: #00e6d0;
+    }
+    .upload-area i { font-size: 2.8rem; color: #00e6d0; opacity: 0.5; }
+    .upload-area p { color: #b0ccdd; margin-top: 6px; }
+    .upload-area .small { font-size: 12px; color: #5a7a8a; }
+    
+    .preview-img {
+      max-width: 100%;
+      margin-top: 15px;
+      border-radius: 16px;
+      display: none;
+    }
+    
+    /* Security Note */
+    .security-note {
+      background: rgba(0,0,0,0.3);
+      border-radius: 20px;
+      padding: 16px 24px;
+      text-align: center;
+      border: 1px solid rgba(255,170,68,0.15);
+      font-size: 0.85rem;
+      backdrop-filter: blur(4px);
+      grid-column: 1 / -1;
+    }
+    .security-note i { color: #ffaa44; margin-right: 10px; }
+    .security-note strong { color: #ffaa44; }
+    
+    /* ===== MODALS ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-container {
+      background: #0d2432;
+      border-radius: 32px;
+      width: 95%;
+      max-width: 1200px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+      border: 1px solid rgba(0,230,210,0.12);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+    .modal-container::-webkit-scrollbar { width: 6px; }
+    .modal-container::-webkit-scrollbar-track { background: #0a1a2a; border-radius: 10px; }
+    .modal-container::-webkit-scrollbar-thumb { background: #00e6d0; border-radius: 10px; }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0,230,210,0.08);
+    }
+    .modal-header h2 {
+      color: #00e6d0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .close-modal {
+      font-size: 32px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #88b0c8;
+      line-height: 1;
+    }
+    .close-modal:hover { color: #00e6d0; transform: rotate(90deg); }
+    
+    .form-section {
+      background: rgba(255,255,255,0.03);
+      border-radius: 20px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      color: #00e6d0;
+      font-weight: 600;
+      margin-bottom: 15px;
+      border-left: 4px solid #00e6d0;
+      padding-left: 12px;
+      font-size: 0.95rem;
+    }
+    .form-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .field {
+      flex: 1;
+      min-width: 140px;
+      margin-bottom: 12px;
+    }
+    .field label {
+      font-size: 0.7rem;
+      display: block;
+      margin-bottom: 5px;
+      color: #88b0c8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 30px;
+      border: none;
+      background: #eef7fc;
+      font-size: 0.85rem;
+      color: #0b1a26;
+      outline: 2px solid transparent;
+      transition: 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: 2px solid #00e6d0;
+    }
+    .field textarea { border-radius: 20px; resize: vertical; }
+    .readonly-date {
+      background: #1e3a3f;
+      color: #00e6d0;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    /* Attendance Table */
+    .attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .attendance-table th {
+      color: #88b0c8;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 8px 8px;
+      text-align: left;
+      border-bottom: 2px solid rgba(0,230,210,0.08);
+    }
+    .attendance-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .present-btn {
+      background: #2e7d32;
+      color: white;
+      padding: 5px 16px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      margin: 2px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: 0.2s;
+    }
+    .present-btn:hover { transform: scale(0.95); }
+    .absent-btn {
+      background: #c62828;
+      color: white;
+      padding: 5px 16px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      margin: 2px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: 0.2s;
+    }
+    .absent-btn:hover { transform: scale(0.95); }
+    .status-badge { margin-left: 10px; font-weight: bold; font-size: 0.85rem; }
+    .submitted-badge {
+      background: #ff9800;
+      padding: 4px 16px;
+      border-radius: 50px;
+      font-size: 12px;
+      display: inline-block;
+      margin-top: 10px;
+      color: #1a1a2e;
+      font-weight: 600;
+    }
+    .perf-badge {
+      background: #1e3a5f;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-block;
+      border: 1px solid rgba(0,230,210,0.2);
+    }
+    .perf-badge:hover {
+      background: #00e6d0;
+      color: #02212e;
+      transform: scale(1.05);
+    }
+    .ratio-bar-sm {
+      background: #1a2a3a;
+      border-radius: 20px;
+      height: 5px;
+      width: 70px;
+      overflow: hidden;
+      display: inline-block;
+      margin-left: 8px;
+    }
+    .ratio-present-sm {
+      background: #4caf50;
+      height: 100%;
+      width: 0%;
+    }
+    
+    /* ===== RESULT UPLOAD TABLE ===== */
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .result-table th {
+      color: #88b0c8;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 8px 8px;
+      text-align: left;
+      border-bottom: 2px solid rgba(0,230,210,0.08);
+    }
+    .result-table td {
+      padding: 8px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .result-table input {
+      background: #eef7fc;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      width: 80px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    .result-table input:focus {
+      outline: 2px solid #00e6d0;
+    }
+    .result-table .student-name {
+      color: #e8f0f8;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .grade-badge {
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+    .grade-A { background: #2e7d32; color: white; }
+    .grade-B { background: #1976d2; color: white; }
+    .grade-C { background: #f57c00; color: white; }
+    .grade-D { background: #c62828; color: white; }
+    .grade-F { background: #880e4f; color: white; }
+    
+    .upload-result-btn {
+      background: linear-gradient(135deg, #00e6d0, #00b8a8);
+      color: #02212e;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 60px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.25s;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .upload-result-btn:hover {
+      transform: scale(0.97);
+      box-shadow: 0 8px 28px rgba(0,230,210,0.25);
+    }
+    
+    .message {
+      padding: 12px;
+      border-radius: 60px;
+      margin-top: 15px;
+      text-align: center;
+      display: none;
+      font-weight: 600;
+    }
+    .success { background: #2e7d32; color: white; }
+    .error { background: #c62828; color: white; }
+    .warning { background: #f57c00; color: #1a1a2e; }
+    
+    /* ===== PAPER CREATOR STYLES ===== */
+    .two-columns {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .form-column { flex: 1; min-width: 300px; }
+    .preview-column {
+      flex: 1;
+      min-width: 350px;
+      background: #f0f0f0;
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .preview-label {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 8px;
+      display: block;
+      font-weight: bold;
+    }
+    .tools-bar {
+      display: flex;
+      gap: 10px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+    .tool-btn {
+      background: #00796b;
+      border: none;
+      border-radius: 30px;
+      padding: 7px 18px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .tool-btn:hover { background: #009688; transform: scale(0.96); }
+    .questions-container {
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .question-item {
+      background: rgba(0,0,0,0.15);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .question-text { font-size: 0.8rem; margin-bottom: 4px; color: #e8f0f8; }
+    .question-marks { font-size: 0.7rem; color: #00e6d0; font-weight: 600; }
+    .remove-q {
+      background: #f44336;
+      border: none;
+      border-radius: 20px;
+      padding: 3px 12px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.65rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .remove-q:hover { background: #d32f2f; }
+    
+    /* A4 Preview */
+    .a4-preview {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 12px;
+      font-family: 'Times New Roman', Times, serif;
+      max-width: 100%;
+    }
+    .a4-header { text-align: center; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 12px; }
+    .a4-school { font-weight: bold; font-size: 14px; text-transform: uppercase; }
+    .a4-address { font-size: 8px; color: #555; }
+    .a4-exam-title { text-align: center; font-weight: bold; font-size: 12px; margin: 10px 0; text-transform: uppercase; }
+    .a4-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      font-size: 12px;
+      border: 1px solid #ccc;
+      padding: 5px;
+      margin: 6px 0;
+    }
+    .a4-quote { background: #f5f5f5; padding: 8px; text-align: center; margin: 10px 0; border-radius: 8px; }
+    .a4-sindhi { font-family: 'Noto Naskh Arabic', serif; font-size: 11px; }
+    .a4-english { font-size: 9px; color: #555; }
+    .a4-section { font-weight: bold; margin: 15px 0 10px 0; font-size: 11px; }
+    .a4-question { margin: 12px 0; padding-bottom: 8px; border-bottom: 1px dotted #ccc; }
+    .a4-q-num { font-weight: bold; display: inline-block; width: 28px; }
+    .a4-q-marks { float: right; font-size: 9px; }
+    .a4-footer { text-align: center; margin-top: 20px; padding-top: 8px; border-top: 1px solid #ccc; font-size: 9px; }
+    
+    .modal-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-end;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .btn-cancel {
+      background: #3a5a6e;
+      color: white;
+      padding: 10px 28px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-cancel:hover { background: #4a6a7e; }
+    .btn-save {
+      background: linear-gradient(135deg, #00e6d0, #00b8a8);
+      color: #02212e;
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-save:hover { transform: scale(0.96); box-shadow: 0 4px 20px rgba(0,230,210,0.2); }
+    .print-btn {
+      background: #4caf50;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+    .print-btn:hover { transform: scale(0.98); }
+    
+    .question-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a2a3a;
+      padding: 28px;
+      border-radius: 24px;
+      z-index: 20000;
+      width: 400px;
+      border: 1px solid #00e6d0;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .question-popup h3 {
+      color: #00e6d0;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+    .popup-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 16px;
+    }
+    .popup-buttons button {
+      padding: 8px 24px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .popup-buttons button:hover { transform: scale(0.96); }
+    
+    .code-verify-box {
+      background: #0a1f2c;
+      border-radius: 40px;
+      padding: 36px;
+      width: 360px;
+      text-align: center;
+      border: 2px solid #00e6d0;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+    .code-verify-box input {
+      font-size: 28px;
+      text-align: center;
+      letter-spacing: 8px;
+      border-radius: 50px;
+      padding: 12px;
+      width: 100%;
+      background: white;
+      border: none;
+      outline: 2px solid transparent;
+    }
+    .code-verify-box input:focus { outline: 2px solid #00e6d0; }
+    
+    /* ===== PRINT ===== */
+    @media print {
+      body * { visibility: hidden; }
+      .print-paper-content, .print-paper-content * {
+        visibility: visible !important;
+        color: black !important;
+        background: white !important;
+        border-color: #000 !important;
+        box-shadow: none !important;
+      }
+      .print-paper-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px 40px;
+        background: white !important;
+        color: black !important;
+        font-family: 'Times New Roman', Times, serif !important;
+      }
+      .print-paper-content .a4-preview {
+        background: white !important;
+        color: black !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        border-radius: 0 !important;
+      }
+      .print-paper-content .a4-header { text-align: center !important; border-bottom: 2px solid black !important; padding-bottom: 12px !important; margin-bottom: 15px !important; }
+      .print-paper-content .a4-school { font-size: 16px !important; font-weight: bold !important; color: black !important; }
+      .print-paper-content .a4-address { font-size: 10px !important; color: black !important; }
+      .print-paper-content .a4-exam-title { text-align: center !important; font-size: 14px !important; font-weight: bold !important; margin: 10px 0 !important; color: black !important; }
+      .print-paper-content .a4-details { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 5px !important; font-size: 12px !important; border: 1px solid black !important; padding: 8px !important; margin: 10px 0 !important; text-align: center !important; color: black !important; }
+      .print-paper-content .a4-details div { color: black !important; }
+      .print-paper-content .a4-quote { background: #f5f5f5 !important; color: black !important; padding: 8px !important; text-align: center !important; margin: 10px 0 !important; border-radius: 8px !important; }
+      .print-paper-content .a4-sindhi { font-size: 12px !important; color: black !important; }
+      .print-paper-content .a4-english { font-size: 10px !important; color: black !important; }
+      .print-paper-content .a4-section { font-weight: bold !important; margin: 15px 0 10px 0 !important; font-size: 12px !important; text-align: left !important; color: black !important; }
+      .print-paper-content .a4-question { margin: 12px 0 !important; padding-bottom: 8px !important; border-bottom: 1px dotted black !important; color: black !important; }
+      .print-paper-content .a4-q-num { font-weight: bold !important; display: inline-block !important; width: 30px !important; color: black !important; }
+      .print-paper-content .a4-q-marks { float: right !important; font-size: 10px !important; color: black !important; }
+      .print-paper-content .a4-footer { text-align: center !important; margin-top: 20px !important; padding-top: 8px !important; border-top: 1px solid black !important; font-size: 10px !important; color: black !important; }
+      .print-paper-content .a4-header img { max-width: 80px !important; border-radius: 50% !important; display: inline-block !important; }
+      .print-paper-content .a4-question div { margin-top: 4px !important; color: black !important; }
+      .print-paper-content .print-footer { text-align: center !important; margin-top: 25px !important; padding-top: 10px !important; border-top: 1px solid black !important; font-size: 9px !important; color: black !important; }
+      .print-paper-content .page-number { text-align: center !important; font-size: 9px !important; color: black !important; margin-top: 15px !important; }
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .header { flex-direction: column; align-items: stretch; gap: 16px; padding: 20px; }
+      .header-left { flex-wrap: wrap; }
+      .header-actions { flex-wrap: wrap; }
+      .login-box { margin: 40px auto; padding: 32px 24px; }
+      .two-columns { flex-direction: column; }
+      .preview-column { min-width: unset; }
+      .code-verify-box { width: 100%; max-width: 360px; }
+      .question-popup { width: 95%; }
+      .top-header { flex-direction: column; align-items: stretch; }
+      .top-header .portal-title { margin-right: 0; text-align: center; margin-bottom: 6px; }
+      .home-btn { justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .header-left h2 { font-size: 1.1rem; }
+      .card { padding: 20px 16px; }
+      .modal-container { padding: 16px; }
+      .login-box { padding: 24px 16px; }
+      .login-box h2 { font-size: 1.4rem; }
+      .home-btn { font-size: 0.8rem; padding: 8px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- TOP HEADER -->
+  <div class="top-header">
+    <span class="portal-title"><strong>GBHS Wahi Pandhi</strong> · Teachers Portal</span>
+    <a href="index.html" class="home-btn" onclick="goHome()">
+      <i class="fas fa-home"></i> Home
+    </a>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginSection" class="login-box">
+    <div class="login-icon"><i class="fas fa-chalkboard-user"></i></div>
+    <h2>Teachers Portal</h2>
+    <p class="sub">Staff Access · GBHS Wahi Pandhi</p>
+    <input type="text" id="teacherId" placeholder="Teacher ID (T001, T002)">
+    <input type="password" id="password" placeholder="Password">
+    <button class="login-btn" id="loginBtn" onclick="login()">
+      <span>Login</span>
+      <i class="fas fa-arrow-right"></i>
+    </button>
+    <div id="loginError" class="error-msg"></div>
+    <div class="demo-info">Demo: <strong>T001</strong> / maths123 &nbsp;|&nbsp; <strong>T002</strong> / science123</div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="dashboard">
+    <div class="header">
+      <div class="header-left">
+        <div class="avatar-icon"><i class="fas fa-user-tie"></i></div>
+        <div>
+          <h2>Welcome, <span id="teacherName"></span>!</h2>
+          <div class="sub-text"><i class="far fa-clock"></i> <span id="headerTime"></span></div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </div>
+
+    <!-- NOTICE -->
+    <div class="notice-board">
+      <h4><i class="fas fa-bullhorn"></i> 📢 Notice from Management</h4>
+      <p>• All teachers must mark daily attendance before 9:00 AM.<br>
+      • Upload student results with proper class & subject selection.<br>
+      • Results will be automatically available for students to check online.<br>
+      • Weekly staff meeting every Friday at 2:00 PM in staff room.</p>
+    </div>
+
+    <!-- GRID -->
+    <div class="dashboard-grid">
+      <!-- Upload Result -->
+      <div class="card full-width">
+        <h3><i class="fas fa-upload"></i> Upload Student Results</h3>
+        <p style="margin-bottom: 12px;">Select class and subject, then enter marks for each student. Results will be available for students to check.</p>
+        
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px;">
+          <div class="field" style="flex:1; min-width:150px;">
+            <label>Select Class</label>
+            <select id="resultClass" onchange="loadStudentsForResult()" style="width:100%; padding:10px 16px; border-radius:30px; border:none; background:#eef7fc; font-size:0.85rem; color:#0b1a26;">
+              <option value="">Select Class</option>
+              <option value="6th">6th</option>
+              <option value="7th">7th</option>
+              <option value="8th">8th</option>
+              <option value="9th">9th</option>
+              <option value="10th">10th</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1; min-width:150px;">
+            <label>Select Subject</label>
+            <select id="resultSubject" onchange="loadStudentsForResult()" style="width:100%; padding:10px 16px; border-radius:30px; border:none; background:#eef7fc; font-size:0.85rem; color:#0b1a26;">
+              <option value="">Select Subject</option>
+              <option value="Urdu">Urdu</option>
+              <option value="Math">Math</option>
+              <option value="Science">Science</option>
+              <option value="English">English</option>
+              <option value="Sindhi">Sindhi</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Biology">Biology</option>
+              <option value="Computer">Computer</option>
+              <option value="Islamiat">Islamiat</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1; min-width:150px;">
+            <label>Exam Type</label>
+            <select id="examType" style="width:100%; padding:10px 16px; border-radius:30px; border:none; background:#eef7fc; font-size:0.85rem; color:#0b1a26;">
+              <option value="Midterm">Midterm</option>
+              <option value="Final">Final</option>
+              <option value="Test">Test</option>
+              <option value="Annual">Annual</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="resultStudentsContainer">
+          <p style="color: #6a8aa8; text-align:center; padding:20px;">Select class and subject to enter marks</p>
+        </div>
+
+        <button class="upload-result-btn" onclick="submitResults()" style="margin-top:16px;">
+          <i class="fas fa-cloud-upload-alt"></i> Publish Results
+        </button>
+        <div id="resultMsg" class="message"></div>
+      </div>
+
+      <!-- Attendance -->
+      <div class="card">
+        <h3><i class="fas fa-calendar-check"></i> Class Attendance</h3>
+        <p>Mark & view daily attendance. Auto-synced date with performance reports.</p>
+        <button class="feature-btn" onclick="verifyAndOpenAttendance()"><i class="fas fa-fingerprint"></i> Mark / View Attendance</button>
+      </div>
+
+      <!-- Question Paper -->
+      <div class="card">
+        <h3><i class="fas fa-file-alt"></i> Question Paper</h3>
+        <p>Create professional exam papers with school logo, subject, and custom questions.</p>
+        <button class="feature-btn" onclick="openPaperCreator()"><i class="fas fa-plus-circle"></i> Create Question Paper</button>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="security-note">
+      <i class="fas fa-shield-alt"></i> <strong>Security:</strong> Never share credentials or teacher code. Report suspicious activity immediately.
+    </div>
+  </div>
+</div>
+
+<!-- ATTENDANCE MODAL -->
+<div id="attendanceModal" class="modal-overlay">
+  <div class="modal-container" style="max-width:1100px;">
+    <div class="modal-header">
+      <h2><i class="fas fa-users"></i> Class Attendance</h2>
+      <span class="close-modal" onclick="closeAttendanceModal()">&times;</span>
+    </div>
+    <div class="form-section">
+      <div class="form-row">
+        <div class="field"><label>Select Class</label><select id="attClass" onchange="loadAttendanceSheet()"><option>6th</option><option>7th</option><option>8th</option><option>9th</option><option>10th</option></select></div>
+        <div class="field"><label>📅 Live Date</label><input type="text" id="liveDateField" readonly class="readonly-date"></div>
+      </div>
+      <div id="attendanceStatusInfo" style="font-size:13px; color:#ffbb77; margin:8px 0;"></div>
+    </div>
+    <div id="studentsList" class="form-section"></div>
+    <div class="modal-buttons">
+      <button class="btn-cancel" onclick="closeAttendanceModal()">Close</button>
+      <button class="btn-save" id="submitAttendanceBtn" onclick="submitAttendance()">Submit Attendance</button>
+    </div>
+    <div id="attMsg" class="message"></div>
+  </div>
+</div>
+
+<!-- CODE VERIFICATION -->
+<div id="codePopup" class="modal-overlay" style="z-index:10002;">
+  <div class="code-verify-box">
+    <i class="fas fa-shield-alt fa-3x" style="color:#00e6d0; margin-bottom:12px;"></i>
+    <h3 style="color:#00e6d0; font-weight:700;">Verify Code</h3>
+    <p style="margin:12px 0; color:#88b0c8;">Enter 4-digit teacher code</p>
+    <input type="password" id="teacherCodeInput" maxlength="4" placeholder="****">
+    <div style="display:flex; gap:12px; margin-top:24px;">
+      <button onclick="closeCodePopup()" style="flex:1; background:#3a5a6e; border:none; padding:10px; border-radius:60px; color:white; cursor:pointer; font-weight:600; transition:0.2s;">Cancel</button>
+      <button onclick="verifyTeacherCode()" style="flex:1; background:#00e6d0; border:none; padding:10px; border-radius:60px; font-weight:700; cursor:pointer; transition:0.2s; color:#02212e;">Verify</button>
+    </div>
+    <div id="codeError" style="color:#ff7a7a; margin-top:15px;"></div>
+    <p style="font-size:11px; margin-top:15px; background:#1a3a4a; display:inline-block; padding:4px 16px; border-radius:60px; color:#88b0c8;">Demo: <strong style="color:#00e6d0;">7429</strong></p>
+  </div>
+</div>
+
+<!-- PERFORMANCE DETAIL -->
+<div id="perfDetailModal" class="modal-overlay">
+  <div class="modal-container" style="max-width:550px;">
+    <div class="modal-header"><h2><i class="fas fa-chart-line"></i> Performance Report</h2><span class="close-modal" onclick="closePerfModal()">&times;</span></div>
+    <div id="perfContent"></div>
+  </div>
+</div>
+
+<!-- PAPER CREATOR -->
+<div id="paperCreatorModal" class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header"><h2><i class="fas fa-file-alt"></i> Create Paper</h2><span class="close-modal" onclick="closePaperCreator()">&times;</span></div>
+    <div class="two-columns">
+      <div class="form-column">
+        <div class="form-section">
+          <div class="section-title">Exam Details</div>
+          <div class="form-row">
+            <div class="field"><label>Exam Name</label><input type="text" id="pExamName" value="MIDTERM EXAMINATION" oninput="updatePreview()"></div>
+            <div class="field"><label>Year</label><input type="text" id="pYear" value="2025-26" oninput="updatePreview()"></div>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="section-title">Paper Info</div>
+          <div class="form-row">
+            <div class="field"><label>Subject</label><input type="text" id="pSubject" placeholder="e.g., Sindhi" oninput="updatePreview()"></div>
+            <div class="field"><label>Class</label><select id="pClass" onchange="updatePreview()"><option>Six</option><option>Seven</option><option>Eight</option><option>Nine</option><option>Ten</option></select></div>
+            <div class="field"><label>Date</label><input type="date" id="pDate" oninput="updatePreview()"></div>
+            <div class="field"><label>Time</label><input type="text" id="pTime" value="3 Hours" oninput="updatePreview()"></div>
+            <div class="field"><label>Total Marks</label><input type="number" id="pTotalMarks" value="100" oninput="updatePreview()"></div>
+            <div class="field"><label>Pass Marks</label><input type="number" id="pPassMarks" value="33" oninput="updatePreview()"></div>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="section-title">Quote</div>
+          <div class="form-row">
+            <div class="field"><label>Sindhi</label><textarea id="pQuoteSindhi" rows="2" placeholder="سنڌي عبارت" oninput="updatePreview()"></textarea></div>
+            <div class="field"><label>English</label><textarea id="pQuoteEnglish" rows="1" placeholder="English translation" oninput="updatePreview()"></textarea></div>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="section-title">Questions</div>
+          <div class="tools-bar">
+            <button class="tool-btn" onclick="openQuestionPopup()"><i class="fas fa-plus"></i> Add Question</button>
+            <button class="tool-btn" onclick="uploadPaperImage()"><i class="fas fa-image"></i> Add Picture</button>
+          </div>
+          <div id="questionsList" class="questions-container"><p style="color:#6a8aa8; text-align:center; padding:10px;">No questions added</p></div>
+        </div>
+      </div>
+      <div class="preview-column">
+        <span class="preview-label">📄 Live Preview</span>
+        <div id="livePreview" class="a4-preview"></div>
+      </div>
+    </div>
+    <div class="modal-buttons">
+      <button class="btn-cancel" onclick="closePaperCreator()">Cancel</button>
+      <button class="btn-save" onclick="generatePaper()">Generate & Print</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION POPUP -->
+<div id="questionPopup" class="question-popup">
+  <h3><i class="fas fa-question-circle"></i> Add Question</h3>
+  <textarea id="newQText" rows="3" placeholder="Enter your question here..." style="width:100%; padding:12px; border-radius:16px; border:none; background:#eef7fc; font-family:'Inter',sans-serif; font-size:0.9rem; resize:vertical;"></textarea>
+  <div class="field" style="margin-top:12px;"><label>Marks</label><input type="number" id="newQMarks" value="10"></div>
+  <div class="popup-buttons">
+    <button onclick="closeQuestionPopup()" style="background:#3a5a6e; color:white;">Cancel</button>
+    <button onclick="saveQuestion()" style="background:#00e6d0; font-weight:700; color:#02212e;">Add Question</button>
+  </div>
+</div>
+
+<!-- PRINT MODAL -->
+<div id="printModal" class="modal-overlay">
+  <div class="modal-container" style="max-width:900px;">
+    <div class="modal-header"><h2><i class="fas fa-print"></i> Print Paper</h2><span class="close-modal" onclick="closePrintModal()">&times;</span></div>
+    <div id="printContent"></div>
+    <button class="print-btn" onclick="printPaper()"><i class="fas fa-print"></i> Print</button>
+  </div>
+</div>
+
+<script>
+  let currentTeacher = null;
+  let paperQuestions = [], paperImage = "";
+  let liveGlobalDate = null;
+  let currentAttendanceRecords = [];
+  let isAttendanceSubmittedFlag = false;
+  let selectedClass = "";
+  let currentResultStudents = [];
+  
+  const studentsDB = {
+    "6th": ["Ali Raza", "Sana Khan", "Usman Ahmed", "Fatima Zia", "Hassan Ali", "Ayesha Noor", "Hamza Ali"],
+    "7th": ["Bilal Ahmed", "Zara Tariq", "Omar Farooq", "Ayesha Siddiqui", "Saad Khan", "Hira Memon", "Fahad Ali"],
+    "8th": ["Hamza Ali", "Mahnoor Sheikh", "Rayan Ahmed", "Iqra Naeem", "Daniyal Anwar", "Zainab Riaz", "Subhan Malik"],
+    "9th": ["Shahzeb Khan", "Laiba Zafar", "Abdullah Qureshi", "Eman Ali", "Rohail Ahmed", "Bisma Shaikh", "Umer Farooq"],
+    "10th": ["Talha Aslam", "Mehak Saeed", "Areeb Hassan", "Zainab Malik", "Sufyan Mirza", "Nida Rasheed", "Owais Ahmed"]
+  };
+  const TEACHER_CODE = "7429";
+  
+  // ===== HOME BUTTON =====
+  function goHome() {
+    window.location.href = 'index.html';
+  }
+  
+  // ===== HELPERS =====
+  function updateHeaderTime() {
+    const el = document.getElementById('headerTime');
+    if (el) el.textContent = new Date().toLocaleString();
+  }
+  setInterval(updateHeaderTime, 1000);
+  updateHeaderTime();
+  
+  async function fetchInternetDate() {
+    try { const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Karachi'); const data = await res.json(); return data.datetime.split('T')[0]; } 
+    catch(e) { return new Date().toISOString().split('T')[0]; }
+  }
+  async function updateLiveDateField() { liveGlobalDate = await fetchInternetDate(); let inp = document.getElementById('liveDateField'); if(inp) inp.value = liveGlobalDate; return liveGlobalDate; }
+  
+  // ===== LOGIN =====
+  function login() {
+    const id = document.getElementById('teacherId').value.trim();
+    const pwd = document.getElementById('password').value.trim();
+    const loginBtn = document.getElementById('loginBtn');
+    const originalContent = loginBtn.innerHTML;
+    
+    loginBtn.innerHTML = '<div class="spinner"></div> Logging in...';
+    loginBtn.disabled = true;
+    
+    setTimeout(() => {
+      if((id === "T001" && pwd === "maths123") || (id === "T002" && pwd === "science123")) {
+        currentTeacher = { id, name: id === "T001" ? "Mr. Ahmed (Mathematics)" : "Mrs. Fatima (Science)" };
+        sessionStorage.setItem('teacher', JSON.stringify(currentTeacher));
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('teacherName').innerText = currentTeacher.name;
+      } else {
+        loginBtn.innerHTML = originalContent;
+        loginBtn.disabled = false;
+        let err = document.getElementById('loginError');
+        err.innerText = "Invalid credentials! Use T001/maths123 or T002/science123";
+        err.style.display = 'block';
+        setTimeout(() => err.style.display = 'none', 3000);
+      }
+    }, 1200);
+  }
+  
+  function logout() {
+    sessionStorage.removeItem('teacher');
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('teacherId').value = '';
+    document.getElementById('password').value = '';
+    const loginBtn = document.getElementById('loginBtn');
+    loginBtn.innerHTML = '<span>Login</span> <i class="fas fa-arrow-right"></i>';
+    loginBtn.disabled = false;
+  }
+  
+  // ===== ATTENDANCE (Existing code kept) =====
+  async function verifyAndOpenAttendance() { await updateLiveDateField(); document.getElementById('codePopup').style.display = 'flex'; document.getElementById('teacherCodeInput').value = ''; document.getElementById('codeError').innerText = ''; }
+  function closeCodePopup() { document.getElementById('codePopup').style.display = 'none'; }
+  function verifyTeacherCode() { if(document.getElementById('teacherCodeInput').value === TEACHER_CODE) { closeCodePopup(); openAttendanceModalFinal(); } else { document.getElementById('codeError').innerText = '❌ Invalid access code'; } }
+  async function openAttendanceModalFinal() { if(!liveGlobalDate) liveGlobalDate = await fetchInternetDate(); document.getElementById('attendanceModal').style.display = 'flex'; loadAttendanceSheet(); }
+  function closeAttendanceModal() { document.getElementById('attendanceModal').style.display = 'none'; }
+  
+  function getStats(name, className, allAttendance, days=7) { let present=0, total=0; for(let i=0;i<days;i++) { let d=new Date(); d.setDate(new Date().getDate()-i); let ds=d.toISOString().split('T')[0]; let rec=allAttendance.find(r=>r.class===className && r.date===ds); if(rec) { let s=rec.records.find(st=>st.name===name); if(s){ if(s.status==='Present') present++; total++; } } } return { present, total, percent: total===0?0:Math.round((present/total)*100) }; }
+  function getMonthlyStats(name, className, allAttendance) { let now=new Date(), month=now.getMonth(), year=now.getFullYear(); let present=0,total=0; for(let rec of allAttendance) { if(rec.class!==className) continue; let rd=new Date(rec.date); if(rd.getMonth()===month && rd.getFullYear()===year) { let s=rec.records.find(st=>st.name===name); if(s){ if(s.status==='Present') present++; total++; } } } return { present, total, percent: total===0?0:Math.round((present/total)*100) }; }
+  function getYearlyStats(name, className, allAttendance) { let year=new Date().getFullYear(); let present=0,total=0; for(let rec of allAttendance) { if(rec.class!==className) continue; if(new Date(rec.date).getFullYear()===year) { let s=rec.records.find(st=>st.name===name); if(s){ if(s.status==='Present') present++; total++; } } } return { present, total, percent: total===0?0:Math.round((present/total)*100) }; }
+  
+  function showPerformancePopup(studentName, className, event) {
+    const allAttendance = JSON.parse(localStorage.getItem('class_attendance')||'[]');
+    const weekly = getStats(studentName, className, allAttendance, 7);
+    const monthly = getMonthlyStats(studentName, className, allAttendance);
+    const yearly = getYearlyStats(studentName, className, allAttendance);
+    let html = `<div style="font-weight:bold; margin-bottom:12px; color:#00e6d0; font-size:1.1rem;">📈 ${studentName} (${className})</div>
+      <div style="margin:8px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <span style="background:#2e7d32; padding:3px 12px; border-radius:40px; color:white; font-size:0.75rem;">Weekly</span>
+        <span>${weekly.percent}% (${weekly.present}/${weekly.total} days)</span>
+        <div class="ratio-bar-sm" style="width:100%; margin-top:4px;"><div class="ratio-present-sm" style="width:${weekly.percent}%;"></div></div>
+      </div>
+      <div style="margin:8px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <span style="background:#f57c00; padding:3px 12px; border-radius:40px; color:white; font-size:0.75rem;">Monthly</span>
+        <span>${monthly.percent}% (${monthly.present}/${monthly.total} days)</span>
+        <div class="ratio-bar-sm" style="width:100%; margin-top:4px;"><div class="ratio-present-sm" style="width:${monthly.percent}%;"></div></div>
+      </div>
+      <div style="margin:8px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <span style="background:#0288d1; padding:3px 12px; border-radius:40px; color:white; font-size:0.75rem;">Yearly</span>
+        <span>${yearly.percent}% (${yearly.present}/${yearly.total} days)</span>
+        <div class="ratio-bar-sm" style="width:100%; margin-top:4px;"><div class="ratio-present-sm" style="width:${yearly.percent}%;"></div></div>
+      </div>
+      <button onclick="viewFullHistory('${studentName}','${className}')" style="margin-top:12px; background:#00e6d0; border:none; padding:8px; width:100%; border-radius:40px; font-weight:700; cursor:pointer; color:#02212e;">📅 View Full History</button>`;
+    let popup = document.getElementById('dynamicPerfPopup');
+    if(!popup){ popup=document.createElement('div'); popup.id='dynamicPerfPopup'; popup.style.cssText='position:fixed; background:#0a1f2c; border:1px solid #00e6d0; border-radius:20px; padding:16px; z-index:20001; width:280px; box-shadow:0 10px 30px rgba(0,0,0,0.6);'; document.body.appendChild(popup); }
+    popup.innerHTML=html;
+    popup.style.left=Math.min(event.clientX+10, window.innerWidth-300)+'px';
+    popup.style.top=Math.max(10, event.clientY-80)+'px';
+    popup.style.display='block';
+    setTimeout(()=>{ window.addEventListener('click', function close(e){ if(!popup.contains(e.target) && !e.target.closest('.perf-badge')){ popup.style.display='none'; window.removeEventListener('click',close); } }); },100);
+  }
+  function viewFullHistory(name, className){
+    document.getElementById('dynamicPerfPopup') && (document.getElementById('dynamicPerfPopup').style.display='none');
+    const allAttendance = JSON.parse(localStorage.getItem('class_attendance')||'[]');
+    let html=`<h3 style="color:#00e6d0; font-size:1.2rem;">${name} - ${className}</h3><div style="margin:15px 0;"><strong style="color:#88b0c8;">Last 7 days:</strong><ul style="list-style:none; margin-top:8px;">`;
+    for(let i=6;i>=0;i--){ let d=new Date(); d.setDate(new Date().getDate()-i); let ds=d.toISOString().split('T')[0]; let rec=allAttendance.find(r=>r.class===className && r.date===ds); let status="—",col="#6a8aa8"; if(rec){ let stu=rec.records.find(s=>s.name===name); if(stu){ status=stu.status; col=status==='Present'?'#4caf50':'#f44336';}} html+=`<li style="padding:6px 0; border-bottom:1px solid #1a2a3a; display:flex; justify-content:space-between;">${ds} <span style="color:${col};font-weight:600;">${status}</span></li>`;}
+    html+=`</ul></div><button class="btn-save" onclick="closePerfModal()" style="width:100%; cursor:pointer; border:none; border-radius:40px; padding:10px;">Close</button>`;
+    document.getElementById('perfContent').innerHTML=html;
+    document.getElementById('perfDetailModal').style.display='flex';
+  }
+  function closePerfModal(){ document.getElementById('perfDetailModal').style.display='none'; }
+  
+  function loadAttendanceSheet() {
+    const className = document.getElementById('attClass').value;
+    selectedClass = className;
+    const date = liveGlobalDate;
+    if(!date) return;
+    const allAttendance = JSON.parse(localStorage.getItem('class_attendance') || '[]');
+    const existing = allAttendance.find(rec => rec.class === className && rec.date === date);
+    const students = studentsDB[className] || [];
+    if(existing) {
+      isAttendanceSubmittedFlag = true;
+      document.getElementById('attendanceStatusInfo').innerHTML = `<i class="fas fa-lock"></i> Submitted for ${className} on ${date}`;
+      document.getElementById('submitAttendanceBtn').disabled = true;
+      let html = '<div class="section-title">📋 Attendance Record</div><table class="attendance-table"><tr><th>Student</th><th>Status</th><th>📊 Performance</th></tr>';
+      for(let s of students) {
+        const rec = existing.records.find(r=>r.name===s);
+        const status = rec ? rec.status : 'Absent';
+        const color = status==='Present'?'#4caf50':'#f44336';
+        html += `<tr><td style="color:#e8f0f8;">${s}</td><td><span style="color:${color}; font-weight:bold;">${status}</span></td><td><span class="perf-badge" onclick="showPerformancePopup('${s}','${className}',event)">📈 Report</span></td></tr>`;
+      }
+      html += `</table><div class="submitted-badge">✅ Submitted</div>`;
+      document.getElementById('studentsList').innerHTML = html;
+    } else {
+      isAttendanceSubmittedFlag = false;
+      document.getElementById('attendanceStatusInfo').innerHTML = `<i class="fas fa-clock"></i> Mark attendance for ${className} on ${date}`;
+      document.getElementById('submitAttendanceBtn').disabled = false;
+      currentAttendanceRecords = students.map(name => ({ name, status: 'Not set' }));
+      let html = '<div class="section-title">✏️ Mark Attendance</div><table class="attendance-table"><tr><th>Student</th><th>Mark</th><th>📈 Performance</th></tr>';
+      for(let i=0;i<students.length;i++) {
+        const safe = students[i].replace(/\s/g,'_');
+        html += `<tr>
+          <td style="color:#e8f0f8;">${students[i]}</td>
+          <td><button class="present-btn" onclick="setTemp('${students[i]}',true)">Present</button> <button class="absent-btn" onclick="setTemp('${students[i]}',false)">Absent</button> <span class="status-badge" id="stat_${safe}" style="color:#6a8aa8;">Not set</span></td>
+          <td><span class="perf-badge" onclick="showPerformancePopup('${students[i]}','${className}',event)">📈 Report</span></td>
+        </tr>`;
+      }
+      html += `</table>`;
+      document.getElementById('studentsList').innerHTML = html;
+    }
+  }
+  function setTemp(name, isPresent) { if(isAttendanceSubmittedFlag) return; const status = isPresent ? 'Present' : 'Absent'; const idx = currentAttendanceRecords.findIndex(r=>r.name===name); if(idx!==-1) currentAttendanceRecords[idx].status = status; const span = document.getElementById(`stat_${name.replace(/\s/g,'_')}`); if(span) { span.innerText = status; span.style.color = status==='Present'?'#4caf50':'#f44336'; } }
+  function submitAttendance() { if(isAttendanceSubmittedFlag) { showMsg('attMsg','Already submitted!','error'); return; } const allMarked = currentAttendanceRecords.every(r=>r.status !== 'Not set'); if(!allMarked) { showMsg('attMsg','Mark all students first','warning'); return; } const presentCount = currentAttendanceRecords.filter(r=>r.status==='Present').length; const total = currentAttendanceRecords.length; const record = { teacherId: currentTeacher.id, class: selectedClass, date: liveGlobalDate, records: currentAttendanceRecords.slice(), timestamp: new Date().toISOString() }; let all = JSON.parse(localStorage.getItem('class_attendance')||'[]'); all = all.filter(r=> !(r.class === selectedClass && r.date === liveGlobalDate)); all.push(record); localStorage.setItem('class_attendance', JSON.stringify(all)); showMsg('attMsg',`✅ Submitted! ${presentCount}/${total} (${((presentCount/total)*100).toFixed(1)}%)`, 'success'); setTimeout(()=>{ closeAttendanceModal(); }, 1500); }
+  
+  // ===== RESULT UPLOAD =====
+  function loadStudentsForResult() {
+    const className = document.getElementById('resultClass').value;
+    const subject = document.getElementById('resultSubject').value;
+    
+    if(!className || !subject) {
+      document.getElementById('resultStudentsContainer').innerHTML = '<p style="color: #6a8aa8; text-align:center; padding:20px;">Select class and subject to enter marks</p>';
+      return;
+    }
+    
+    const students = studentsDB[className] || [];
+    if(students.length === 0) {
+      document.getElementById('resultStudentsContainer').innerHTML = '<p style="color: #ff7a7a; text-align:center; padding:20px;">No students found for this class</p>';
+      return;
+    }
+    
+    currentResultStudents = students.map(name => ({ name, marks: '' }));
+    
+    let html = `
+      <div class="section-title">📝 Enter Marks for ${className} - ${subject}</div>
+      <table class="result-table">
+        <tr>
+          <th>Student Name</th>
+          <th>Marks</th>
+          <th>Grade</th>
+        </tr>
+    `;
+    
+    for(let i = 0; i < students.length; i++) {
+      const safe = students[i].replace(/\s/g,'_');
+      html += `
+        <tr>
+          <td class="student-name">${students[i]}</td>
+          <td><input type="number" id="marks_${safe}" min="0" max="100" onchange="updateGrade('${students[i]}', this.value)" placeholder="Marks"></td>
+          <td><span id="grade_${safe}" class="grade-badge" style="background:#3a5a6e; color:white;">—</span></td>
+        </tr>
+      `;
+    }
+    
+    html += `</table>`;
+    document.getElementById('resultStudentsContainer').innerHTML = html;
+  }
+  
+  function updateGrade(studentName, marks) {
+    const safe = studentName.replace(/\s/g,'_');
+    const gradeSpan = document.getElementById(`grade_${safe}`);
+    const numMarks = parseInt(marks);
+    
+    let grade, color;
+    if(isNaN(numMarks) || numMarks < 0) {
+      grade = '—';
+      color = '#3a5a6e';
+    } else if(numMarks >= 80) {
+      grade = 'A+';
+      color = '#2e7d32';
+    } else if(numMarks >= 70) {
+      grade = 'A';
+      color = '#1976d2';
+    } else if(numMarks >= 60) {
+      grade = 'B';
+      color = '#1976d2';
+    } else if(numMarks >= 50) {
+      grade = 'C';
+      color = '#f57c00';
+    } else if(numMarks >= 40) {
+      grade = 'D';
+      color = '#f57c00';
+    } else if(numMarks >= 33) {
+      grade = 'E';
+      color = '#c62828';
+    } else {
+      grade = 'F';
+      color = '#880e4f';
+    }
+    
+    gradeSpan.textContent = grade;
+    gradeSpan.style.background = color;
+    gradeSpan.style.color = 'white';
+    
+    // Store marks in array
+    const idx = currentResultStudents.findIndex(s => s.name === studentName);
+    if(idx !== -1) {
+      currentResultStudents[idx].marks = numMarks;
+      currentResultStudents[idx].grade = grade;
+    }
+  }
+  
+  function submitResults() {
+    const className = document.getElementById('resultClass').value;
+    const subject = document.getElementById('resultSubject').value;
+    const examType = document.getElementById('examType').value;
+    
+    if(!className || !subject) {
+      showMsg('resultMsg', 'Please select class and subject first', 'error');
+      return;
+    }
+    
+    // Check if all students have marks
+    const allMarked = currentResultStudents.every(s => s.marks !== '' && !isNaN(s.marks));
+    if(!allMarked) {
+      showMsg('resultMsg', 'Please enter marks for all students', 'warning');
+      return;
+    }
+    
+    // Get all existing results
+    let allResults = JSON.parse(localStorage.getItem('student_results') || '[]');
+    
+    // Remove existing results for this class+subject+exam to avoid duplicates
+    allResults = allResults.filter(r => !(r.class === className && r.subject === subject && r.examType === examType));
+    
+    // Create result object
+    const result = {
+      class: className,
+      subject: subject,
+      examType: examType,
+      teacherId: currentTeacher.id,
+      teacherName: currentTeacher.name,
+      uploadDate: new Date().toISOString().split('T')[0],
+      students: currentResultStudents.map(s => ({
+        name: s.name,
+        marks: parseInt(s.marks),
+        grade: s.grade || '—'
+      })),
+      timestamp: new Date().toISOString()
+    };
+    
+    allResults.push(result);
+    localStorage.setItem('student_results', JSON.stringify(allResults));
+    
+    showMsg('resultMsg', `✅ Results for ${className} - ${subject} (${examType}) published successfully! Students can now check their results.`, 'success');
+    
+    // Clear the form after successful upload
+    setTimeout(() => {
+      document.getElementById('resultClass').value = '';
+      document.getElementById('resultSubject').value = '';
+      document.getElementById('resultStudentsContainer').innerHTML = '<p style="color: #6a8aa8; text-align:center; padding:20px;">Select class and subject to enter marks</p>';
+      currentResultStudents = [];
+    }, 2000);
+  }
+  
+  function showMsg(id, txt, type) { let d=document.getElementById(id); if(d){ d.innerText=txt; d.className='message '+type; d.style.display='block'; setTimeout(()=>d.style.display='none', 4000);} }
+  
+  // ===== PAPER CREATOR (Existing code) =====
+  function openPaperCreator() { paperQuestions=[]; paperImage=''; updateQuestionsDisplay(); updatePreview(); document.getElementById('paperCreatorModal').style.display='flex'; }
+  function closePaperCreator() { document.getElementById('paperCreatorModal').style.display='none'; }
+  function closePrintModal() { document.getElementById('printModal').style.display='none'; }
+  function openQuestionPopup() { document.getElementById('questionPopup').style.display='block'; }
+  function closeQuestionPopup() { document.getElementById('questionPopup').style.display='none'; }
+  function saveQuestion() { let txt=document.getElementById('newQText').value.trim(); if(txt){ paperQuestions.push({text:txt, marks:parseInt(document.getElementById('newQMarks').value)||10}); updateQuestionsDisplay(); updatePreview(); closeQuestionPopup();} }
+  function updateQuestionsDisplay() { let cont=document.getElementById('questionsList'); if(paperQuestions.length===0){ cont.innerHTML='<p style="color:#6a8aa8; text-align:center; padding:10px;">No questions added</p>'; return;} let h=''; for(let i=0;i<paperQuestions.length;i++) h+=`<div class="question-item"><div><div class="question-text">Q${i+1}. ${paperQuestions[i].text}</div><div class="question-marks">Marks: ${paperQuestions[i].marks}</div></div><button class="remove-q" onclick="removeQuestion(${i})">Remove</button></div>`; cont.innerHTML=h; }
+  function removeQuestion(i){ paperQuestions.splice(i,1); updateQuestionsDisplay(); updatePreview(); }
+  function uploadPaperImage() { let inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.onchange=e=>{let f=e.target.files[0]; if(f){let r=new FileReader(); r.onload=ev=>{paperImage=ev.target.result; updatePreview();}; r.readAsDataURL(f);}}; inp.click(); }
+  function updatePreview() {
+    let sub=document.getElementById('pSubject').value||'[Subject]', cls=document.getElementById('pClass').value||'[Class]', date=document.getElementById('pDate').value||'[Date]', time=document.getElementById('pTime').value||'3 Hours', total=document.getElementById('pTotalMarks').value||'100', pass=document.getElementById('pPassMarks').value||'33', exam=document.getElementById('pExamName').value||'MIDTERM', year=document.getElementById('pYear').value||'2025', qSindhi=document.getElementById('pQuoteSindhi').value||'', qEng=document.getElementById('pQuoteEnglish').value||'';
+    let html=`<div class="a4-header"><img src="https://i.ibb.co/qXLQR7Y/Whats-App-Image-2026-05-05-at-12-23-47-AM.jpg" style="width:60px; border-radius:50%;"><div class="a4-school">GOVERNMENT BOYS HIGH SCHOOL WAHI PANDHI</div><div class="a4-address">Tehsil Johi, District Dadu, Sindh (SEMIS: 402020500)</div></div>`;
+    html+=`<div class="a4-exam-title">${exam.toUpperCase()} ${year}</div><div class="a4-details"><div><strong>Subject:</strong> ${sub}</div><div><strong>Class:</strong> ${cls}</div><div><strong>Date:</strong> ${date}</div><div><strong>Time:</strong> ${time}</div><div><strong>Total:</strong> ${total}</div><div><strong>Pass:</strong> ${pass}</div></div>`;
+    if(qSindhi||qEng) html+=`<div class="a4-quote">${qSindhi?`<div class="a4-sindhi">"${qSindhi}"</div>`:''}${qEng?`<div class="a4-english">"${qEng}"</div>`:''}</div>`;
+    if(paperImage) html+=`<div style="text-align:center;"><img src="${paperImage}" style="max-width:80%; margin:10px 0;"></div>`;
+    html+=`<div class="a4-section">SECTION - A</div>`;
+    for(let i=0;i<paperQuestions.length;i++) html+=`<div class="a4-question"><div><span class="a4-q-num">${i+1}.</span> ${paperQuestions[i].text}<span class="a4-q-marks">(${paperQuestions[i].marks} marks)</span></div><div style="margin-top:25px;"></div></div>`;
+    if(!paperQuestions.length) html+=`<p style="color:#999; text-align:center; padding:10px 0;">Add questions</p>`;
+    html+=`<div class="a4-footer"><hr><p>**** Best of Luck ****</p></div>`;
+    document.getElementById('livePreview').innerHTML=html;
+  }
+  function generatePaper() { if(!document.getElementById('pSubject').value){ alert('Enter Subject'); return; } let html=document.getElementById('livePreview').innerHTML; document.getElementById('printContent').innerHTML=`<div class="print-paper-content">${html}</div>`; closePaperCreator(); document.getElementById('printModal').style.display='flex'; }
+  function printPaper() {
+    let printContent = document.getElementById('printContent').innerHTML;
+    let printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html><head><title>Question Paper</title>
+      <style>
+        body { margin:0; padding:20px; background:white; font-family:'Times New Roman',Times,serif; }
+        .a4-preview { background:white; color:black; padding:20px; max-width:100%; }
+        .a4-header { text-align:center; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:12px; }
+        .a4-school { font-weight:bold; font-size:14px; text-transform:uppercase; color:black; }
+        .a4-address { font-size:8px; color:black; }
+        .a4-exam-title { text-align:center; font-weight:bold; font-size:12px; margin:10px 0; text-transform:uppercase; color:black; }
+        .a4-details { display:grid; grid-template-columns:1fr 1fr 1fr; gap:3px; font-size:12px; border:1px solid black; padding:5px; margin:6px 0; color:black; }
+        .a4-details div { color:black; }
+        .a4-quote { background:#f5f5f5; padding:8px; text-align:center; margin:10px 0; border-radius:8px; color:black; }
+        .a4-sindhi { font-family:'Noto Naskh Arabic',serif; font-size:11px; color:black; }
+        .a4-english { font-size:9px; color:black; }
+        .a4-section { font-weight:bold; margin:15px 0 10px 0; font-size:11px; color:black; }
+        .a4-question { margin:12px 0; padding-bottom:8px; border-bottom:1px dotted black; color:black; }
+        .a4-q-num { font-weight:bold; display:inline-block; width:28px; color:black; }
+        .a4-q-marks { float:right; font-size:9px; color:black; }
+        .a4-footer { text-align:center; margin-top:20px; padding-top:8px; border-top:1px solid black; font-size:9px; color:black; }
+        .a4-header img { max-width:80px; border-radius:50%; }
+        .print-footer { text-align:center; margin-top:25px; padding-top:10px; border-top:1px solid black; font-size:9px; color:black; }
+        .page-number { text-align:center; font-size:9px; color:black; margin-top:15px; }
+      </style>
+      </head><body>${printContent}<div class="print-footer">Created with GBHS Wahi Pandhi Teachers Portal</div><div class="page-number">Page 1/1</div></body></html>
+    `);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+  }
+  
+  document.getElementById('attClass')?.addEventListener('change', loadAttendanceSheet);
+  window.addEventListener('load', async()=>{ 
+    if(sessionStorage.getItem('teacher')){ 
+      currentTeacher=JSON.parse(sessionStorage.getItem('teacher')); 
+      document.getElementById('loginSection').style.display='none'; 
+      document.getElementById('dashboard').style.display='block'; 
+      document.getElementById('teacherName').innerText=currentTeacher.name;
+    } 
+    await updateLiveDateField(); 
+  });
+</script>
+</body>
+</html>
