@@ -1,44 +1,1290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Redirecting to GBHS Wahi Pandhi...</title>
-    <style>
-        body {
-            background: radial-gradient(circle at 10% 20%, #0e1f2f, #04141f);
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
-            text-align: center;
-        }
-        .loader {
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top: 3px solid #00e6d0;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>GBHS Wahi Pandhi - Official School Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: #1a2a3a;
+      min-height: 100vh;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      background: #0a1628;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 2px solid #00d4c0;
+    }
+    .top-bar .contact-info {
+      display: flex;
+      gap: 16px;
+      color: #8aa8c8;
+      font-size: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .top-bar .contact-info i { color: #00d4c0; margin-right: 4px; }
+    .top-bar .social-icons { display: flex; gap: 10px; }
+    .top-bar .social-icons a {
+      color: #8aa8c8;
+      transition: 0.3s;
+      font-size: 0.85rem;
+    }
+    .top-bar .social-icons a:hover { color: #00d4c0; transform: translateY(-2px); }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-area img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 3px solid #00d4c0;
+      object-fit: cover;
+    }
+    .logo-area .school-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0a1628;
+      line-height: 1.2;
+    }
+    .logo-area .school-name span { color: #00b8a8; }
+    .logo-area .school-name small {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 400;
+      color: #6a8aa8;
+      letter-spacing: 0.3px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #0a1628;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      padding: 6px 14px;
+      border-radius: 30px;
+      text-decoration: none;
+      color: #1a3a5a;
+      font-weight: 600;
+      font-size: 0.75rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: #00d4c0;
+      color: white;
+      box-shadow: 0 4px 16px rgba(0,212,192,0.3);
+    }
+    .nav-links .btn-admission {
+      background: #ff6b4a;
+      color: white;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+    .nav-links .btn-admission:hover {
+      background: #e85530;
+      transform: scale(0.96);
+      box-shadow: 0 4px 20px rgba(255,107,74,0.4);
+    }
+
+    /* ===== NEWS TICKER ===== */
+    .news-ticker {
+      background: #0a1628;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(0,212,192,0.15);
+    }
+    .news-ticker .label {
+      background: #ff6b4a;
+      color: white;
+      padding: 2px 14px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .news-ticker .ticker-wrap {
+      overflow: hidden;
+      flex: 1;
+      position: relative;
+      height: 28px;
+    }
+    .news-ticker .ticker-content {
+      display: flex;
+      flex-direction: column;
+      animation: tickerScroll 12s infinite;
+    }
+    .news-ticker .ticker-content span {
+      color: #aac8e8;
+      font-size: 0.8rem;
+      padding: 4px 0;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .news-ticker .ticker-content span i { color: #00d4c0; margin-right: 10px; }
+    @keyframes tickerScroll {
+      0%, 20% { transform: translateY(0); }
+      25%, 45% { transform: translateY(-28px); }
+      50%, 70% { transform: translateY(-56px); }
+      75%, 95% { transform: translateY(-84px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #0a1628 0%, #1a3a5a 100%);
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0,212,192,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-content h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1.2;
+    }
+    .hero-content h1 span { color: #00d4c0; }
+    .hero-content p {
+      color: #aac8e8;
+      font-size: 0.95rem;
+      margin: 12px 0 20px;
+      line-height: 1.6;
+      max-width: 500px;
+    }
+    .hero-content .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-content .btn-primary {
+      background: #00d4c0;
+      color: #0a1628;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,212,192,0.3);
+      cursor: pointer;
+    }
+    .hero-content .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,212,192,0.4); }
+    .hero-content .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-content .btn-secondary:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-stats .stat-item { text-align: center; }
+    .hero-stats .stat-item h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #00d4c0;
+    }
+    .hero-stats .stat-item p {
+      color: #8aa8c8;
+      font-size: 0.75rem;
+      margin-top: 2px;
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 30px 16px;
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .section-title h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0a1628;
+    }
+    .section-title h2 span { color: #00b8a8; }
+    .section-title p {
+      color: #6a8aa8;
+      max-width: 600px;
+      margin: 6px auto 0;
+      font-size: 0.95rem;
+    }
+
+    /* ===== GRID ===== */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: 0.3s;
+      border: 1px solid #eef4f8;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+      border-color: #00d4c0;
+    }
+    .card .icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #00d4c0, #00a898);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .card h3 { font-size: 1rem; font-weight: 700; color: #0a1628; margin-bottom: 6px; }
+    .card p { color: #5a7a92; font-size: 0.85rem; line-height: 1.6; }
+    .card .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #00b8a8;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-decoration: none;
+      margin-top: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .card .card-link:hover { gap: 12px; color: #0a1628; }
+
+    /* ===== POPUP MODAL ===== */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 3000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .popup-overlay.active { display: flex; }
+    .popup-content {
+      background: white;
+      border-radius: 28px;
+      max-width: 560px;
+      width: 100%;
+      padding: 32px 28px;
+      animation: modalFade 0.3s ease;
+      position: relative;
+      text-align: center;
+    }
+    .popup-content .popup-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #8aa8c8;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .popup-content .popup-close:hover { color: #ff6b4a; transform: rotate(90deg); }
+    .popup-content .popup-icon {
+      font-size: 3rem;
+      color: #00d4c0;
+      margin-bottom: 12px;
+    }
+    .popup-content h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 8px;
+    }
+    .popup-content p {
+      color: #5a7a92;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+    .popup-content .highlight {
+      color: #00b8a8;
+      font-weight: 700;
+    }
+    .popup-content .popup-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .popup-content .popup-links a {
+      background: #eef4f8;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      color: #1a3a5a;
+      text-decoration: none;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+    .popup-content .popup-links a:hover {
+      background: #00d4c0;
+      color: white;
+      transform: translateY(-2px);
+    }
+    .popup-content .btn-primary {
+      display: inline-block;
+      padding: 10px 28px;
+      border-radius: 50px;
+      background: #00d4c0;
+      color: #0a1628;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 16px;
+      transition: 0.3s;
+    }
+    .popup-content .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,212,192,0.4);
+    }
+    @keyframes modalFade {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ===== NOTICE CARD ===== */
+    .notice-card {
+      background: linear-gradient(135deg, #ff8a5c, #ff6b4a);
+      color: white;
+      border: none;
+    }
+    .notice-card h3 { color: white; }
+    .notice-card p { color: rgba(255,255,255,0.85); }
+    .notice-card .icon { background: rgba(255,255,255,0.2); }
+
+    /* ===== PORTAL CARD ===== */
+    .portal-card {
+      background: linear-gradient(135deg, #1a3a5a, #0a1628);
+      color: white;
+      border: none;
+    }
+    .portal-card h3 { color: white; }
+    .portal-card p { color: #aac8e8; }
+    .portal-card .icon { background: #00d4c0; color: #0a1628; }
+
+    /* ===== MESSAGE CARD ===== */
+    .message-card {
+      background: white;
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .message-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #00d4c0;
+      flex-shrink: 0;
+    }
+    .message-card h3 { font-size: 1rem; font-weight: 700; color: #0a1628; }
+    .message-card p { color: #5a7a92; line-height: 1.6; font-size: 0.9rem; }
+    .message-card .role { color: #00b8a8; font-weight: 600; font-size: 0.8rem; }
+
+    /* ===== GALLERY ===== */
+    .gallery-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 8px 0 16px;
+      scroll-behavior: smooth;
+    }
+    .gallery-track::-webkit-scrollbar { height: 4px; }
+    .gallery-track::-webkit-scrollbar-track { background: #eef4f8; border-radius: 10px; }
+    .gallery-track::-webkit-scrollbar-thumb { background: #00d4c0; border-radius: 10px; }
+    .gallery-item {
+      min-width: 200px;
+      height: 140px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #eef4f8;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ===== STAFF MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: white;
+      border-radius: 28px;
+      max-width: 950px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+      animation: modalFade 0.3s ease;
+    }
+    .modal-content::-webkit-scrollbar { width: 6px; }
+    .modal-content::-webkit-scrollbar-track { background: #f0f4f8; border-radius: 10px; }
+    .modal-content::-webkit-scrollbar-thumb { background: #00d4c0; border-radius: 10px; }
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: #ff6b4a;
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close:hover { transform: rotate(90deg); background: #e85530; }
+    .modal-content h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 4px;
+    }
+    .modal-content .subtitle {
+      color: #6a8aa8;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    .staff-category {
+      margin-top: 20px;
+    }
+    .staff-category h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a1628;
+      border-bottom: 2px solid #00d4c0;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .staff-category h3 i { color: #00d4c0; }
+    .modal-staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 14px;
+    }
+    .modal-staff-card {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 14px 12px;
+      text-align: center;
+      border: 1px solid #eef4f8;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .modal-staff-card:hover {
+      border-color: #00d4c0;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .modal-staff-card .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00d4c0, #00a898);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-size: 1.4rem;
+      color: white;
+      border: 3px solid #eef4f8;
+      transition: 0.3s;
+    }
+    .modal-staff-card:hover .avatar { border-color: #00d4c0; }
+    .modal-staff-card .avatar.support { background: linear-gradient(135deg, #ff8a5c, #ff6b4a); }
+    .modal-staff-card h4 { font-size: 0.8rem; font-weight: 700; color: #0a1628; line-height: 1.2; }
+    .modal-staff-card .desig { font-size: 0.65rem; color: #00b8a8; font-weight: 600; }
+    .modal-staff-card .dept { font-size: 0.6rem; color: #6a8aa8; margin-top: 2px; }
+    .modal-staff-card .exp {
+      display: inline-block;
+      background: #eef4f8;
+      padding: 1px 10px;
+      border-radius: 20px;
+      font-size: 0.55rem;
+      color: #5a7a92;
+      margin-top: 4px;
+    }
+    .staff-view-btn {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.6rem;
+      color: #00b8a8;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .staff-view-btn:hover { color: #0a1628; }
+
+    /* ===== STAFF DETAIL POPUP ===== */
+    .detail-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .detail-popup.active { display: flex; }
+    .detail-card {
+      background: white;
+      border-radius: 32px;
+      max-width: 460px;
+      width: 100%;
+      padding: 32px 28px;
+      animation: modalFade 0.3s ease;
+      position: relative;
+      text-align: center;
+    }
+    .detail-card .close-detail {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #8aa8c8;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .detail-card .close-detail:hover { color: #ff6b4a; transform: rotate(90deg); }
+    .detail-card .detail-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00d4c0, #00a898);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 2.8rem;
+      color: white;
+      border: 4px solid #00d4c0;
+    }
+    .detail-card .detail-avatar.support { background: linear-gradient(135deg, #ff8a5c, #ff6b4a); border-color: #ff6b4a; }
+    .detail-card h2 { font-size: 1.4rem; font-weight: 800; color: #0a1628; }
+    .detail-card .detail-desig { font-size: 0.9rem; color: #00b8a8; font-weight: 600; margin-top: 2px; }
+    .detail-card .detail-dept { font-size: 0.8rem; color: #6a8aa8; }
+    .detail-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00d4c0, transparent);
+      margin: 16px 0;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: left;
+    }
+    .detail-item { background: #f8fafc; padding: 10px 14px; border-radius: 12px; }
+    .detail-item .label { font-size: 0.6rem; color: #6a8aa8; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+    .detail-item .value { font-size: 0.85rem; font-weight: 600; color: #0a1628; margin-top: 2px; }
+    .detail-item.full { grid-column: 1 / -1; }
+    .detail-badge {
+      display: inline-block;
+      background: #eef4f8;
+      padding: 3px 16px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #5a7a92;
+      margin-top: 8px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0a1628;
+      color: #8aa8c8;
+      padding: 30px 20px 16px;
+      margin-top: 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 30px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .footer h4 { color: white; font-size: 0.95rem; margin-bottom: 12px; }
+    .footer a { color: #8aa8c8; text-decoration: none; display: block; margin-bottom: 6px; font-size: 0.8rem; transition: 0.3s; }
+    .footer a:hover { color: #00d4c0; padding-left: 4px; }
+    .footer .bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 16px;
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.75rem;
+    }
+    .footer .bottom strong { color: #00d4c0; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; padding: 30px 16px; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 12px 0;
+        gap: 6px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { width: 100%; text-align: center; padding: 8px; font-size: 0.8rem; }
+      .header { padding: 10px 16px; }
+      .hero-content h1 { font-size: 1.7rem; }
+      .hero { padding: 24px 16px; }
+      .hero-stats { padding: 16px; }
+      .hero-stats .stat-item h2 { font-size: 1.5rem; }
+      .container { padding: 20px 12px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .message-card { flex-direction: column; text-align: center; align-items: center; }
+      .top-bar { padding: 6px 12px; justify-content: center; }
+      .top-bar .contact-info { gap: 10px; font-size: 0.65rem; justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+      .footer { padding: 24px 12px 12px; }
+      .news-ticker { padding: 6px 12px; }
+      .news-ticker .label { font-size: 0.6rem; padding: 2px 10px; }
+      .news-ticker .ticker-content span { font-size: 0.7rem; }
+      .gallery-item { min-width: 150px; height: 110px; }
+      .section-title h2 { font-size: 1.4rem; }
+      .modal-content { padding: 20px; max-height: 90vh; }
+      .modal-staff-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail-card { padding: 24px 16px; }
+    }
+    @media (max-width: 480px) {
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .hero-stats .stat-item h2 { font-size: 1.2rem; }
+      .logo-area .school-name { font-size: 0.9rem; }
+      .logo-area img { width: 38px; height: 38px; }
+      .modal-staff-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <h1>🏫 GBHS Wahi Pandhi</h1>
-        <div class="loader"></div>
-        <p>Redirecting to school portal...</p>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="contact-info">
+    <span><i class="fas fa-phone"></i> +92-123-4567890</span>
+    <span><i class="fas fa-envelope"></i> info@gbhswp.edu.pk</span>
+    <span><i class="fas fa-map-marker-alt"></i> Wahi Pandhi, Johi, Dadu</span>
+  </div>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-area">
+    <img src="https://i.ibb.co/qXLQR7Y/Whats-App-Image-2026-05-05-at-12-23-47-AM.jpg" alt="School Logo">
+    <div class="school-name">
+      GBHS Wahi Pandhi
+      <small>Tehsil Johi · District Dadu · Sindh</small>
     </div>
-    <script>
-        // Redirect to your Apps Script
-        window.location.href = 'https://script.google.com/macros/s/AKfycbyU6-Yk0AmfXFRz3ShrKkW2qzcPgRNOjVN7e0qkujqK/exec';
-    </script>
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <nav class="nav-links" id="navLinks">
+    <a href="https://script.google.com/macros/s/AKfycbyU6-Yk0AmfXFRz3ShrKkW2qzcPgRNOjVN7e0qkujqK/exec?page=index.html" class="active">Home</a>
+    <a onclick="openStaffModal()" style="cursor:pointer;">Staff</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <a href="https://script.google.com/macros/s/AKfycbyU6-Yk0AmfXFRz3ShrKkW2qzcPgRNOjVN7e0qkujqK/exec?page=teacher-portal" class="btn-admission"><i class="fas fa-user-tie"></i> Teachers Portal</a>
+  </nav>
+</header>
+
+<!-- NEWS TICKER -->
+<div class="news-ticker">
+  <span class="label"><i class="fas fa-bolt"></i> NEWS</span>
+  <div class="ticker-wrap">
+    <div class="ticker-content">
+      <span><i class="fas fa-calendar-check"></i> Mid-Term Exams: May 20-28, 2026</span>
+      <span><i class="fas fa-trophy"></i> Annual Sports Gala: June 15, 2026</span>
+      <span><i class="fas fa-book"></i> New Admissions Open for Session 2026-27</span>
+      <span><i class="fas fa-star"></i> PTM on 25th May at 9:00 AM</span>
+      <span><i class="fas fa-graduation-cap"></i> Results Announced: Check Online</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Why Choose <span>GBHS Wahi Pandhi?</span></h1>
+    <p>We provide a nurturing environment that fosters academic excellence, character development, and lifelong learning.Empowering young minds through quality education, digital learning, and holistic development since 1985. We nurture future leaders who will make a difference.</p>
+    <div class="hero-buttons">
+      <a class="btn-primary" onclick="openAdmissionPopup()"><i class="fas fa-arrow-right"></i> Admissions Open</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <h2>810+</h2>
+      <p>Students</p>
+    </div>
+    <div class="stat-item">
+      <h2>28</h2>
+      <p>Teachers</p>
+    </div>
+    <div class="stat-item">
+      <h2>95%</h2>
+      <p>Pass Rate</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MESSAGES -->
+  <div style="margin: 30px 0;">
+    <div class="grid-2">
+      <div class="message-card">
+        <img src="https://blogs.dunyanews.tv/wp-content/uploads/2017/12/Riaz-Ahmed-Rustamani.jpg" alt="Head Master">
+        <div>
+          <h3>Head Master's Message</h3>
+          <p>GBHS Wahi Pandhi is dedicated to holistic development – blending modern academics, technology, and sports. Every student is guided to become a responsible citizen and future leader.</p>
+          <span class="role">— Mr. Ahmed Ahmed Rustamani, Head Master</span>
+        </div>
+      </div>
+      <div class="message-card">
+        <img src="https://www.dailyparliamenttimes.com/wp-content/uploads/2023/05/pic13-6.jpg" alt="Education Minister">
+        <div>
+          <h3>Education Minister's Message</h3>
+          <p>Sindh government prioritizes quality education & digital transformation. GBHS Wahi Pandhi stands as a model for free, modern learning. Together we empower youth for a brighter future.</p>
+          <span class="role">— Education Minister, Sindh</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FEATURES GRID -->
+  <div class="grid-3">
+    <!-- Quality Education with Popup -->
+    <div class="card" id="qualityCard">
+      <div class="icon"><i class="fas fa-book-open"></i></div>
+      <h3>Quality Education</h3>
+      <p>Comprehensive curriculum with focus on conceptual understanding, critical thinking, and practical application.</p>
+      <a class="card-link" onclick="openQualityPopup()">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- Digital Learning with Popup -->
+    <div class="card">
+      <div class="icon"><i class="fas fa-laptop"></i></div>
+      <h3>Digital Learning</h3>
+      <p>Smart classrooms, computer labs, and digital resources to prepare students for the modern technology-driven world.</p>
+      <a class="card-link" onclick="openDigitalPopup()">Explore Resources <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- Student Results -->
+    <div class="card">
+      <div class="icon"><i class="fas fa-trophy"></i></div>
+      <h3>Student Results</h3>
+      <p>Students here you can check your results and many more in this portion of website.</p>
+      <a href="https://script.google.com/macros/s/AKfycbyU6-Yk0AmfXFRz3ShrKkW2qzcPgRNOjVN7e0qkujqK/exec?page=student-corner" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <br>
+
+  <!-- NOTICE + PORTAL -->
+  <div class="grid-2" style="margin-bottom: 30px;">
+    <div class="card notice-card">
+      <div class="icon"><i class="fas fa-bullhorn"></i></div>
+      <h3>📢 School Notice</h3>
+      <p><strong>Summer Vacation:</strong> 1st June to 31st July 2026</p>
+      <p><strong>PTM:</strong> 25th May at 9:00 AM</p>
+      <p><strong>Mid-Term Exams:</strong> May 20-28, 2026</p>
+      <a href="#" class="card-link" style="color: rgba(255,255,255,0.9);">View All Notices <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="card portal-card">
+      <div class="icon"><i class="fas fa-user-tie"></i></div>
+      <h3>👨‍🏫 Teachers Portal</h3>
+      <p>Secure login for teachers to submit results, mark attendance, track monthly progress, and generate academic reports.</p>
+      <a href="https://script.google.com/macros/s/AKfycbyU6-Yk0AmfXFRz3ShrKkW2qzcPgRNOjVN7e0qkujqK/exec?page=teacher-portal" class="card-link" style="color: #00d4c0;">Go to Portal <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div id="gallery" class="section-title" style="margin-top: 10px;">
+    <h2>School <span>Gallery</span></h2>
+  </div>
+  <div class="gallery-track">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop" alt="School"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=300&fit=crop" alt="Classroom"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop" alt="Students"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=400&h=300&fit=crop" alt="Library"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" alt="Sports"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=300&fit=crop" alt="Event"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=300&fit=crop" alt="Campus"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop" alt="Graduation"></div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="card" style="margin-top: 20px; text-align: center; background: linear-gradient(135deg, #0a1628, #1a3a5a); color: white; border: none;">
+    <h3 style="color: #ffcd6b; font-size: 1.2rem;">"Education is the most powerful weapon which you can use to change the world."</h3>
+    <p style="color: #aac8e8; margin-top: 6px;">— Nelson Mandela</p>
+    <p style="color: #6a8aa8; margin-top: 14px; font-size: 0.8rem;">Designed & Developed by <strong style="color: #00d4c0;">Sadam Rustamani</strong> | School Admin Panel</p>
+  </div>
+
+</div>
+
+<!-- ===== ADMISSION POPUP ===== -->
+<div class="popup-overlay" id="admissionPopup">
+  <div class="popup-content">
+    <button class="popup-close" onclick="closeAdmissionPopup()"><i class="fas fa-times"></i></button>
+    <div class="popup-icon"><i class="fas fa-door-open"></i></div>
+    <h2>🎓 Admissions Are Open 2026-27</h2>
+    <p>
+      <span class="highlight">GBHS Wahi Pandhi</span> welcomes new students for the upcoming academic session. 
+      We offer <span class="highlight">quality education</span> from class 6th to 10th with modern facilities.
+    </p>
+    <br>
+    <p>
+      <strong>📌 Key Features:</strong><br>
+      • Qualified & experienced teachers<br>
+      • Free Books<br>
+      • Science laboratory<br>
+      • Sports facilities & extracurricular activities<br>
+      • Free addmission
+    </p>
+    <br>
+    <p>
+      Visit <span class="highlight">GBHS Wahi Pandhi</span> Office for addmission form and process.
+    </p>
+</div>
+
+<!-- ===== QUALITY POPUP ===== -->
+<div class="popup-overlay" id="qualityPopup">
+  <div class="popup-content">
+    <button class="popup-close" onclick="closeQualityPopup()"><i class="fas fa-times"></i></button>
+    <div class="popup-icon"><i class="fas fa-star"></i></div>
+    <h2>🌟 Quality Education at GBHS</h2>
+    <p>
+      At <span class="highlight">GBHS Wahi Pandhi</span>, we believe that education is the cornerstone of a prosperous society. 
+      Our <span class="highlight">comprehensive curriculum</span> is designed to foster <span class="highlight">critical thinking</span>, 
+      <span class="highlight">creativity</span>, and <span class="highlight">character development</span>.
+    </p>
+    <br>
+    <p>
+      We are committed to providing <span class="highlight">holistic education</span> that prepares students not just for exams, 
+      but for life. Our dedicated teachers use <span class="highlight">modern teaching methodologies</span> to ensure 
+      every student reaches their full potential.
+    </p>
+    <br>
+    <p style="font-style: italic; color: #0a1628;">
+      <i class="fas fa-quote-left" style="color: #00d4c0;"></i> 
+      Empowering minds, building character, shaping the future. 
+      <i class="fas fa-quote-right" style="color: #00d4c0;"></i>
+    </p>
+    <a href="#" class="btn-primary"><i class="fas fa-arrow-right"></i> Explore Admissions</a>
+  </div>
+</div>
+
+<!-- ===== DIGITAL LEARNING POPUP ===== -->
+<div class="popup-overlay" id="digitalPopup">
+  <div class="popup-content">
+    <button class="popup-close" onclick="closeDigitalPopup()"><i class="fas fa-times"></i></button>
+    <div class="popup-icon"><i class="fas fa-laptop-code"></i></div>
+    <h2>💻 Digital Learning Resources</h2>
+    <p>
+      <span class="highlight">GBHS Wahi Pandhi</span> embraces technology to enhance learning. 
+      Explore these <span class="highlight">free educational platforms</span> to expand your knowledge beyond the classroom.
+    </p>
+    <div class="popup-links">
+      <a href="https://www.khanacademy.org" target="_blank"><i class="fas fa-graduation-cap"></i> Khan Academy</a>
+      <a href="https://www.coursera.org" target="_blank"><i class="fas fa-globe"></i> Coursera</a>
+      <a href="https://www.edx.org" target="_blank"><i class="fas fa-university"></i> edX</a>
+      <a href="https://www.duolingo.com" target="_blank"><i class="fas fa-language"></i> Duolingo</a>
+      <a href="https://www.code.org" target="_blank"><i class="fas fa-code"></i> Code.org</a>
+      <a href="https://www.w3schools.com" target="_blank"><i class="fas fa-file-code"></i> W3Schools</a>
+      <a href="https://www.udemy.com" target="_blank"><i class="fas fa-play-circle"></i> Udemy</a>
+      <a href="https://www.youtube.com/education" target="_blank"><i class="fab fa-youtube"></i> YouTube Edu</a>
+    </div>
+    <p style="margin-top: 12px; font-size: 0.85rem; color: #6a8aa8;">
+      <i class="fas fa-info-circle"></i> These platforms are free and recommended for students of all ages.
+    </p>
+  </div>
+</div>
+
+<!-- ===== STAFF MODAL ===== -->
+<div class="modal-overlay" id="staffModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeStaffModal()"><i class="fas fa-times"></i></button>
+    <h2>👨‍🏫 Our Staff</h2>
+    <p class="subtitle">28+ dedicated teachers, support staff, and administration committed to quality education. Click on any staff member to view full details.</p>
+    
+    <div class="staff-category">
+      <h3><i class="fas fa-chalkboard-teacher"></i> Teaching Staff</h3>
+      <div class="modal-staff-grid" id="teachersGrid"></div>
+    </div>
+
+    <div class="staff-category">
+      <h3><i class="fas fa-tools"></i> Support Staff</h3>
+      <div class="modal-staff-grid" id="supportGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STAFF DETAIL POPUP ===== -->
+<div class="detail-popup" id="detailPopup">
+  <div class="detail-card">
+    <button class="close-detail" onclick="closeDetailPopup()"><i class="fas fa-times"></i></button>
+    <div class="detail-avatar" id="detailAvatar"><i class="fas fa-user-tie"></i></div>
+    <h2 id="detailName">Mr. Ahmed Raza</h2>
+    <div class="detail-desig" id="detailDesig">Head Master</div>
+    <div class="detail-dept" id="detailDept">Administration</div>
+    <div class="detail-divider"></div>
+    <div class="detail-grid">
+      <div class="detail-item"><div class="label">Qualification</div><div class="value" id="detailQualification">M.Sc. Mathematics</div></div>
+      <div class="detail-item"><div class="label">BPS</div><div class="value" id="detailBPS">BPS-18</div></div>
+      <div class="detail-item"><div class="label">Caste</div><div class="value" id="detailCaste">Raza</div></div>
+      <div class="detail-item"><div class="label">Service</div><div class="value" id="detailService">BPS-18</div></div>
+      <div class="detail-item full"><div class="label">Specialization</div><div class="value" id="detailSpecialization">Mathematics, Educational Leadership</div></div>
+      <div class="detail-item full"><div class="label">Bio / About</div><div class="value" id="detailBio">Dedicated educator with 15+ years of experience in educational administration and teaching.</div></div>
+    </div>
+    <span class="detail-badge" id="detailBadge">📍 Wahi Pandhi, Dadu</span>
+  </div>
+</div>
+
+
+
+<script>
+  // ===== ADMISSION POPUP =====
+  function openAdmissionPopup() {
+    document.getElementById('admissionPopup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAdmissionPopup() {
+    document.getElementById('admissionPopup').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('admissionPopup').addEventListener('click', function(e) {
+    if (e.target === this) closeAdmissionPopup();
+  });
+
+  // ===== QUALITY POPUP =====
+  function openQualityPopup() {
+    document.getElementById('qualityPopup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeQualityPopup() {
+    document.getElementById('qualityPopup').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('qualityPopup').addEventListener('click', function(e) {
+    if (e.target === this) closeQualityPopup();
+  });
+
+  // ===== DIGITAL POPUP =====
+  function openDigitalPopup() {
+    document.getElementById('digitalPopup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDigitalPopup() {
+    document.getElementById('digitalPopup').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('digitalPopup').addEventListener('click', function(e) {
+    if (e.target === this) closeDigitalPopup();
+  });
+
+  // ===== STAFF DATA =====
+  const staffData = {
+    teachers: [
+      { id: 1, name: "RASOOL BUX S/O HUSSAIN BUX", designation: "HST", dept: "Teaching", qualification: "MA", bps: "BPS-16", caste: "Bux", service: "BPS-16", specialization: "General Teaching", bio: "Experienced HST dedicated to student success." },
+      { id: 2, name: "ABDUL LATIF S/O MUHAMMAD YOUSIF", designation: "OT", dept: "Teaching", qualification: "B.A", bps: "BPS-16", caste: "Yousif", service: "BPS-16", specialization: "General Teaching", bio: "Dedicated OT with years of service." },
+      { id: 3, name: "RAZA MUHAMMAD GADEHI S/O SHAHMEER", designation: "OT", dept: "Teaching", qualification: "B.A", bps: "BPS-16", caste: "Gadehi", service: "BPS-16", specialization: "General Teaching", bio: "Committed to quality education." },
+      { id: 4, name: "GHULAM MUHAMAMD S/O JUMAN LASHARI", designation: "P.T.I", dept: "Physical Education", qualification: "B.A", bps: "BPS-16", caste: "Lashari", service: "BPS-16", specialization: "Physical Training", bio: "Dedicated PTI focusing on sports and fitness." },
+      { id: 5, name: "ASHFAQUE AMIR S/O AMIR BUX", designation: "SST", dept: "Teaching", qualification: "B.A", bps: "BPS-16", caste: "Bux", service: "BPS-16", specialization: "Social Studies", bio: "Senior SST teacher committed to student growth." },
+      { id: 6, name: "ABDUL HAMEED LAGHARI S/O MUAMMAD SIDDIQUE LAGHARI", designation: "JEST", dept: "Teaching", qualification: "B.A", bps: "BPS-14", caste: "Laghari", service: "BPS-14", specialization: "Junior Teaching", bio: "Passionate JEST teacher." },
+      { id: 7, name: "ABDUL JABAR S/O JAM KHAN", designation: "JEST", dept: "Teaching", qualification: "BS", bps: "BPS-14", caste: "Khan", service: "BPS-14", specialization: "Junior Teaching", bio: "Dedicated JEST teacher." },
+      { id: 8, name: "ABDUL SALAM S/O IMAM BUX", designation: "JEST", dept: "Teaching", qualification: "MA", bps: "BPS-14", caste: "Bux", service: "BPS-14", specialization: "Junior Teaching", bio: "Experienced JEST teacher." },
+      { id: 9, name: "ABID ALI SOOMRO S/O GHULAM SHABIR SOOMRO", designation: "JEST", dept: "Teaching", qualification: "B.A", bps: "BPS-14", caste: "Soomro", service: "BPS-14", specialization: "Junior Teaching", bio: "Committed to student learning." },
+      { id: 10, name: "AFSHAN LAGHARI D/O ABDUL KHALIQUE", designation: "JEST", dept: "Teaching", qualification: "B.Sc", bps: "BPS-14", caste: "Laghari", service: "BPS-14", specialization: "Science Teaching", bio: "Science teacher with a passion for education." },
+      { id: 11, name: "AMJAD ALI S/O NOOR UDDIN", designation: "JEST", dept: "Teaching", qualification: "B.A", bps: "BPS-14", caste: "Uddin", service: "BPS-14", specialization: "Junior Teaching", bio: "Dedicated to student success." },
+      { id: 12, name: "ASIF ALI S/O RAJAB ALI", designation: "JEST", dept: "Teaching", qualification: "B.A", bps: "BPS-14", caste: "Ali", service: "BPS-14", specialization: "Junior Teaching", bio: "Passionate about teaching." },
+      { id: 13, name: "ASIF JAMALI S/O MUHAMMAD SADIQ JAMALI", designation: "JEST", dept: "Teaching", qualification: "BS", bps: "BPS-14", caste: "Jamali", service: "BPS-14", specialization: "Junior Teaching", bio: "Focused on student development." },
+      { id: 14, name: "FAYAZ AHMED S/O JAM KHAN", designation: "JEST", dept: "Teaching", qualification: "MA", bps: "BPS-14", caste: "Khan", service: "BPS-14", specialization: "Junior Teaching", bio: "Experienced and committed." },
+      { id: 15, name: "GHULAM RASOOL S/O MUHAMMAD MITHAL BIRAHMANI", designation: "JEST", dept: "Teaching", qualification: "MA", bps: "BPS-14", caste: "Birahmani", service: "BPS-14", specialization: "Junior Teaching", bio: "Dedicated JEST teacher." },
+      { id: 16, name: "MUHAMMAD ASLAM S/O MUHAMMAD AMIN", designation: "JEST", dept: "Teaching", qualification: "B.A", bps: "BPS-14", caste: "Amin", service: "BPS-14", specialization: "Junior Teaching", bio: "Committed to quality education." },
+      { id: 17, name: "MUSHTAQUE AHMED S/O JAM KHAN", designation: "JEST", dept: "Teaching", qualification: "MA", bps: "BPS-14", caste: "Khan", service: "BPS-14", specialization: "Junior Teaching", bio: "Experienced teacher." },
+      { id: 18, name: "MUZAFFAR ALI S/O HERO KHAN", designation: "JEST", dept: "Teaching", qualification: "B.Com", bps: "BPS-14", caste: "Khan", service: "BPS-14", specialization: "Junior Teaching", bio: "Focused on student learning." },
+      { id: 19, name: "SADAM HUSSAIN S/O ALI AKBAR RUSTAMANI", designation: "JEST", dept: "Teaching", qualification: "B.A", bps: "BPS-14", caste: "Rustamani", service: "BPS-14", specialization: "Junior Teaching", bio: "Passionate educator." },
+      { id: 20, name: "SAFAN ALI S/O KEHRUDDIN RUSTAMANI", designation: "JEST", dept: "Teaching", qualification: "B.A/B.Ed", bps: "BPS-14", caste: "Rustamani", service: "BPS-14", specialization: "Junior Teaching", bio: "Committed to teaching excellence." },
+      { id: 21, name: "SAJJAD ALI RUSTAMANI S/O ABDUL HAFEEZ RUSTAMANI", designation: "JEST", dept: "Teaching", qualification: "B.A", bps: "BPS-14", caste: "Rustamani", service: "BPS-14", specialization: "Junior Teaching", bio: "Dedicated to student growth." },
+      { id: 22, name: "SHAHNAWAZ LASHARI S/O MUHAMMAD IBRAHIM", designation: "JEST", dept: "Teaching", qualification: "B.Com", bps: "BPS-14", caste: "Lashari", service: "BPS-14", specialization: "Junior Teaching", bio: "Experienced and committed." },
+      { id: 23, name: "ZAKIR HUSSAIN S/O MUHAMMAD SALEH RUSTAMANI BALOCH", designation: "JEST", dept: "Teaching", qualification: "MA", bps: "BPS-14", caste: "Rustamani", service: "BPS-14", specialization: "Junior Teaching", bio: "Passionate about education." },
+      { id: 24, name: "GUL SHER S/O GHULAM RASOOL", designation: "LAB ASSISTANT", dept: "Science Lab", qualification: "MA", bps: "BPS-14", caste: "Rasool", service: "BPS-14", specialization: "Lab Management", bio: "Dedicated lab assistant with years of experience." }
+    ],
+    support: [
+      { id: 101, name: "ABDUL HAMEED S/O LATE HABIBULLAH KINGRANI", designation: "JUNIOR CLERK", dept: "Administration", qualification: "Intermediate", bps: "BPS-11", caste: "Kingrani", service: "BPS-11", specialization: "Office Management", bio: "Experienced clerk handling school administration." },
+      { id: 102, name: "ISHAQUE S/O HAMZO KHAN LASHARI", designation: "LAB ATTENDENT", dept: "Science Lab", qualification: "Matriculation", bps: "BPS-2", caste: "Lashari", service: "BPS-2", specialization: "Lab Support", bio: "Lab attendant supporting science experiments." },
+      { id: 103, name: "MUHAMMAD YAMEEN S/O KHUDA BUX", designation: "NAIB QASID", dept: "Administration", qualification: "Primary", bps: "BPS-2", caste: "Bux", service: "BPS-2", specialization: "Office Support", bio: "Office assistant providing administrative support." },
+      { id: 104, name: "ALI NAWAZ S/O MUHAMMAD USMAN", designation: "SWEEPER", dept: "Maintenance", qualification: "Middle", bps: "BPS-2", caste: "Usman", service: "BPS-2", specialization: "Campus Cleaning", bio: "Dedicated to maintaining a clean school environment." },
+      { id: 105, name: "ASHIQUE HUSSAIN S/O MUHAMMAD HASHIM BIRAHMANI", designation: "CHOWKIDAR", dept: "Security", qualification: "Intermediate", bps: "BPS-1", caste: "Birahmani", service: "BPS-1", specialization: "Campus Security", bio: "Security guard ensuring campus safety." }
+    ]
+  };
+
+  // ===== RENDER STAFF =====
+  function renderStaffCards() {
+    const teachersGrid = document.getElementById('teachersGrid');
+    const supportGrid = document.getElementById('supportGrid');
+
+    teachersGrid.innerHTML = staffData.teachers.map(teacher => {
+      const icon = teacher.designation === 'HST' ? 'fa-user-tie' :
+                   teacher.designation === 'SST' ? 'fa-chalkboard-teacher' :
+                   teacher.designation === 'P.T.I' ? 'fa-running' :
+                   teacher.designation === 'LAB ASSISTANT' ? 'fa-flask' : 'fa-user-graduate';
+      return `
+      <div class="modal-staff-card" onclick="openDetailPopup(${teacher.id}, 'teacher')">
+        <div class="avatar"><i class="fas ${icon}"></i></div>
+        <h4>${teacher.name}</h4>
+        <div class="desig">${teacher.designation}</div>
+        <div class="dept">${teacher.bps}</div>
+        <span class="exp">${teacher.qualification}</span>
+        <button class="staff-view-btn">View Details <i class="fas fa-arrow-right"></i></button>
+      </div>
+    `}).join('');
+
+    supportGrid.innerHTML = staffData.support.map(staff => {
+      const icon = staff.designation === 'JUNIOR CLERK' ? 'fa-building' :
+                   staff.designation === 'LAB ATTENDENT' ? 'fa-flask' :
+                   staff.designation === 'NAIB QASID' ? 'fa-tasks' :
+                   staff.designation === 'SWEEPER' ? 'fa-broom' : 'fa-shield-alt';
+      return `
+      <div class="modal-staff-card" onclick="openDetailPopup(${staff.id}, 'support')">
+        <div class="avatar support"><i class="fas ${icon}"></i></div>
+        <h4>${staff.name}</h4>
+        <div class="desig">${staff.designation}</div>
+        <div class="dept">${staff.bps}</div>
+        <span class="exp">${staff.qualification}</span>
+        <button class="staff-view-btn">View Details <i class="fas fa-arrow-right"></i></button>
+      </div>
+    `}).join('');
+  }
+
+  // ===== OPEN DETAIL POPUP =====
+  function openDetailPopup(id, type) {
+    const data = type === 'teacher' 
+      ? staffData.teachers.find(t => t.id === id) 
+      : staffData.support.find(s => s.id === id);
+    
+    if (!data) return;
+
+    const avatarClass = type === 'support' ? 'support' : '';
+    const icon = data.designation === 'HST' ? 'fa-user-tie' :
+                 data.designation === 'SST' ? 'fa-chalkboard-teacher' :
+                 data.designation === 'P.T.I' ? 'fa-running' :
+                 data.designation === 'LAB ASSISTANT' ? 'fa-flask' :
+                 data.designation === 'JUNIOR CLERK' ? 'fa-building' :
+                 data.designation === 'LAB ATTENDENT' ? 'fa-flask' :
+                 data.designation === 'NAIB QASID' ? 'fa-tasks' :
+                 data.designation === 'SWEEPER' ? 'fa-broom' : 'fa-shield-alt';
+
+    document.getElementById('detailAvatar').className = `detail-avatar ${avatarClass}`;
+    document.getElementById('detailAvatar').innerHTML = `<i class="fas ${icon}"></i>`;
+    document.getElementById('detailName').textContent = data.name;
+    document.getElementById('detailDesig').textContent = data.designation;
+    document.getElementById('detailDept').textContent = data.dept || 'School';
+    document.getElementById('detailQualification').textContent = data.qualification;
+    document.getElementById('detailBPS').textContent = data.bps;
+    document.getElementById('detailCaste').textContent = data.caste || 'N/A';
+    document.getElementById('detailService').textContent = data.service || data.bps;
+    document.getElementById('detailSpecialization').textContent = data.specialization || 'General';
+    document.getElementById('detailBio').textContent = data.bio || 'Dedicated professional committed to school excellence.';
+    document.getElementById('detailBadge').textContent = '📍 Wahi Pandhi, District Dadu, Sindh';
+
+    document.getElementById('detailPopup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDetailPopup() {
+    document.getElementById('detailPopup').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ===== STAFF MODAL CONTROLS =====
+  function openStaffModal() {
+    document.getElementById('staffModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeStaffModal() {
+    document.getElementById('staffModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ===== EVENT LISTENERS =====
+  document.getElementById('staffModal').addEventListener('click', function(e) {
+    if (e.target === this) closeStaffModal();
+  });
+
+  document.getElementById('detailPopup').addEventListener('click', function(e) {
+    if (e.target === this) closeDetailPopup();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeDetailPopup();
+      closeQualityPopup();
+      closeAdmissionPopup();
+      closeDigitalPopup();
+      if (document.getElementById('staffModal').classList.contains('active')) {
+        closeStaffModal();
+      }
+    }
+  });
+
+  // ===== MOBILE MENU =====
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ===== INIT =====
+  renderStaffCards();
+</script>
 </body>
 </html>
