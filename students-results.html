@@ -198,7 +198,7 @@
       .hero h1 { font-size: 2rem; }
       .hero { padding: 40px 16px; }
       .result-check-box { padding: 20px; }
-      .result-grid { grid-template-columns: 1fr 1fr; }
+      .result-grid { grid-template-columns: 1fr; }
       .top-bar { padding: 6px 12px; justify-content: center; }
       .top-bar .contact-info { gap: 10px; font-size: 0.65rem; justify-content: center; }
       .footer-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -252,7 +252,7 @@
   <div class="hero-content">
     <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Check Your Results</div>
     <h1>Student <span>Results</span></h1>
-    <p>Select your class and subject to view all uploaded exam results. No roll number or name required.</p>
+    <p>Select your class and subject to view all uploaded exam results. Results are securely stored and updated by teachers.</p>
   </div>
 </section>
 
@@ -261,10 +261,10 @@
   
   <div class="section-title">
     <h2>View <span>Your Results</span></h2>
-    <p>Select your class and subject to see all available results uploaded by teachers.</p>
+    <p>Select your class and subject to see all available results.</p>
   </div>
 
-  <!-- Result Check Form - Only Class and Subject -->
+  <!-- Result Check Form -->
   <div class="result-check-box">
     <h3><i class="fas fa-search" style="color: #00d4c0;"></i> Find Your Results</h3>
     <p class="sub">Select class and subject to view all uploaded results. No roll number needed!</p>
@@ -355,6 +355,14 @@
 </footer>
 
 <script>
+  // ============================================================
+  // 🔴🔴🔴 YOUR GOOGLE APPS SCRIPT URL IS ALREADY ADDED 🔴🔴🔴
+  // ============================================================
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxl7GnUvLgBi9BWbS8LnktESH0hioPn5N0S81JCvpkRzYqKOBcPNdw9fTHknm4ueaqt/exec';
+  // ============================================================
+
+  let globalResults = [];
+
   // ===== MOBILE MENU =====
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
@@ -365,8 +373,8 @@
     });
   });
 
-  // ===== CHECK RESULTS - Only Class and Subject =====
-  function checkResults() {
+  // ===== CHECK RESULTS =====
+  async function checkResults() {
     const className = document.getElementById('studentClass').value;
     const subject = document.getElementById('studentSubject').value;
     
@@ -375,68 +383,77 @@
       return;
     }
     
-    // Get all results from localStorage
-    const allResults = JSON.parse(localStorage.getItem('result_images') || '[]');
+    // Show loading
+    const checkBtn = document.querySelector('.check-btn');
+    checkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+    checkBtn.disabled = true;
     
-    // Filter results for this class and subject
-    const filtered = allResults.filter(r => r.class === className && r.subject === subject);
-    
-    const container = document.getElementById('resultsContainer');
-    container.style.display = 'block';
-    
-    if(filtered.length === 0) {
-      document.getElementById('resultTitle').textContent = `📊 No Results Found`;
-      document.getElementById('resultCount').textContent = '';
-      document.getElementById('resultContent').innerHTML = `
-        <div class="no-result">
-          <i class="fas fa-folder-open"></i>
-          <p>No results available for ${className} - ${subject}</p>
-          <p style="font-size: 0.85rem; margin-top: 4px;">Please check with your teacher or select a different subject.</p>
-        </div>
-      `;
-      return;
-    }
-    
-    // Sort by date (newest first)
-    filtered.sort((a, b) => b.timestamp - a.timestamp);
-    
-    document.getElementById('resultTitle').textContent = `📊 Results for ${className} - ${subject}`;
-    document.getElementById('resultCount').textContent = `${filtered.length} result(s) found`;
-    
-    let html = `<div class="result-grid">`;
-    for(let result of filtered) {
-      const isImage = result.fileType && result.fileType.startsWith('image/');
-      const displayName = result.fileName || 'Result';
+    try {
+      const url = `${API_URL}?class=${encodeURIComponent(className)}&subject=${encodeURIComponent(subject)}`;
+      const response = await fetch(url);
+      const data = await response.json();
       
-      html += `
-        <div class="result-card" onclick="viewResultDetail(${result.id})">
-          <div class="thumb">
-            ${isImage ? `<img src="${result.fileData}" alt="${displayName}">` : `<i class="fas fa-file-pdf"></i>`}
+      const container = document.getElementById('resultsContainer');
+      container.style.display = 'block';
+      
+      // Check if data is valid
+      if(!data.success || !data.data || data.data.length === 0) {
+        document.getElementById('resultTitle').textContent = `📊 No Results Found`;
+        document.getElementById('resultCount').textContent = '';
+        document.getElementById('resultContent').innerHTML = `
+          <div class="no-result">
+            <i class="fas fa-folder-open"></i>
+            <p>No results available for ${className} - ${subject}</p>
+            <p style="font-size: 0.85rem; margin-top: 4px;">Please check with your teacher or select a different subject.</p>
           </div>
-          <div class="info">
-            <div class="exam-type">${result.examType}</div>
-            <div class="exam-date"><i class="far fa-calendar-alt"></i> ${result.date}</div>
-            <div class="uploaded-by"><i class="fas fa-user"></i> ${result.teacherName || 'Teacher'}</div>
+        `;
+        return;
+      }
+      
+      globalResults = data.data;
+      
+      document.getElementById('resultTitle').textContent = `📊 Results for ${className} - ${subject}`;
+      document.getElementById('resultCount').textContent = `${globalResults.length} result(s) found`;
+      
+      let html = `<div class="result-grid">`;
+      for(let result of globalResults) {
+        const isImage = result.fileData && result.fileData.startsWith('data:image/');
+        
+        html += `
+          <div class="result-card" onclick="viewResultDetail('${result.id}')">
+            <div class="thumb">
+              ${isImage ? `<img src="${result.fileData}" alt="Result">` : `<i class="fas fa-file-pdf"></i>`}
+            </div>
+            <div class="info">
+              <div class="exam-type">${result.examType}</div>
+              <div class="exam-date"><i class="far fa-calendar-alt"></i> ${result.date}</div>
+              <div class="uploaded-by"><i class="fas fa-user"></i> ${result.teacherName || 'Teacher'}</div>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      }
+      html += `</div>`;
+      html += `<div style="margin-top: 16px; font-size: 0.8rem; color: #6a8aa8; text-align: center;">Click on any result card to view full image.</div>`;
+      
+      document.getElementById('resultContent').innerHTML = html;
+      
+    } catch(error) {
+      alert('Error loading results: ' + error.message);
     }
-    html += `</div>`;
-    html += `<div style="margin-top: 16px; font-size: 0.8rem; color: #6a8aa8; text-align: center;">Click on any result card to view full image.</div>`;
     
-    document.getElementById('resultContent').innerHTML = html;
+    checkBtn.innerHTML = '<i class="fas fa-search"></i> View Results';
+    checkBtn.disabled = false;
   }
 
   // ===== VIEW RESULT DETAIL =====
   function viewResultDetail(id) {
-    const allResults = JSON.parse(localStorage.getItem('result_images') || '[]');
-    const result = allResults.find(r => r.id === id);
+    const result = globalResults.find(r => r.id == id);
     if(!result) return;
     
     document.getElementById('detailTitle').textContent = `${result.class} - ${result.subject}`;
     document.getElementById('detailSubtitle').textContent = `${result.examType} · ${result.date} · Uploaded by ${result.teacherName || 'Teacher'}`;
     
-    const isImage = result.fileType && result.fileType.startsWith('image/');
+    const isImage = result.fileData && result.fileData.startsWith('data:image/');
     if(isImage) {
       document.getElementById('detailBody').innerHTML = `<img src="${result.fileData}" alt="Result">`;
     } else {
@@ -463,31 +480,38 @@
   });
 
   // ===== SHOW AVAILABLE RESULTS =====
-  function showAvailableResults() {
-    const allResults = JSON.parse(localStorage.getItem('result_images') || '[]');
-    const container = document.getElementById('availableResultsList');
-    
-    if(allResults.length === 0) {
-      container.innerHTML = '<p>No results have been uploaded yet. Check back later!</p>';
-      return;
+  async function showAvailableResults() {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      
+      const container = document.getElementById('availableResultsList');
+      
+      if(!data.success || !data.data || data.data.length === 0) {
+        container.innerHTML = '<p>No results have been uploaded yet. Check back later!</p>';
+        return;
+      }
+      
+      // Group by class and subject
+      const grouped = {};
+      for(let r of data.data) {
+        const key = `${r.class} - ${r.subject}`;
+        if(!grouped[key]) grouped[key] = [];
+        if(!grouped[key].includes(r.examType)) grouped[key].push(r.examType);
+      }
+      
+      let html = '';
+      for(let [key, exams] of Object.entries(grouped)) {
+        html += `<div style="padding: 6px 0; border-bottom: 1px solid #eef4f8; display: flex; justify-content: space-between; flex-wrap: wrap;">
+          <span><strong>${key}</strong></span>
+          <span style="color: #00d4c0;">${exams.join(', ')}</span>
+        </div>`;
+      }
+      container.innerHTML = html;
+      
+    } catch(error) {
+      console.error('Error loading available results:', error);
     }
-    
-    // Group by class and subject
-    const grouped = {};
-    for(let r of allResults) {
-      const key = `${r.class} - ${r.subject}`;
-      if(!grouped[key]) grouped[key] = [];
-      if(!grouped[key].includes(r.examType)) grouped[key].push(r.examType);
-    }
-    
-    let html = '';
-    for(let [key, exams] of Object.entries(grouped)) {
-      html += `<div style="padding: 6px 0; border-bottom: 1px solid #eef4f8; display: flex; justify-content: space-between; flex-wrap: wrap;">
-        <span><strong>${key}</strong></span>
-        <span style="color: #00d4c0;">${exams.join(', ')}</span>
-      </div>`;
-    }
-    container.innerHTML = html;
   }
 
   // ===== ENTER KEY SUPPORT =====
@@ -505,8 +529,8 @@
     showAvailableResults();
   });
   
-  console.log('🎓 GBHS Wahi Pandhi - Student Results');
-  console.log('📊 Students can view results by selecting Class & Subject only');
+  console.log('🔒 GBHS Wahi Pandhi - Secure Student Results');
+  console.log('📊 API URL:', API_URL);
 </script>
 </body>
 </html>
