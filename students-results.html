@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
+  <title>Student Results · GBHS Wahi Pandhi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a2a3a; min-height: 100vh; }
+
+    /* Top Bar */
+    .top-bar { background: #0a1628; padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; border-bottom: 2px solid #00d4c0; }
+    .top-bar .contact-info { display: flex; gap: 16px; color: #8aa8c8; font-size: 0.7rem; flex-wrap: wrap; }
+    .top-bar .contact-info i { color: #00d4c0; margin-right: 4px; }
+    .top-bar .social-icons { display: flex; gap: 10px; }
+    .top-bar .social-icons a { color: #8aa8c8; transition: 0.3s; font-size: 0.85rem; }
+    .top-bar .social-icons a:hover { color: #00d4c0; transform: translateY(-2px); }
+
+    /* Header */
+    .header { background: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 20px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-area img { width: 48px; height: 48px; border-radius: 50%; border: 3px solid #00d4c0; object-fit: cover; }
+    .logo-area .school-name { font-size: 1.1rem; font-weight: 800; color: #0a1628; line-height: 1.2; }
+    .logo-area .school-name small { display: block; font-size: 0.55rem; font-weight: 400; color: #6a8aa8; letter-spacing: 0.3px; }
+    .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: #0a1628; cursor: pointer; padding: 4px 8px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .nav-links a { padding: 6px 14px; border-radius: 30px; text-decoration: none; color: #1a3a5a; font-weight: 600; font-size: 0.75rem; transition: 0.3s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { background: #00d4c0; color: white; box-shadow: 0 4px 16px rgba(0,212,192,0.3); }
+    .nav-links .btn-admission { background: #ff6b4a; color: white; padding: 6px 18px; border-radius: 30px; font-weight: 700; }
+    .nav-links .btn-admission:hover { background: #e85530; transform: scale(0.96); }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #0a1628 0%, #1a3a5a 100%); padding: 60px 20px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,192,0.08) 0%, transparent 70%); border-radius: 50%; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+    .hero-badge { display: inline-block; background: rgba(0,212,192,0.15); color: #00d4c0; padding: 8px 24px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(0,212,192,0.2); }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; color: white; line-height: 1.2; }
+    .hero h1 span { color: #00d4c0; }
+    .hero p { color: #aac8e8; font-size: 1.05rem; line-height: 1.8; max-width: 600px; margin: 16px auto 0; }
+
+    /* Container */
+    .container { max-width: 1100px; margin: 0 auto; padding: 30px 16px; }
+    .section-title { text-align: center; margin-bottom: 30px; }
+    .section-title h2 { font-size: 2rem; font-weight: 800; color: #0a1628; }
+    .section-title h2 span { color: #00b8a8; }
+    .section-title p { color: #6a8aa8; max-width: 600px; margin: 6px auto 0; font-size: 0.95rem; }
+
+    /* Result Check Form */
+    .result-check-box {
+      background: white;
+      border-radius: 24px;
+      padding: 32px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid #eef4f8;
+    }
+    .result-check-box h3 {
+      font-size: 1.2rem;
+      color: #0a1628;
+      margin-bottom: 8px;
+    }
+    .result-check-box .sub {
+      color: #6a8aa8;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1a3a5a;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-group select, .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 2px solid #eef4f8;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      background: #f8fafc;
+      font-family: 'Inter', sans-serif;
+    }
+    .form-group select:focus, .form-group input:focus {
+      outline: none;
+      border-color: #00d4c0;
+      box-shadow: 0 0 0 4px rgba(0,212,192,0.1);
+    }
+    .check-btn {
+      background: linear-gradient(135deg, #00d4c0, #00a898);
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .check-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,212,192,0.3);
+    }
+
+    /* Results Table */
+    .results-container {
+      display: none;
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid #eef4f8;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    .results-container .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #eef4f8;
+    }
+    .results-container .result-header h3 {
+      color: #0a1628;
+      font-size: 1.1rem;
+    }
+    .results-container .result-header span {
+      color: #6a8aa8;
+      font-size: 0.85rem;
+    }
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .result-table th {
+      background: #f0f4f8;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #1a3a5a;
+      letter-spacing: 0.5px;
+    }
+    .result-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #eef4f8;
+      font-size: 0.9rem;
+    }
+    .result-table tr:hover {
+      background: #f8fafc;
+    }
+    .grade-badge {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: inline-block;
+    }
+    .grade-Aplus { background: #2e7d32; color: white; }
+    .grade-A { background: #1976d2; color: white; }
+    .grade-B { background: #1976d2; color: white; }
+    .grade-C { background: #f57c00; color: white; }
+    .grade-D { background: #f57c00; color: white; }
+    .grade-E { background: #c62828; color: white; }
+    .grade-F { background: #880e4f; color: white; }
+
+    .no-result {
+      text-align: center;
+      padding: 40px 20px;
+      color: #6a8aa8;
+    }
+    .no-result i {
+      font-size: 3rem;
+      color: #dce4ec;
+      margin-bottom: 12px;
+    }
+
+    /* Footer */
+    .footer { background: #0a1628; color: #8aa8c8; padding: 30px 20px 16px; margin-top: 30px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .footer h4 { color: white; font-size: 0.95rem; margin-bottom: 12px; }
+    .footer a { color: #8aa8c8; text-decoration: none; display: block; margin-bottom: 6px; font-size: 0.8rem; transition: 0.3s; }
+    .footer a:hover { color: #00d4c0; padding-left: 4px; }
+    .footer .bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 24px; text-align: center; font-size: 0.75rem; }
+    .footer .bottom strong { color: #00d4c0; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; width: 100%; padding: 12px 0; gap: 6px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { width: 100%; text-align: center; padding: 8px; font-size: 0.8rem; }
+      .header { padding: 10px 16px; }
+      .hero h1 { font-size: 2rem; }
+      .hero { padding: 40px 16px; }
+      .result-check-box { padding: 20px; }
+      .top-bar { padding: 6px 12px; justify-content: center; }
+      .top-bar .contact-info { gap: 10px; font-size: 0.65rem; justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+      .section-title h2 { font-size: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.6rem; }
+      .result-table th, .result-table td { padding: 8px 10px; font-size: 0.8rem; }
+      .logo-area .school-name { font-size: 0.9rem; }
+      .logo-area img { width: 38px; height: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="contact-info">
+    <span><i class="fas fa-phone"></i> +92-123-4567890</span>
+    <span><i class="fas fa-envelope"></i> info@gbhswp.edu.pk</span>
+    <span><i class="fas fa-map-marker-alt"></i> Wahi Pandhi, Johi, Dadu</span>
+  </div>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo-area">
+    <img src="https://i.ibb.co/qXLQR7Y/Whats-App-Image-2026-05-05-at-12-23-47-AM.jpg" alt="School Logo" />
+    <div class="school-name">GBHS Wahi Pandhi <small>Tehsil Johi · District Dadu · Sindh</small></div>
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="staff.html">Staff</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="student-results.html" class="active">Results</a>
+    <a href="teacher-portal.html" class="btn-admission"><i class="fas fa-user-tie"></i> Teachers Portal</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Check Your Results</div>
+    <h1>Student <span>Results</span></h1>
+    <p>Enter your details below to check your exam results. Results are updated by teachers and available immediately after upload.</p>
+  </div>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+  
+  <div class="section-title">
+    <h2>Check <span>Your Result</span></h2>
+    <p>Select your class, subject, and enter your roll number to view your result.</p>
+  </div>
+
+  <!-- Result Check Form -->
+  <div class="result-check-box">
+    <h3><i class="fas fa-search" style="color: #00d4c0;"></i> Find Your Result</h3>
+    <p class="sub">Results are available for all exams published by teachers.</p>
+    
+    <div class="form-group">
+      <label><i class="fas fa-users"></i> Select Class</label>
+      <select id="studentClass">
+        <option value="">— Select Class —</option>
+        <option value="6th">6th</option>
+        <option value="7th">7th</option>
+        <option value="8th">8th</option>
+        <option value="9th">9th</option>
+        <option value="10th">10th</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label><i class="fas fa-book"></i> Select Subject</label>
+      <select id="studentSubject">
+        <option value="">— Select Subject —</option>
+        <option value="Urdu">Urdu</option>
+        <option value="Math">Math</option>
+        <option value="Science">Science</option>
+        <option value="English">English</option>
+        <option value="Sindhi">Sindhi</option>
+        <option value="Physics">Physics</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Biology">Biology</option>
+        <option value="Computer">Computer</option>
+        <option value="Islamiat">Islamiat</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label><i class="fas fa-id-card"></i> Student Name</label>
+      <input type="text" id="studentName" placeholder="Enter your full name (e.g., Ali Raza)">
+    </div>
+    
+    <button class="check-btn" onclick="checkResult()">
+      <i class="fas fa-search"></i> Check Result
+    </button>
+  </div>
+
+  <!-- Results Display -->
+  <div class="results-container" id="resultsContainer">
+    <div class="result-header">
+      <h3 id="resultTitle">📊 Your Result</h3>
+      <span id="resultDate"></span>
+    </div>
+    <div id="resultContent"></div>
+  </div>
+
+  <!-- Available Results Info -->
+  <div style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eef4f8; margin-top: 20px;">
+    <h4 style="color: #0a1628; margin-bottom: 8px;"><i class="fas fa-info-circle" style="color: #00d4c0;"></i> Available Results</h4>
+    <div id="availableResultsList" style="color: #6a8aa8; font-size: 0.9rem;"></div>
+  </div>
+
+  <!-- Quote -->
+  <div style="margin-top: 30px; background: linear-gradient(135deg, #0a1628, #1a3a5a); color: white; border: none; padding: 30px; border-radius: 20px; text-align: center;">
+    <i class="fas fa-quote-left" style="color: #00d4c0; font-size: 2rem; opacity: 0.5;"></i>
+    <h3 style="color: #ffcd6b; font-size: 1.2rem; margin: 10px 0;">"Success is not the key to happiness. Happiness is the key to success."</h3>
+    <p style="color: #aac8e8;">— Albert Schweitzer</p>
+    <div style="margin-top: 16px;">
+      <a href="index.html" style="background: white; color: #0a1628; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 4px 20px rgba(255,255,255,0.2);">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div><h4>GBHS Wahi Pandhi</h4><p style="font-size: 0.8rem; line-height: 1.6;">Tehsil Johi, District Dadu, Sindh<br />Established 1985</p></div>
+    <div><h4>Quick Links</h4><a href="admissions.html">Admissions</a><a href="staff.html">Staff</a><a href="student-results.html">Results</a></div>
+    <div><h4>Contact</h4><a href="#"><i class="fas fa-phone"></i> +92-123-4567890</a><a href="#"><i class="fas fa-envelope"></i> info@gbhswp.edu.pk</a></div>
+  </div>
+  <div class="bottom">&copy; 2026 GBHS Wahi Pandhi. All rights reserved. <strong>|</strong> Designed by <strong style="color:#00d4c0;">Sadam Rustamani</strong></div>
+</footer>
+
+<script>
+  // ===== MOBILE MENU =====
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ===== CHECK RESULT =====
+  function checkResult() {
+    const className = document.getElementById('studentClass').value;
+    const subject = document.getElementById('studentSubject').value;
+    const studentName = document.getElementById('studentName').value.trim();
+    
+    if(!className || !subject || !studentName) {
+      alert('Please select class, subject, and enter your name');
+      return;
+    }
+    
+    // Get all results from localStorage
+    const allResults = JSON.parse(localStorage.getItem('student_results') || '[]');
+    
+    // Find results for this class and subject
+    const classResults = allResults.filter(r => r.class === className && r.subject === subject);
+    
+    if(classResults.length === 0) {
+      document.getElementById('resultsContainer').style.display = 'block';
+      document.getElementById('resultTitle').textContent = '📊 No Results Found';
+      document.getElementById('resultContent').innerHTML = `
+        <div class="no-result">
+          <i class="fas fa-folder-open"></i>
+          <p>No results available for ${className} - ${subject}</p>
+          <p style="font-size: 0.85rem; margin-top: 4px;">Please check with your teacher or select a different subject.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    // Search for student in all results for this class+subject
+    let foundResults = [];
+    let foundStudent = null;
+    
+    for(let result of classResults) {
+      const student = result.students.find(s => 
+        s.name.toLowerCase().includes(studentName.toLowerCase()) || 
+        studentName.toLowerCase().includes(s.name.toLowerCase())
+      );
+      if(student) {
+        foundStudent = student;
+        foundResults.push({
+          ...result,
+          studentResult: student
+        });
+      }
+    }
+    
+    if(!foundStudent) {
+      document.getElementById('resultsContainer').style.display = 'block';
+      document.getElementById('resultTitle').textContent = '📊 Student Not Found';
+      document.getElementById('resultContent').innerHTML = `
+        <div class="no-result">
+          <i class="fas fa-user-slash"></i>
+          <p>Student "${studentName}" not found in ${className} - ${subject}</p>
+          <p style="font-size: 0.85rem; margin-top: 4px;">Please check the spelling or select a different subject.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    // Display results
+    displayResults(foundResults, foundStudent, studentName);
+  }
+  
+  function displayResults(results, student, searchName) {
+    const container = document.getElementById('resultsContainer');
+    container.style.display = 'block';
+    
+    document.getElementById('resultTitle').textContent = `📊 Results for ${searchName}`;
+    document.getElementById('resultDate').textContent = `Updated: ${new Date().toLocaleDateString()}`;
+    
+    let html = `
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Exam</th>
+            <th>Subject</th>
+            <th>Marks</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    
+    for(let result of results) {
+      const gradeClass = `grade-${result.studentResult.grade === 'A+' ? 'Aplus' : result.studentResult.grade}`;
+      html += `
+        <tr>
+          <td><strong>${result.studentResult.name}</strong></td>
+          <td>${result.examType}</td>
+          <td>${result.subject}</td>
+          <td><strong>${result.studentResult.marks}</strong></td>
+          <td><span class="grade-badge ${gradeClass}">${result.studentResult.grade}</span></td>
+        </tr>
+      `;
+    }
+    
+    html += `</tbody></table>`;
+    html += `<div style="margin-top: 12px; font-size: 0.8rem; color: #6a8aa8; text-align: center;">Results uploaded by teachers. Last updated: ${new Date().toLocaleDateString()}</div>`;
+    
+    document.getElementById('resultContent').innerHTML = html;
+  }
+  
+  // ===== SHOW AVAILABLE RESULTS =====
+  function showAvailableResults() {
+    const allResults = JSON.parse(localStorage.getItem('student_results') || '[]');
+    const container = document.getElementById('availableResultsList');
+    
+    if(allResults.length === 0) {
+      container.innerHTML = '<p>No results have been uploaded yet. Check back later!</p>';
+      return;
+    }
+    
+    // Group by class and subject
+    const grouped = {};
+    for(let r of allResults) {
+      const key = `${r.class} - ${r.subject}`;
+      if(!grouped[key]) grouped[key] = [];
+      if(!grouped[key].includes(r.examType)) grouped[key].push(r.examType);
+    }
+    
+    let html = '';
+    for(let [key, exams] of Object.entries(grouped)) {
+      html += `<div style="padding: 6px 0; border-bottom: 1px solid #eef4f8; display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <span><strong>${key}</strong></span>
+        <span style="color: #00d4c0;">${exams.join(', ')}</span>
+      </div>`;
+    }
+    container.innerHTML = html;
+  }
+  
+  // ===== INIT =====
+  document.addEventListener('DOMContentLoaded', function() {
+    showAvailableResults();
+    
+    // Enter key to search
+    document.getElementById('studentName').addEventListener('keypress', function(e) {
+      if(e.key === 'Enter') checkResult();
+    });
+  });
+  
+  console.log('🎓 GBHS Wahi Pandhi - Student Results');
+  console.log('📚 Results are stored in localStorage');
+</script>
+</body>
+</html>
