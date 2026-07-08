@@ -7,8 +7,807 @@
   <!-- ===== EXTERNAL ASSETS ===== -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- ===== MAIN STYLESHEET ===== -->
-  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: #1a2a3a;
+      min-height: 100vh;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      background: #0a1628;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 2px solid #00d4c0;
+    }
+
+    .top-bar .contact-info {
+      display: flex;
+      gap: 16px;
+      color: #8aa8c8;
+      font-size: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .top-bar .contact-info i {
+      color: #00d4c0;
+      margin-right: 4px;
+    }
+
+    .top-bar .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .top-bar .social-icons a {
+      color: #8aa8c8;
+      transition: 0.3s;
+      font-size: 0.85rem;
+    }
+
+    .top-bar .social-icons a:hover {
+      color: #00d4c0;
+      transform: translateY(-2px);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-area img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 3px solid #00d4c0;
+      object-fit: cover;
+    }
+
+    .logo-area .school-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0a1628;
+      line-height: 1.2;
+    }
+
+    .logo-area .school-name span {
+      color: #00b8a8;
+    }
+
+    .logo-area .school-name small {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 400;
+      color: #6a8aa8;
+      letter-spacing: 0.3px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #0a1628;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 6px 14px;
+      border-radius: 30px;
+      text-decoration: none;
+      color: #1a3a5a;
+      font-weight: 600;
+      font-size: 0.75rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: #00d4c0;
+      color: white;
+      box-shadow: 0 4px 16px rgba(0, 212, 192, 0.3);
+    }
+
+    .nav-links .btn-admission {
+      background: #ff6b4a;
+      color: white;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+    .nav-links .btn-admission:hover {
+      background: #e85530;
+      transform: scale(0.96);
+      box-shadow: 0 4px 20px rgba(255, 107, 74, 0.4);
+    }
+
+    /* ===== ADMISSIONS HERO ===== */
+    .admissions-hero {
+      background: linear-gradient(135deg, #0a1628 0%, #1a3a5a 100%);
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 450px;
+    }
+
+    .admissions-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 212, 192, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .admissions-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .admissions-badge {
+      display: inline-block;
+      background: rgba(0, 212, 192, 0.15);
+      color: #00d4c0;
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      border: 1px solid rgba(0, 212, 192, 0.2);
+    }
+
+    .admissions-hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .admissions-hero-content h1 span {
+      color: #00d4c0;
+    }
+
+    .admissions-hero-content p {
+      color: #aac8e8;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 16px auto 24px;
+    }
+
+    .admissions-hero-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #00d4c0;
+      color: #0a1628;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0, 212, 192, 0.3);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 212, 192, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 16px;
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0a1628;
+    }
+
+    .section-title h2 span {
+      color: #00b8a8;
+    }
+
+    .section-title p {
+      color: #6a8aa8;
+      max-width: 600px;
+      margin: 6px auto 0;
+      font-size: 0.95rem;
+    }
+
+    /* ===== GRID ===== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: 0.3s;
+      border: 1px solid #eef4f8;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      border-color: #00d4c0;
+    }
+
+    .card .icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #00d4c0, #00a898);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      margin: 0 auto 12px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0a1628;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .card p {
+      color: #5a7a92;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ===== ADMISSION DETAILS ===== */
+    .admission-details {
+      margin: 40px 0;
+    }
+
+    .admission-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .admission-info-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eef4f8;
+      transition: 0.3s;
+    }
+
+    .admission-info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      border-color: #00d4c0;
+    }
+
+    .admission-info-card.highlight-card {
+      background: linear-gradient(135deg, #0a1628, #1a3a5a);
+      color: white;
+      border: none;
+    }
+
+    .admission-info-card.highlight-card h3 {
+      color: white;
+    }
+
+    .admission-info-card.highlight-card .info-list li {
+      color: #aac8e8;
+    }
+
+    .admission-info-card.highlight-card p {
+      color: #aac8e8;
+    }
+
+    .info-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #00d4c0, #00a898);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .admission-info-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a1628;
+      margin-bottom: 12px;
+    }
+
+    .admission-info-card p {
+      color: #5a7a92;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-list li {
+      padding: 6px 0;
+      font-size: 0.85rem;
+      color: #5a7a92;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-list li i {
+      color: #00d4c0;
+      font-size: 0.9rem;
+    }
+
+    /* ===== PROCESS STEPS ===== */
+    .admission-process {
+      margin: 40px 0;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eef4f8;
+      text-align: center;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      border-color: #00d4c0;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #00d4c0, #00a898);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: white;
+      margin: 0 auto 12px;
+    }
+
+    .step-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0a1628;
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      color: #5a7a92;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ===== DOCUMENTS ===== */
+    .documents-section {
+      margin: 40px 0;
+    }
+
+    .documents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .document-item {
+      background: white;
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid #eef4f8;
+      transition: 0.3s;
+    }
+
+    .document-item:hover {
+      border-color: #00d4c0;
+      transform: translateX(4px);
+    }
+
+    .document-item i {
+      font-size: 1.3rem;
+      color: #00d4c0;
+      width: 30px;
+      text-align: center;
+    }
+
+    .document-item span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1a3a5a;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+      margin: 40px 0;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eef4f8;
+    }
+
+    .contact-card-content {
+      padding: 32px;
+    }
+
+    .contact-card-content h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 12px;
+    }
+
+    .contact-card-content p {
+      color: #5a7a92;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .contact-details {
+      margin: 20px 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eef4f8;
+    }
+
+    .contact-item:last-child {
+      border-bottom: none;
+    }
+
+    .contact-item i {
+      font-size: 1.1rem;
+      color: #00d4c0;
+      width: 24px;
+      margin-top: 2px;
+    }
+
+    .contact-item strong {
+      display: block;
+      font-size: 0.8rem;
+      color: #0a1628;
+    }
+
+    .contact-item p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #5a7a92;
+    }
+
+    .contact-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-map {
+      padding: 12px;
+    }
+
+    .contact-map iframe {
+      border-radius: 16px;
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0a1628;
+      color: #8aa8c8;
+      padding: 30px 20px 16px;
+      margin-top: 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer h4 {
+      color: white;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .footer a {
+      color: #8aa8c8;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+
+    .footer a:hover {
+      color: #00d4c0;
+      padding-left: 4px;
+    }
+
+    .footer .bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 16px;
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.75rem;
+    }
+
+    .footer .bottom strong {
+      color: #00d4c0;
+    }
+
+    /* ===== QUOTE CARD ===== */
+    .quote-card {
+      background: linear-gradient(135deg, #0a1628, #1a3a5a);
+      color: white;
+      border: none;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .quote-card h3 {
+      color: #ffcd6b;
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .quote-card p {
+      color: #aac8e8;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .admission-info-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+      }
+      .documents-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 12px 0;
+        gap: 6px;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.8rem;
+      }
+      .header {
+        padding: 10px 16px;
+      }
+      .admissions-hero-content h1 {
+        font-size: 2rem;
+      }
+      .admissions-hero {
+        padding: 40px 16px;
+        min-height: 350px;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .admission-info-grid {
+        grid-template-columns: 1fr;
+      }
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .documents-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-card-content {
+        padding: 24px;
+      }
+      .top-bar {
+        padding: 6px 12px;
+        justify-content: center;
+      }
+      .top-bar .contact-info {
+        gap: 10px;
+        font-size: 0.65rem;
+        justify-content: center;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .footer {
+        padding: 24px 12px 12px;
+      }
+      .section-title h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .admissions-hero-content h1 {
+        font-size: 1.6rem;
+      }
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+      .logo-area .school-name {
+        font-size: 0.9rem;
+      }
+      .logo-area img {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -53,27 +852,10 @@
       <i class="fas fa-graduation-cap"></i> Admissions 2026-27
     </div>
     <h1>Welcome to <span>GBHS Wahi Pandhi</span></h1>
-    <h2>Your Child's Future Starts Here</h2>
     <p>We are excited to announce that admissions are now open for the academic session 2026-27. Join us in our mission to provide quality education and holistic development to every student.</p>
     <div class="admissions-hero-buttons">
       <a href="#why-choose" class="btn-primary"><i class="fas fa-arrow-right"></i> Why Choose Us</a>
-      <a href="#contact-info" class="btn-secondary"><i class="fas fa-phone"></i> Contact Us</a>
-    </div>
-  </div>
-  <div class="admissions-hero-image">
-    <div class="hero-stats-card">
-      <div class="stat-item">
-        <h2>810+</h2>
-        <p>Current Students</p>
-      </div>
-      <div class="stat-item">
-        <h2>28</h2>
-        <p>Qualified Teachers</p>
-      </div>
-      <div class="stat-item">
-        <h2>95%</h2>
-        <p>Success Rate</p>
-      </div>
+      <a href="#contact" class="btn-secondary"><i class="fas fa-phone"></i> Contact Us</a>
     </div>
   </div>
 </section>
@@ -219,7 +1001,7 @@
   </section>
 
   <!-- ===== CONTACT SECTION ===== -->
-  <section id="contact-info" class="contact-section">
+  <section id="contact" class="contact-section">
     <div class="contact-card">
       <div class="contact-card-content">
         <h2><i class="fas fa-map-marker-alt" style="color: #00d4c0;"></i> Visit Us</h2>
@@ -273,10 +1055,10 @@
   </section>
 
   <!-- ===== QUOTE ===== -->
-  <div class="card" style="margin-top: 30px; text-align: center; background: linear-gradient(135deg, #0a1628, #1a3a5a); color: white; border: none; padding: 30px;">
+  <div class="quote-card">
     <i class="fas fa-quote-left" style="color: #00d4c0; font-size: 2rem; opacity: 0.5;"></i>
-    <h3 style="color: #ffcd6b; font-size: 1.2rem; margin: 10px 0;">"Every child deserves a quality education. Join us in building a brighter future."</h3>
-    <p style="color: #aac8e8; margin-top: 6px;">— GBHS Wahi Pandhi Team</p>
+    <h3>"Every child deserves a quality education. Join us in building a brighter future."</h3>
+    <p>— GBHS Wahi Pandhi Team</p>
     <div style="margin-top: 16px;">
       <a href="index.html" class="btn-primary" style="background: white; color: #0a1628; box-shadow: 0 4px 20px rgba(255,255,255,0.2);">
         <i class="fas fa-arrow-left"></i> Back to Home
@@ -313,6 +1095,38 @@
 </footer>
 
 <!-- ===== JAVASCRIPT ===== -->
-<script src="script.js"></script>
+<script>
+  // ===== MOBILE MENU TOGGLE =====
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Close menu when a link is clicked (for mobile)
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  console.log('🎓 GBHS Wahi Pandhi - Admissions Page');
+  console.log('📚 Admissions Open 2026-27');
+</script>
+
 </body>
 </html>
