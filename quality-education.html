@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
+  <title>Quality Education · GBHS Wahi Pandhi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1a2a3a; min-height: 100vh; }
+
+    /* Top Bar */
+    .top-bar { background: #0a1628; padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; border-bottom: 2px solid #00d4c0; }
+    .top-bar .contact-info { display: flex; gap: 16px; color: #8aa8c8; font-size: 0.7rem; flex-wrap: wrap; }
+    .top-bar .contact-info i { color: #00d4c0; margin-right: 4px; }
+    .top-bar .social-icons { display: flex; gap: 10px; }
+    .top-bar .social-icons a { color: #8aa8c8; transition: 0.3s; font-size: 0.85rem; }
+    .top-bar .social-icons a:hover { color: #00d4c0; transform: translateY(-2px); }
+
+    /* Header */
+    .header { background: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 20px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-area img { width: 48px; height: 48px; border-radius: 50%; border: 3px solid #00d4c0; object-fit: cover; }
+    .logo-area .school-name { font-size: 1.1rem; font-weight: 800; color: #0a1628; line-height: 1.2; }
+    .logo-area .school-name small { display: block; font-size: 0.55rem; font-weight: 400; color: #6a8aa8; letter-spacing: 0.3px; }
+    .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: #0a1628; cursor: pointer; padding: 4px 8px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .nav-links a { padding: 6px 14px; border-radius: 30px; text-decoration: none; color: #1a3a5a; font-weight: 600; font-size: 0.75rem; transition: 0.3s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { background: #00d4c0; color: white; box-shadow: 0 4px 16px rgba(0,212,192,0.3); }
+    .nav-links .btn-admission { background: #ff6b4a; color: white; padding: 6px 18px; border-radius: 30px; font-weight: 700; }
+    .nav-links .btn-admission:hover { background: #e85530; transform: scale(0.96); }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #0a1628 0%, #1a3a5a 100%); padding: 60px 20px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,192,0.08) 0%, transparent 70%); border-radius: 50%; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+    .hero-badge { display: inline-block; background: rgba(0,212,192,0.15); color: #00d4c0; padding: 8px 24px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(0,212,192,0.2); }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; color: white; line-height: 1.2; }
+    .hero h1 span { color: #00d4c0; }
+    .hero p { color: #aac8e8; font-size: 1.05rem; line-height: 1.8; max-width: 600px; margin: 16px auto 0; }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 30px 16px; }
+    .section-title { text-align: center; margin-bottom: 30px; }
+    .section-title h2 { font-size: 2rem; font-weight: 800; color: #0a1628; }
+    .section-title h2 span { color: #00b8a8; }
+    .section-title p { color: #6a8aa8; max-width: 600px; margin: 6px auto 0; font-size: 0.95rem; }
+
+    /* Grid */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* Cards */
+    .card { background: white; border-radius: 20px; padding: 28px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #eef4f8; transition: 0.3s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: #00d4c0; }
+    .card .icon { width: 56px; height: 56px; background: linear-gradient(135deg, #00d4c0, #00a898); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; margin-bottom: 16px; }
+    .card h3 { font-size: 1.1rem; font-weight: 700; color: #0a1628; margin-bottom: 8px; }
+    .card p { color: #5a7a92; font-size: 0.9rem; line-height: 1.6; }
+
+    /* Feature List */
+    .feature-list { list-style: none; padding: 0; margin-top: 12px; }
+    .feature-list li { padding: 8px 0; font-size: 0.85rem; color: #5a7a92; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eef4f8; }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li i { color: #00d4c0; font-size: 1rem; width: 20px; }
+
+    /* Quote Card */
+    .quote-card { background: linear-gradient(135deg, #0a1628, #1a3a5a); color: white; border: none; padding: 30px; border-radius: 20px; text-align: center; margin-top: 30px; }
+    .quote-card h3 { color: #ffcd6b; font-size: 1.2rem; margin: 10px 0; }
+    .quote-card p { color: #aac8e8; }
+    .btn-primary { background: white; color: #0a1628; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 4px 20px rgba(255,255,255,0.2); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,255,255,0.3); }
+
+    /* Footer */
+    .footer { background: #0a1628; color: #8aa8c8; padding: 30px 20px 16px; margin-top: 30px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .footer h4 { color: white; font-size: 0.95rem; margin-bottom: 12px; }
+    .footer a { color: #8aa8c8; text-decoration: none; display: block; margin-bottom: 6px; font-size: 0.8rem; transition: 0.3s; }
+    .footer a:hover { color: #00d4c0; padding-left: 4px; }
+    .footer .bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 24px; text-align: center; font-size: 0.75rem; }
+    .footer .bottom strong { color: #00d4c0; }
+
+    /* Responsive */
+    @media (max-width: 1024px) { .grid-3 { grid-template-columns: 1fr 1fr; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; width: 100%; padding: 12px 0; gap: 6px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { width: 100%; text-align: center; padding: 8px; font-size: 0.8rem; }
+      .hero h1 { font-size: 2rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .top-bar { padding: 6px 12px; justify-content: center; }
+      .top-bar .contact-info { gap: 10px; font-size: 0.65rem; justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+      .section-title h2 { font-size: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.6rem; }
+      .logo-area .school-name { font-size: 0.9rem; }
+      .logo-area img { width: 38px; height: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="contact-info">
+    <span><i class="fas fa-phone"></i> +92-123-4567890</span>
+    <span><i class="fas fa-envelope"></i> info@gbhswp.edu.pk</span>
+    <span><i class="fas fa-map-marker-alt"></i> Wahi Pandhi, Johi, Dadu</span>
+  </div>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo-area">
+    <img src="https://i.ibb.co/qXLQR7Y/Whats-App-Image-2026-05-05-at-12-23-47-AM.jpg" alt="School Logo" />
+    <div class="school-name">GBHS Wahi Pandhi <small>Tehsil Johi · District Dadu · Sindh</small></div>
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="staff.html">Staff</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="quality-education.html" class="active">Quality Education</a>
+    <a href="teacher-portal.html" class="btn-admission"><i class="fas fa-user-tie"></i> Teachers Portal</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-star"></i> Quality Education</div>
+    <h1>Excellence in <span>Education</span></h1>
+    <p>At GBHS Wahi Pandhi, we are committed to providing quality education that transforms lives and builds a better future for our students and community.</p>
+  </div>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="section-title">
+    <h2>Our <span>Educational Approach</span></h2>
+    <p>We believe in holistic education that develops the whole child - academically, socially, and emotionally.</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="icon"><i class="fas fa-brain"></i></div>
+      <h3>Critical Thinking</h3>
+      <p>We encourage students to think critically, ask questions, and develop problem-solving skills that will serve them throughout their lives.</p>
+    </div>
+    <div class="card">
+      <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+      <h3>Character Building</h3>
+      <p>Education goes beyond academics. We focus on building strong character, moral values, and social responsibility in every student.</p>
+    </div>
+    <div class="card">
+      <div class="icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Academic Excellence</h3>
+      <p>Our dedicated teachers use modern teaching methodologies to ensure every student achieves their full academic potential.</p>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top: 40px;">
+    <h2>Why <span>Quality Education Matters</span></h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3><i class="fas fa-graduation-cap" style="color: #00d4c0;"></i> Strong Foundation</h3>
+      <p>Quality education builds a strong foundation for lifelong learning. Students develop essential skills in reading, writing, mathematics, and critical thinking.</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Concept-based learning</li>
+        <li><i class="fas fa-check-circle"></i> Practical application of knowledge</li>
+        <li><i class="fas fa-check-circle"></i> Regular assessments and feedback</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-users" style="color: #00d4c0;"></i> Skilled Teachers</h3>
+      <p>Our 24+ qualified teachers are passionate about education and dedicated to student success. They use innovative teaching methods to make learning engaging.</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Qualified and trained educators</li>
+        <li><i class="fas fa-check-circle"></i> Individual attention to students</li>
+        <li><i class="fas fa-check-circle"></i> Continuous professional development</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-laptop" style="color: #00d4c0;"></i> Modern Facilities</h3>
+      <p>We provide a conducive learning environment with modern facilities that support quality education and student development.</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Smart classrooms</li>
+        <li><i class="fas fa-check-circle"></i> Computer laboratory</li>
+        <li><i class="fas fa-check-circle"></i> Science laboratory</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-trophy" style="color: #00d4c0;"></i> Student Success</h3>
+      <p>Our students consistently achieve excellent results, with a 95% pass rate. We prepare students for board examinations and future academic challenges.</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Board exam preparation</li>
+        <li><i class="fas fa-check-circle"></i> Career guidance</li>
+        <li><i class="fas fa-check-circle"></i> Extracurricular activities</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-card">
+    <i class="fas fa-quote-left" style="color: #00d4c0; font-size: 2rem; opacity: 0.5;"></i>
+    <h3>"Quality education is the foundation of a prosperous society. At GBHS Wahi Pandhi, we build that foundation one student at a time."</h3>
+    <p>— Our Commitment to Excellence</p>
+    <div style="margin-top: 16px;">
+      <a href="index.html" class="btn-primary"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div><h4>GBHS Wahi Pandhi</h4><p style="font-size: 0.8rem; line-height: 1.6;">Tehsil Johi, District Dadu, Sindh<br />Established 1985</p></div>
+    <div><h4>Quick Links</h4><a href="admissions.html">Admissions</a><a href="staff.html">Staff</a><a href="quality-education.html">Quality Education</a></div>
+    <div><h4>Contact</h4><a href="#"><i class="fas fa-phone"></i> +92-123-4567890</a><a href="#"><i class="fas fa-envelope"></i> info@gbhswp.edu.pk</a></div>
+  </div>
+  <div class="bottom">&copy; 2026 GBHS Wahi Pandhi. All rights reserved. <strong>|</strong> Designed by <strong style="color:#00d4c0;">Sadam Rustamani</strong></div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+  document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); }); });
+</script>
+</body>
+</html>
